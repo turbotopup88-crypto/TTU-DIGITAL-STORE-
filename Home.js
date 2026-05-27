@@ -50,7 +50,7 @@ let products = [
     
     
                 {
-        id: "product-TTU_GP 6 sign in",
+        id: "Product-TTU_GP 6 sign in.",
 
         title: "اشنراك جيم باس 6 اشهر ساين",
 
