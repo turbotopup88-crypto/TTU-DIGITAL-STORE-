@@ -74,29 +74,6 @@ let products = [
         category: "subscriptions"
     },
 
-    {
-        id: "product-1-for-ttu",
-
-        title: "حساب كامل مترو 2033",
-
-        price: "100 جنيه",
-
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLiSVve1tHyXU7NosQZ0QJ_IncHsjKIUwV5rZfn-g2tA&s=10",
-
-        category: "accounts"
-    },
-
-    {
-        id: "product-chatgpt",
-
-        title: "حساب ChatGPT Plus",
-
-        price: "500 جنيه",
-
-        image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600",
-
-        category: "accounts"
-    }
 
 ];
 
