@@ -75,8 +75,7 @@ let products = [
     },
 
     {
-        id: "Product-TTU_GP_PC  2M ",
-
+        id: "Product-TTU_GP_PC 2M ",
         title: "  اشتراك جيم باس للكمبيوتر شهرين",
 
         price: "150 جنيه",
