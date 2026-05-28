@@ -48,17 +48,7 @@ let products = [
         category: "subscriptions"
     },
 
-{
-        id: "Product-TTU_GP 4 sign in",
 
-        title: "اشنراك جيم باس 4 اشهر ساين",
-
-        price: "700 جنيه",
-
-        image: "https://i.ibb.co/WvvzyXtg/4-20260527-111343.png",
-
-        category: "subscriptions"
-    },
     
     
         {  
