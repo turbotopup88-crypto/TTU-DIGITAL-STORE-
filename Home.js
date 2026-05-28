@@ -13,25 +13,27 @@ let products = [
     },
     
         {
-        id: "Product-TTU_GP_ PC 6M",
+        id: "Product-TTU_GP 2 sign in",
 
-        title: "  اشتراك جيم باس للكمبيوتر 6 اشهر  ",
+        title: "  اشتراك جيم باس شهرين ساين",
 
-        price: "400 جنيه",
+        price: "350 جنيه",
 
-        image: "https://i.ibb.co/Xk53gBbV/4-20260528-105009.png",
+        image: "https://i.ibb.co/1G7B43yM/file-000000006870720aa187ae1f65b31c0a.png",
 
         category: "subscriptions"
+    },
     },
     
     
         {
-        id: "Product-TTU_GP_PC 2m",
-        title: "اشنراك جيم باس للكمبيوتر شهرين",
+        id: "Product-TTU_GP 4 Home",
 
-        price: "150 جنيه",
+        title: "اشنراك جيم باس 4 اشهر هوم",
 
-        image: "https://i.ibb.co/pjxj1tZn/file-0000000065087246bf59030366c07377.png",
+        price: "770 جنيه",
+
+        image: "https://i.ibb.co/WvvzyXtg/4-20260527-111343.png",
 
         category: "subscriptions"
     },
@@ -75,20 +77,31 @@ let products = [
 
         category: "subscriptions"
     },
-    
-    
-        {
-        id: "Product-TTU_GP 2 sign in",
 
-        title: "  اشتراك جيم باس شهرين ساين",
+{
+        id: "Product-TTU_GP_PC 2m",
+        title: "اشنراك جيم باس للكمبيوتر شهرين",
 
-        price: "350 جنيه",
+        price: "150 جنيه",
 
-        image: "https://i.ibb.co/1G7B43yM/file-000000006870720aa187ae1f65b31c0a.png",
+        image: "https://i.ibb.co/pjxj1tZn/file-0000000065087246bf59030366c07377.png",
 
         category: "subscriptions"
     },
 
+    
+    
+        {
+        id: "Product-TTU_GP_ PC 6M",
+
+        title: "  اشتراك جيم باس للكمبيوتر 6 اشهر  ",
+
+        price: "400 جنيه",
+
+        image: "https://i.ibb.co/Xk53gBbV/4-20260528-105009.png",
+
+        category: "subscriptions"
+    },
 ];
 
 /* ======================
