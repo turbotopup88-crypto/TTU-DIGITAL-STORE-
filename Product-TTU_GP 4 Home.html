@@ -79,13 +79,21 @@
 
         </div>
 
-        <a href="https://wa.me/+0201555293810" target="_blank">
-            <button class="buy-btn">تواصل عبر واتساب</button>
-        </a>
+        <button class="buy-btn" onclick="sendWhatsApp()">تواصل عبر واتساب</button>
 
     </div>
 
 </section>
+
+<script>
+function sendWhatsApp() {
+    const phoneNumber = '201555293810';
+    const message = 'السلام عليكم ، أريد شراء اشتراك Game Pass Ultimate هوم لمدة 4 اشهر';
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
+}
+</script>
 
 <script src="Product-TTU_GP 4 Home.js"></script>
 
