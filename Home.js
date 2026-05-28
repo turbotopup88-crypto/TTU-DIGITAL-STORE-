@@ -74,6 +74,19 @@ let products = [
         category: "subscriptions"
     },
 
+{
+        id: "Product-TTU_GP_PC  2M ",
+
+        title: "  اشتراك جيم باس للكمبيوتر شهرين",
+
+        price: "150 جنيه",
+
+        image: "https://i.ibb.co/1G7B43yM/file-000000006870720aa187ae1f65b31c0a.png",
+
+        category: "subscriptions"
+    },
+    
+
 
 ];
 
