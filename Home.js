@@ -26,7 +26,7 @@ let products = [
     
     
         {
-        id: "Product-TTU_GP_PC 2M",
+        id: "Product-TTU_GP_PC 2m",
 
         title: "اشنراك جيم باس للكمبيوتر شهرين",
 
