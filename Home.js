@@ -19,7 +19,7 @@ let products = [
 
         price: "400 جنيه",
 
-        image: "https://i.ibb.co/LDJc5YDN/4-20260527-111437.png",
+        image: "https://i.ibb.co/Xk53gBbV/4-20260528-105009.png",
 
         category: "subscriptions"
     },
@@ -78,7 +78,7 @@ let products = [
         {
         id: "Product-TTU_GP 2 sign in",
 
-        title: "  اشتراك جيم باس التيمت شهرين ساين",
+        title: "  اشتراك جيم باس شهرين ساين",
 
         price: "350 جنيه",
 
