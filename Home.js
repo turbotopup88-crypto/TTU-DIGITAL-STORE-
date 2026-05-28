@@ -55,7 +55,7 @@ let products = [
 
         price: "1000 جنيه",
 
-        image: "https://i.ibb.co/dsv1LbXM/4-20260527-111437.png",
+        image: "https://i.ibb.co/LDJc5YDN/4-20260527-111437.png",
 
         category: "subscriptions"
     },
@@ -67,7 +67,7 @@ let products = [
 
         price: "950 جنيه",
 
-        image: "https://i.ibb.co/dsv1LbXM/4-20260527-111437.png",
+        image: "https://i.ibb.co/LDJc5YDN/4-20260527-111437.png",
 
         category: "subscriptions"
     },
