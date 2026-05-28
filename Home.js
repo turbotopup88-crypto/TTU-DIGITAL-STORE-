@@ -26,13 +26,13 @@ let products = [
     
     
         {
-        id: "Product-TTU_GP 4 Home",
+        id: "Product-TTU_GP_PC 2M",
 
-        title: "اشنراك جيم باس 4 اشهر هوم",
+        title: "اشنراك جيم باس للكمبيوتر شهرين",
 
-        price: "770 جنيه",
+        price: "150 جنيه",
 
-        image: "https://i.ibb.co/WvvzyXtg/4-20260527-111343.png",
+        image: "https://i.ibb.co/pjxj1tZn/file-0000000065087246bf59030366c07377.png",
 
         category: "subscriptions"
     },
@@ -48,6 +48,19 @@ let products = [
 
         category: "subscriptions"
     },
+
+{
+        id: "Product-TTU_GP 4 sign in",
+
+        title: "اشنراك جيم باس 4 اشهر ساين",
+
+        price: "700 جنيه",
+
+        image: "https://i.ibb.co/WvvzyXtg/4-20260527-111343.png",
+
+        category: "subscriptions"
+    },
+    
     
         {  
         id: "Product-TTU_GP 6 Home",
