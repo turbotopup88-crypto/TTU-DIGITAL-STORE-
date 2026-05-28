@@ -1,7 +1,7 @@
 let products = [
 
     {
-        id: "Product-TTU_GP 2 Home",
+        id: "Product-TTU_GP_2Home",
 
         title: "اشتراك جيم باس التيمت شهرين هوم",
 
@@ -13,7 +13,7 @@ let products = [
     },
 
     {
-        id: "Product-TTU_GP_PC 6M",
+        id: "Product-TTU_GP_ PC6M",
 
         title: "اشتراك جيم باس للكمبيوتر 6 اشهر",
 
@@ -25,7 +25,7 @@ let products = [
     },
 
     {
-        id: "Product-TTU_GP 4 Home",
+        id: "Product-TTU_GP_4_Home",
 
         title: "اشتراك جيم باس 4 اشهر هوم",
 
@@ -37,7 +37,7 @@ let products = [
     },
 
     {
-        id: "Product-TTU_GP 4 sign in",
+        id: "Product-TTU_GP 4_sign_in",
 
         title: "اشتراك جيم باس 4 اشهر ساين",
 
@@ -49,7 +49,7 @@ let products = [
     },
 
     {
-        id: "Product-TTU_GP 6 Home",
+        id: "Product-TTU_GP_6_Home",
 
         title: "اشتراك جيم باس 6 اشهر هوم",
 
@@ -73,7 +73,7 @@ let products = [
     },
 
     {
-        id: "Product-TTU_GP 2 sign in",
+        id: "Product-TTU_GP_2sign_in",
 
         title: "اشتراك جيم باس التيمت شهرين ساين",
 
@@ -85,7 +85,7 @@ let products = [
     },
 
     {
-        id: "Product-TTU_GP_PC 2m",
+        id: "Product-TTU_GP_PC2m",
 
         title: "اشتراك جيم باس للكمبيوتر شهرين",
 
