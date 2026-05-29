@@ -13,8 +13,7 @@ let products = [
     },
 
     {
-        id: "Product-TTU_GP_PC6M",
-
+        id: "Product-TTU_GP_ PC6M",
         title: "اشتراك جيم باس للكمبيوتر 6 اشهر",
 
         price: "400 جنيه",
