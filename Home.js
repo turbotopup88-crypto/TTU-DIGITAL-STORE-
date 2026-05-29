@@ -431,7 +431,7 @@ document.getElementById("bannerImage");
 
 const banners = [
 
-    "https://i.ibb.co/VW4QxFFX/20260528-074526.jpg",
+    "https://i.ibb.co/Q7sBq2Ld/20260528-074526.jpg",
 
     "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200",
 
