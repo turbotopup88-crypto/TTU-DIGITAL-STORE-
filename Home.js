@@ -31,7 +31,7 @@ let products = [
 
         price: "770 جنيه",
 
-        image: "https://collection.cloudinary.com/dqlv5yatu/c0283acb67b10befb3c0eafb8fb771ae",
+        image: "https://i.ibb.co/WvvzyXtg/4-20260527-111343.png",
 
         category: "subscriptions"
     },
@@ -43,7 +43,7 @@ let products = [
 
         price: "700 جنيه",
 
-        image: "https://collection.cloudinary.com/dqlv5yatu/c0283acb67b10befb3c0eafb8fb771ae",
+        image: "https://i.ibb.co/WvvzyXtg/4-20260527-111343.png",
 
         category: "subscriptions"
     },
