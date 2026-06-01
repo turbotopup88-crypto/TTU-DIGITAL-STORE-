@@ -3,7 +3,7 @@ let products = [
     {
         id: "Product-TTU_GP_2Home",
 
-        title: "اشتراك جيم باس التيمت شهرين هوم",
+        title: "اشتراك جيم باس شهرين هوم",
 
         price: "400 جنيه",
 
