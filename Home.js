@@ -144,17 +144,7 @@ let products = [
         category: "accounts"
     },
 
-    {
-        id: "Product-TTU_METRO_2033_REDUX_xbox",
-
-        title: "Full Account Metro 2033 Redux Xbox",
-
-        price: "90 جنيه",
-
-        image: "https://i.ibb.co/3YCyhw9L/0db5d3875063dc8ec116322036ba7b15.jpg",
-
-        category: "accounts"
-    },
+    
 
     {
         id: "Product-TTU_BACK_4_BLOOD_Ultimate_xbox_pc",
