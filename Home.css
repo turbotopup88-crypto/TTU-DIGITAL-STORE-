@@ -1,0 +1,397 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Tahoma;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body{
+    background:#111;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* ======================
+   الهيدر
+====================== */
+
+header{
+    background:#111;
+    padding:20px;
+    border-bottom:2px solid red;
+}
+
+.logo-box{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.logo-img{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    border:2px solid red;
+    object-fit:cover;
+    animation:spinLogo 6s linear infinite;
+    flex-shrink:0;
+}
+
+.logo{
+    color:red;
+    font-size:2.2rem;
+    font-weight:bold;
+    animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+    from{ text-shadow:0 0 5px red; }
+    to{ text-shadow:0 0 20px red; }
+}
+
+@keyframes spinLogo{
+    from{ transform:rotate(0deg); }
+    to{ transform:rotate(360deg); }
+}
+
+/* ======================
+   السيرش + فلتر السعر
+====================== */
+
+.search-wrapper{
+    padding:12px 15px;
+    position:relative;
+}
+
+.search-box{
+    position:relative;
+}
+
+.search-box input{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    background:#1b1b1b;
+    color:white;
+    outline:none;
+    font-size:1rem;
+    border:1px solid #222;
+    transition:0.3s;
+}
+
+.search-box input:focus{
+    border-color:red;
+}
+
+.price-filter-box{
+    display:flex;
+    justify-content:flex-start;
+    gap:10px;
+    margin-top:12px;
+    flex-wrap:wrap;
+}
+
+.price-filter-btn{
+    background:#1b1b1b;
+    padding:6px 15px;
+    border-radius:20px;
+    cursor:pointer;
+    border:1px solid #333;
+    transition:0.3s;
+    font-size:0.85rem;
+    white-space:nowrap;
+}
+
+.price-filter-btn:hover,
+.price-filter-btn.active-price-filter{
+    background:red;
+    border-color:red;
+}
+
+.suggestions-box{
+    background:#1b1b1b;
+    margin-top:6px;
+    border-radius:12px;
+    overflow:hidden;
+    display:none;
+    border:1px solid #222;
+    position:absolute;
+    width:calc(100% - 30px);
+    z-index:100;
+}
+
+.suggestion-item{
+    padding:12px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.suggestion-item:hover{
+    background:#222;
+    color:red;
+}
+
+/* ======================
+   التصنيفات
+====================== */
+
+.categories{
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    gap:10px;
+    padding:10px 0;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    scrollbar-width:none;
+}
+
+.categories::-webkit-scrollbar{
+    display:none;
+}
+
+.category{
+    background:#1b1b1b;
+    padding:5px 15px;
+    border-radius:20px;
+    cursor:pointer;
+    border:1px solid #333;
+    transition:0.3s;
+    white-space:nowrap;
+    flex-shrink:0;
+}
+
+.category:hover,
+.category.active-category{
+    background:red;
+    border-color:red;
+    transform:scale(1.05);
+}
+
+/* ======================
+   البانر
+====================== */
+
+.banner-slider{
+    width:95%;
+    height:220px;
+    margin:10px auto 20px;
+    border-radius:18px;
+    overflow:hidden;
+    border:2px solid #222;
+    position:relative;
+}
+
+.banner-slider img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:opacity 0.5s ease;
+}
+
+/* ======================
+   المنتجات
+====================== */
+
+.products-container{
+    padding:15px;
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+    gap:15px;
+}
+
+.product-card{
+    background:#1b1b1b;
+    border-radius:14px;
+    overflow:hidden;
+    cursor:pointer;
+    border:1px solid #222;
+    transition:0.3s;
+    display:flex;
+    flex-direction:column;
+    height:100%;
+}
+
+.product-card:hover{
+    transform:translateY(-5px);
+    border-color:red;
+}
+
+.product-card img{
+    width:100%;
+    height:170px;
+    object-fit:cover;
+    flex-shrink:0;
+}
+
+.product-info{
+    padding:12px;
+    display:flex;
+    flex-direction:column;
+    flex:1;
+    gap:8px;
+}
+
+.product-title{
+    font-size:0.95rem;
+    line-height:1.5;
+    word-break:break-word;
+}
+
+.product-price{
+    color:red;
+    font-weight:bold;
+    font-size:1rem;
+}
+
+.product-rating{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    margin-top:5px;
+    flex-wrap:wrap;
+}
+
+.stars{
+    color:#ffc107;
+    font-size:0.8rem;
+    letter-spacing:2px;
+}
+
+.rating-count{
+    font-size:0.7rem;
+    color:#aaa;
+}
+
+.add-to-cart-btn{
+    background:#ff4757;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:0.8rem;
+    font-weight:bold;
+    margin-top:auto;
+    transition:0.3s;
+    width:100%;
+}
+
+.add-to-cart-btn:hover{
+    background:#e84118;
+    transform:scale(1.02);
+}
+
+/* ======================
+   زر تحميل المزيد
+====================== */
+
+.load-more-box{
+    display:flex;
+    justify-content:center;
+    margin:20px 0 40px;
+}
+
+.load-more-btn{
+    background:red;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:1rem;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.load-more-btn:hover{
+    background:#c40000;
+    transform:scale(1.05);
+}
+
+/* ======================
+   أيقونة السلة
+====================== */
+
+#cartIcon{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:red;
+    color:white;
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    font-size:24px;
+    z-index:999;
+    box-shadow:0 4px 15px rgba(0,0,0,0.3);
+    border:2px solid white;
+    transition:0.3s;
+}
+
+#cartIcon:hover{
+    transform:scale(1.1);
+}
+
+#cartCount{
+    position:absolute;
+    top:-5px;
+    right:-5px;
+    background:#111;
+    color:white;
+    font-size:12px;
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid red;
+}
+
+/* ======================
+   الموبايل
+====================== */
+
+@media(max-width:768px){
+    .logo{
+        font-size:1.8rem;
+    }
+    .logo-img{
+        width:50px;
+        height:50px;
+    }
+    .banner-slider{
+        height:170px;
+    }
+    .products-container{
+        grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+    }
+    .price-filter-btn{
+        padding:4px 12px;
+        font-size:0.8rem;
+    }
+    #cartIcon{
+        width:45px;
+        height:45px;
+        font-size:20px;
+        bottom:15px;
+        right:15px;
+    }
+}
+
+@keyframes fadeOut{
+    0%{opacity:1;transform:translateX(-50%) translateY(0);}
+    70%{opacity:1;}
+    100%{opacity:0;transform:translateX(-50%) translateY(-20px);visibility:hidden;}
+}
