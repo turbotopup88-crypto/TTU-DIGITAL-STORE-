@@ -2,8 +2,8 @@ let products = [
     {
         id: "Product-TTU_Batman_arkham_knight_Xbox",
         title: "Batman Arkham Knight Full account",
-        price: 200,
-        priceText: "200 جنيه",
+        price: 270,
+        priceText: "270 جنيه",
         image: "https://i.ibb.co/gLBtLMZ6/d550f93b3de7b68015516483344066ec.jpg",
         category: "accounts",
         rating: 4.6,
@@ -13,8 +13,8 @@ let products = [
         {
         id: "Product-TTU_Assetto_corsa_ultimate_Xbox",
         title: "Assetto Corsa Ultimate  Full account",
-        price: 200,
-        priceText: "200 جنيه",
+        price: 250,
+        priceText: "250 جنيه",
         image: "https://i.ibb.co/ym8M8fy4/images-4.jpg",
         category: "accounts",
         rating: 4.1,
@@ -24,8 +24,8 @@ let products = [
           {
         id: "Product-TTU_Hollow_knight_voidheart_edition_Xbox",
         title: "Hollow Knight voidheart edition  Full account",
-        price: 200,
-        priceText: "200 جنيه",
+        price: 280,
+        priceText: "280 جنيه",
         image: "https://i.ibb.co/gMPX5W7k/images-5.jpg",
         category: "accounts",
         rating: 4.7,
@@ -35,8 +35,8 @@ let products = [
             {
         id: "Product-TTUGears_Of_War_4_Xbox",
         title: "Gears Of War 4  Full account",
-        price: 100,
-        priceText: "100 جنيه",
+        price: 150,
+        priceText: "150 جنيه",
         image: "https://i.ibb.co/Rk8msdP0/images-6.jpg",
         category: "accounts",
         rating: 5,
