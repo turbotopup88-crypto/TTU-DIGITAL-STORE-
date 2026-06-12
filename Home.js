@@ -33,7 +33,7 @@ let products = [
     },
   
             {
-        id: "Product-TTUGears_Of_War_4_Xbox",
+        id: "Product-TTU_Gears_Of_War_4_Xbox",
         title: "Gears Of War 4  Full account",
         price: 150,
         priceText: "150 جنيه",
