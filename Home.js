@@ -401,7 +401,7 @@ function addCartIcon() {
 
 const bannerImage = document.getElementById("bannerImage");
 const banners = [
-    "https://i.ibb.co/Q7sBq2Ld/20260528-074526.jpg",
+    "https://i.ibb.co/nNt0rrRq/20260611-213617.png",
     "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200",
     "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=1200"
 ];
