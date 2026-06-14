@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTU DIGTAL STOR.HOME</title>
+    <link rel="icon" href="https://i.ibb.co/CKWK5brd/48929.png">
+    <link rel="stylesheet" href="Home.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3SHSN5TDX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-C3SHSN5TDX');
+    </script>
+</head>
+
+<body>
+
+<header>
+    <div class="logo-box">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGQQDv_plCTNduaQnsV1TlgFWIGIm0i4mo1QjyhseiFQ&s"
+             class="logo-img" alt="TTU Store Logo">
+        <div class="logo">TTU STORE</div>
+    </div>
+</header>
+
+<!-- السيرش -->
+<div class="search-wrapper">
+    <div class="search-box">
+        <div class="categories">
+            <div class="category">🎮 بطاقات</div>
+            <div class="category">📺 اشتراكات</div>
+            <div class="category">👤 حسابات</div>
+        </div>
+        <input type="text" id="searchInput" placeholder="ابحث عن منتج...">
+    </div>
+    <div id="suggestions" class="suggestions-box"></div>
+</div>
+
+<!-- البانر -->
+<div class="banner-slider">
+    <img id="bannerImage" src="" alt="Banner Image">
+</div>
+
+<!-- المنتجات -->
+<section class="products-container" id="productsContainer"></section>
+
+<script src="Home.js"></script>
+
+</body>
+</html>
