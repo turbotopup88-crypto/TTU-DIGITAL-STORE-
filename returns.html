@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سياسة الاستبدال والاسترجاع</title>
+  <link rel="icon" href="https://i.ibb.co/CKWK5brd/48929.png">
+<script src="lang.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGQQDv_plCTNduaQnsV1TlgFWIGIm0i4mo1QjyhseiFQ&s" alt="شعار المتجر">
+    <div class="header-icons">
+      <button class="icon-btn" id="lang-toggle" aria-label="تغيير اللغة">
+        🌐
+        <span class="lang-badge" id="lang-badge">EN</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="policy-page">
+    <a class="back-link" href="index.html" id="back-link">→ العودة للمتجر</a>
+    <h1 id="page-title">سياسة الاستبدال والاسترجاع</h1>
+    <p class="policy-updated" id="updated-note">آخر تحديث: يوليو 2026</p>
+    <div id="policy-content"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="privacy.html" data-i18n="footerPrivacy">سياسة الخصوصية</a>
+      <a href="returns.html" data-i18n="footerReturns">سياسة الاستبدال والاسترجاع</a>
+    </div>
+    <p class="footer-copy" data-i18n="footerCopy">© 2026 جميع الحقوق محفوظة</p>
+  </footer>
+
+  <script>
+    // ---------------------------------------------------------
+    // محتوى سياسة الاستبدال والاسترجاع — عدّلها حسب سياستك الفعلية
+    // ⚠️ هذا نص استرشادي وليس استشارة قانونية، راجعه مع مختص قبل النشر
+    // خصوصاً إن المنتجات الرقمية (حسابات/أكواد) ليها اعتبارات خاصة عن المنتجات المادية
+    // ---------------------------------------------------------
+    const SECTIONS = [
+      {
+        title: { ar: "طبيعة المنتجات الرقمية", en: "Nature of Digital Products" },
+        body: {
+          ar: "المنتجات اللي بنبيعها (حسابات ألعاب، بطاقات هدايا، اشتراكات) هي منتجات رقمية بتتسلّم خلال ساعتين بحد اقصى بعد تأكيد الطلب. بمجرد تسليم بيانات الحساب أو الكود للعميل، بيبقى الطلب مكتمل ومش قابل للاسترجاع، إلا في حالات محددة موضحة تحت.",
+          en: "The products we sell (game accounts, gift cards, subscriptions) are digital products Delivery within a maximum of 2 hours after order confirmation. Once account details or a code are delivered to the customer, the order is considered complete and non-refundable, except in the specific cases below."
+        }
+      },
+      {
+        title: { ar: "حالات الاستبدال", en: "Replacement Cases" },
+        body: {
+          ar: "بنوفر استبدال أو حل بديل في الحالات دي: (1) الحساب أو الكود اتضح إنه مش شغال من وقت التسليم. (2) استلمت منتج مختلف عن اللي طلبته. (3) في مشكلة تقنية من جهتنا منعت وصول المنتج. لازم تبلغنا خلال 24 ساعة من وقت الاستلام مع إرفاق سكرين شوت يوضح المشكلة.",
+          en: "We offer replacement or resolution in these cases: (1) the account or code turns out not to work from the moment of delivery, (2) you received a different product than what you ordered, or (3) a technical issue on our end prevented delivery. You must report this within 24 hours of delivery, with a screenshot showing the issue."
+        }
+      },
+      {
+        title: { ar: "حالات لا يشملها الاسترجاع", en: "Cases Not Covered" },
+        body: {
+          ar: "مش بنقبل استرجاع أو استبدال في الحالات دي: (1) تغيير رأي العميل بعد استلام المنتج. (2) تم تغيير بيانات الحساب (الباسورد، البريد المرتبط) من جهة العميل بعد الاستلام. (3) مخالفة العميل لشروط استخدام المنصة (Xbox/PlayStation) بعد الاستلام.",
+          en: "We do not accept returns or replacements in these cases: (1) the customer changes their mind after receiving the product, (2) account details (password, linked email) were changed by the customer after delivery, or (3) the customer violated the platform's (Xbox/PlayStation) terms of use after delivery."
+        }
+      },
+      {
+        title: { ar: "كيفية طلب الاستبدال", en: "How to Request a Replacement" },
+        body: {
+          ar: "تواصل معانا مباشرة عبر واتساب على نفس الرقم اللي استلمت بيه تفاصيل طلبك، واذكر رقم الطلب أو اسمك المستخدم وقت الطلب مع توضيح المشكلة. بنرد ونحل المشكلة عادةً خلال 24 ساعة.",
+          en: "Contact us directly via WhatsApp using the same number you received your order details from, and mention your order reference or the name used at checkout along with a description of the issue. We typically respond and resolve issues within 24 hours."
+        }
+      }
+    ];
+
+    document.getElementById('back-link').textContent = t('backLink');
+    document.getElementById('page-title').textContent = localized('سياسة الاستبدال والاسترجاع', 'Returns & Refunds Policy');
+    document.getElementById('updated-note').textContent = localized('آخر تحديث: يوليو 2026', 'Last updated: July 2026');
+
+    const contentEl = document.getElementById('policy-content');
+    contentEl.innerHTML = SECTIONS.map((s) => `
+      <h2>${localized(s.title.ar, s.title.en)}</h2>
+      <p>${localized(s.body.ar, s.body.en)}</p>
+    `).join('');
+  </script>
+</body>
+</html>

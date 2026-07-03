@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تفاصيل المنتج</title>
+<link rel="icon" href="https://i.ibb.co/CKWK5brd/48929.png">
+<!-- ⚠️ تاجات عامة للموقع. المعاينة لصفحة منتج معينة على واتساب/فيسبوك مش هتظهر تفاصيل المنتج
+     نفسه إلا لو الموقع بقى شغال على سيرفر بيبني الصفحة ديناميكياً (Server-Side Rendering) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="المتجر - منتجات رقمية">
+<meta property="og:description" content="بطاقات هدايا، اشتراكات، وألعاب رقمية - تسليم فوري عبر واتساب">
+<meta property="og:image" content="https://via.placeholder.com/1200x630/0a0714/b026ff?text=Store">
+<meta name="twitter:card" content="summary_large_image">
+
+<script src="lang.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGQQDv_plCTNduaQnsV1TlgFWIGIm0i4mo1QjyhseiFQ&s" alt="شعار المتجر">
+    <div class="header-icons">
+      <button class="icon-btn" id="lang-toggle" aria-label="تغيير اللغة">
+        🌐
+        <span class="lang-badge" id="lang-badge">EN</span>
+      </button>
+      <button class="icon-btn" id="cart-btn" aria-label="السلة">
+        🛒
+        <span class="cart-badge" id="cart-count" style="display:none">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="product-page" id="product-page">
+    <!-- يتم تعبئة هذا القسم تلقائياً بواسطة script.js -->
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="privacy.html" data-i18n="footerPrivacy">سياسة الخصوصية</a>
+      <a href="returns.html" data-i18n="footerReturns">سياسة الاستبدال والاسترجاع</a>
+    </div>
+    <p class="footer-copy" data-i18n="footerCopy">© 2026 جميع الحقوق محفوظة</p>
+  </footer>
+
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-label="سلة المشتريات">
+    <div class="cart-header">
+      <h2 data-i18n="cartTitle">سلتك</h2>
+      <button class="cart-close" id="cart-close" aria-label="إغلاق السلة">✕</button>
+    </div>
+    <div class="cart-body" id="cart-body"></div>
+    <div class="cart-footer" id="cart-footer">
+      <button type="button" class="cart-fields-toggle" id="cart-fields-toggle">
+        <span data-i18n="customerInfoLabel">بيانات التواصل وطريقة الدفع</span>
+        <span class="toggle-arrow">▾</span>
+      </button>
+      <div class="cart-checkout-fields" id="cart-checkout-fields">
+        <div class="field">
+          <label for="cart-name" data-i18n="nameLabel">الاسم الكامل</label>
+          <input type="text" id="cart-name" placeholder="اكتب اسمك" data-i18n-placeholder="namePlaceholder">
+        </div>
+        <div class="field">
+          <label for="cart-phone" data-i18n="phoneLabel">رقم الهاتف</label>
+          <input type="tel" id="cart-phone" placeholder="09xxxxxxxx">
+        </div>
+        <div class="field">
+          <label for="cart-email" data-i18n="emailLabel">البريد الإلكتروني (اختياري)</label>
+          <input type="email" id="cart-email" placeholder="example@email.com" data-i18n-placeholder="emailPlaceholder">
+        </div>
+        <div class="field">
+          <label for="cart-payment" data-i18n="paymentLabel">طريقة الدفع</label>
+          <select id="cart-payment">
+            <option value="" disabled selected data-i18n="paymentChoose">اختر طريقة الدفع</option>
+            <option value="bank" data-i18n="paymentBank">تحويل مصرفي</option>
+            <option value="wallet" data-i18n="paymentWallet">محفظة إلكترونية</option>
+            <option value="cash" data-i18n="paymentCash">نقداً عند الاستلام</option>
+          </select>
+        </div>
+      </div>
+
+      <p class="form-error" id="cart-form-error" data-i18n="orderErrorMsg">من فضلك عبئ الاسم، الهاتف وطريقة الدفع.</p>
+
+      <div class="cart-total-row">
+        <span data-i18n="total">الإجمالي</span>
+        <span id="cart-total">0</span>
+      </div>
+      <button class="whatsapp-btn" id="cart-checkout" data-i18n="checkout">🟢 إتمام الطلب عبر واتساب</button>
+    </div>
+  </aside>
+
+  <script src="products.js"></script>
+  <script src="cart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
