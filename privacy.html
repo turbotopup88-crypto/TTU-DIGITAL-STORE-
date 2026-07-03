@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سياسة الخصوصية</title>
+<script src="lang.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGQQDv_plCTNduaQnsV1TlgFWIGIm0i4mo1QjyhseiFQ&s" alt="شعار المتجر">
+    <div class="header-icons">
+      <button class="icon-btn" id="lang-toggle" aria-label="تغيير اللغة">
+        🌐
+        <span class="lang-badge" id="lang-badge">EN</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="policy-page">
+    <a class="back-link" href="index.html" id="back-link">→ العودة للمتجر</a>
+    <h1 id="page-title">سياسة الخصوصية</h1>
+    <p class="policy-updated" id="updated-note">آخر تحديث: يوليو 2026</p>
+    <div id="policy-content"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="privacy.html" data-i18n="footerPrivacy">سياسة الخصوصية</a>
+      <a href="returns.html" data-i18n="footerReturns">سياسة الاستبدال والاسترجاع</a>
+    </div>
+    <p class="footer-copy" data-i18n="footerCopy">© 2026 جميع الحقوق محفوظة</p>
+  </footer>
+
+  <script>
+    // ---------------------------------------------------------
+    // محتوى سياسة الخصوصية — عدّل النصوص دي حسب طبيعة نشاطك الفعلية
+    // ⚠️ هذا نص استرشادي وليس استشارة قانونية، راجعه مع مختص قبل النشر
+    // ---------------------------------------------------------
+    const SECTIONS = [
+      {
+        title: { ar: "المعلومات التي نجمعها", en: "Information We Collect" },
+        body: {
+          ar: "عند إتمام طلب عبر الموقع، بنجمع بعض المعلومات الأساسية فقط عشان نقدر نوصل طلبك بشكل صحيح، وهي: الاسم الكامل، رقم الهاتف، البريد الإلكتروني (اختياري)، وطريقة الدفع المفضلة. الموقع مش بيخزن بيانات دفع حساسة زي أرقام البطاقات، لأن عملية الدفع بتتم بشكل منفصل بعد التواصل معك.",
+          en: "When you complete an order through the site, we collect only the basic information needed to fulfill it: your full name, phone number, email (optional), and preferred payment method. The site does not store sensitive payment data such as card numbers, since payment is arranged separately after we contact you."
+        }
+      },
+      {
+        title: { ar: "كيفية استخدام المعلومات", en: "How We Use Your Information" },
+        body: {
+          ar: "بنستخدم بياناتك فقط عشان نأكد الطلب، نتواصل معاك عبر واتساب، ونسلّم المنتج الرقمي اللي طلبته. مش بنستخدم بياناتك لأي غرض تسويقي من غير إذنك، ومش بنبيعها ولا بنشاركها مع أي طرف تالت.",
+          en: "We use your data solely to confirm your order, communicate with you via WhatsApp, and deliver the digital product you requested. We do not use your data for marketing without your consent, and we never sell or share it with third parties."
+        }
+      },
+      {
+        title: { ar: "تخزين البيانات محلياً", en: "Local Data Storage" },
+        body: {
+          ar: "الموقع بيستخدم تخزين محلي في متصفحك (localStorage) عشان يحفظ محتويات سلة التسوق واللغة المفضلة بتاعتك. البيانات دي متخزنة على جهازك بس، مش بترفع لأي سيرفر، وبتتمسح لو مسحت بيانات المتصفح.",
+          en: "The site uses local browser storage (localStorage) to remember your cart contents and language preference. This data stays on your device only, is never uploaded to a server, and is cleared if you clear your browser data."
+        }
+      },
+      {
+        title: { ar: "التواصل عبر واتساب", en: "Communication via WhatsApp" },
+        body: {
+          ar: "لما بتضغط على زرار إتمام الطلب، بتتحول لتطبيق واتساب برسالة جاهزة فيها تفاصيل طلبك. الرسالة دي بتتبعت من جهازك مباشرة لرقم المتجر، وبتخضع لسياسة خصوصية واتساب نفسها.",
+          en: "When you tap the order button, you're redirected to WhatsApp with a pre-filled message containing your order details. This message is sent directly from your device to the store's number and is subject to WhatsApp's own privacy policy."
+        }
+      },
+      {
+        title: { ar: "تواصل معنا", en: "Contact Us" },
+        body: {
+          ar: "لو عندك أي سؤال بخصوص سياسة الخصوصية دي، تقدر تتواصل معانا مباشرة عبر واتساب من نفس الرقم المستخدم لاستلام الطلبات.",
+          en: "If you have any questions about this privacy policy, you can reach us directly via WhatsApp using the same number used to receive orders."
+        }
+      }
+    ];
+
+    document.getElementById('back-link').textContent = t('backLink');
+    document.getElementById('page-title').textContent = localized('سياسة الخصوصية', 'Privacy Policy');
+    document.getElementById('updated-note').textContent = localized('آخر تحديث: يوليو 2026', 'Last updated: July 2026');
+
+    const contentEl = document.getElementById('policy-content');
+    contentEl.innerHTML = SECTIONS.map((s) => `
+      <h2>${localized(s.title.ar, s.title.en)}</h2>
+      <p>${localized(s.body.ar, s.body.en)}</p>
+    `).join('');
+  </script>
+</body>
+</html>
