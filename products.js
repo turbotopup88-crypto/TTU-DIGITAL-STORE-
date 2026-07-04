@@ -304,8 +304,8 @@ const PRODUCTS = {
 
 
       "Gift Card 10 USD ": {
-    name: "Gift Card 10 USD",
-    nameEn: "Gift Card 10 USD",
+    name: "Xbox Gift Card 10 USD",
+    nameEn: " Xbox Gift Card 10 USD",
     platformTag: "XBOX",
     category: "gift-cards",
     note: " بطاقة هدايا ",
@@ -323,8 +323,8 @@ const PRODUCTS = {
   },
 
         "Gift Card 50 USD ": {
-    name: "Gift Card 50 USD",
-    nameEn: "Gift Card 50 USD",
+    name: "Xbox Gift Card 50 USD",
+    nameEn: "Xbox Gift Card 50 USD",
     platformTag: "XBOX",
     category: "gift-cards",
     note: " بطاقة هدايا ",
@@ -343,8 +343,8 @@ const PRODUCTS = {
 
 
         "Gift Card 100 USD ": {
-    name: "Gift Card 100 USD",
-    nameEn: "Gift Card 100 USD",
+    name: "Xbox Gift Card 100 USD",
+    nameEn: "Xbox Gift Card 100 USD",
     platformTag: "XBOX",
     category: "gift-cards",
     note: " بطاقة هدايا ",
@@ -362,8 +362,8 @@ const PRODUCTS = {
   },
 
         "Gift Card 10 USD ps ": {
-    name: "Gift Card 10 USD",
-    nameEn: "Gift Card 10 USD",
+    name: "playstation Gift Card 10 USD",
+    nameEn: "playstation Gift Card 10 USD",
     platformTag: "PlayStation",
     category: "gift-cards",
     note: " بطاقة هدايا ",
@@ -381,8 +381,8 @@ const PRODUCTS = {
   },
 
         "Gift Card 50 USD ps ": {
-    name: "Gift Card 50 USD",
-    nameEn: "Gift Card 50 USD",
+    name: "playstation Gift Card 50 USD",
+    nameEn: "playstation Gift Card 50 USD",
     platformTag: "playstation",
     category: "gift-cards",
     note: " بطاقة هدايا ",
@@ -400,8 +400,8 @@ const PRODUCTS = {
   },
 
         "Gift Card 100 USD ps ": {
-    name: "Gift Card 100 USD",
-    nameEn: "Gift Card 100 USD",
+    name: "playstation Gift Card 100 USD",
+    nameEn: "playstation Gift Card 100 USD",
     platformTag: "XBOX",
     category: "gift-cards",
     note: " بطاقة هدايا ",
