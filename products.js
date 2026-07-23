@@ -437,24 +437,7 @@ const PRODUCTS = {
       "Full account including Stray on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },  
 
-      "Assassins creed mirage Xbox": {
-    name: "Assassins Creed Mirage Xbox",
-    nameEn: "Assassins Creed Mirage Xbox",
-    platformTag: "XBOX",
-    category: "xbox-games",
-    note: "حساب كامل",
-    noteEn: "Full account",
-    price: 650,
-    isNew: null,
-    inStock: true
-,
-    currency: { ar: "ج.م", en: "EGP" },
-    image: "https://i.ibb.co/PZP2ngRh/images-6.jpg",
-    description:
-      "حساب كامل يحتوي على لعبة Assassins Creed Mirage لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
-    descriptionEn:
-      "Full account including Assassins Creed Mirage on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
-  },  
+    
 
   "Call of duty black ops 6 xb": {
     name: "Call of duty black ops 6 Xbox",
