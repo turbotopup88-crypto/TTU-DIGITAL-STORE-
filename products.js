@@ -3,14 +3,17 @@
 const WHATSAPP_NUMBER = "201555293810";
 
 // ---------------------------------------------------------
-// بانر صفحة الخصومات (offers.html)
+// بانر صفحة الخصومات (Offers.html)
 // imageAr: صورة البانر لما الموقع يكون بالعربي
 // imageEn: صورة البانر لما الموقع يكون بالإنجليزي
 // link: الرابط اللي يتوجه له المستخدم عند الضغط على البانر
 // المنتجات نفسها بتظهر تلقائياً تحت البانر (أي منتج عنده oldPrice في PRODUCTS تحت) —
 // مفيش داعي تضيفهم هنا تاني
 // ---------------------------------------------------------
-
+const OFFERS_BANNER = {
+  imageEn: "https://i.ibb.co/jk3FvRW5/ey-Jp-ZCI6-Im1f-Nm-E2-Mm-U0-Mz-Zh-Mj-Bj-ODE5-MWE2-ZDQw-M2-Mw-Ym-Fl-Mjkx-ZGM6c2-Vka-W1lbn-Q6-Ly9m-Zj-My-Zm-Fl.jpg",
+  link: "Offers.html"
+};
 
 // ---------------------------------------------------------
 // الكاتيجوري — دوائر أسفل البانر مباشرة
@@ -27,7 +30,6 @@ const CATEGORIES = [
     image: "https://i.ibb.co/DPj8GzcL/20260702-131510.png",
     link: "category.html?cat=gift-cards"
   },
-
   {
     id: "xbox-games",
     label: "ألعاب Xbox",
@@ -45,9 +47,9 @@ const CATEGORIES = [
   {
     id: "offers",
     label: "خصومات",
-    labelEn: "offers",
+    labelEn: "Offers",
     image: "https://i.ibb.co/jk3FvRW5/ey-Jp-ZCI6-Im1f-Nm-E2-Mm-U0-Mz-Zh-Mj-Bj-ODE5-MWE2-ZDQw-M2-Mw-Ym-Fl-Mjkx-ZGM6c2-Vka-W1lbn-Q6-Ly9m-Zj-My-Zm-Fl.jpg",
-    link: "offers.html"
+    link: "Offers.html"
   }
 ];
 
@@ -78,8 +80,8 @@ const BANNERS = [
 // ---------------------------------------------------------
 // بيانات المنتجات — أضف منتجاتك هنا بنفس الشكل
 // كل منتج له: id (يُستخدم في الرابط product.html?id=...)
-// category: لازم يطابق أحد id بتاع CATEGORIES فوق (gift-cards / subscriptions / xbox-games / playstation-games)
-// oldPrice: اختياري، لو موجود بيظهر % الخصم على الصورة والسعر القديم مشطوب تحتها (ويظهر تلقائياً في offers.html)
+// category: لازم يطابق أحد id بتاع CATEGORIES فوق (gift-cards / xbox-games / playstation-games)
+// oldPrice: اختياري، لو موجود بيظهر % الخصم على الصورة والسعر القديم مشطوب تحتها (ويظهر تلقائياً في Offers.html)
 // isNew: اختياري (true/false)، لو مفيش oldPrice بيظهر شارة "جديد" على الصورة
 // inStock: false لو المنتج خلص — هيظهر "غير متوفر" على الكارد وصفحة المنتج وهيتقفل زرار الطلب
 // ⚠️ الـ id يفضل بدون مسافات (استخدم - بدل المسافة) عشان الروابط تشتغل صح
