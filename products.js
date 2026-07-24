@@ -437,24 +437,65 @@ const PRODUCTS = {
       "Full account including Stray on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },  
 
-      "Assassins creed mirage Xbox": {
-    name: "Assassins Creed Mirage Xbox",
-    nameEn: "Assassins Creed Mirage Xbox",
+    
+
+  "Call of duty black ops 6 xb": {
+    name: "Call of duty black ops 6 Xbox",
+    nameEn: "Call of duty black ops 6 Xbox",
     platformTag: "XBOX",
     category: "xbox-games",
     note: "حساب كامل",
     noteEn: "Full account",
-    price: 650,
+    price: 780,
     isNew: null,
     inStock: true
 ,
     currency: { ar: "ج.م", en: "EGP" },
-    image: "https://i.ibb.co/PZP2ngRh/images-6.jpg",
+    image: "https://i.ibb.co/PZv1hM6G/MV5-BYj-E3-OGFk-Mm-It-ZGMz-OC00-Ym-Vj-LWE5-Zm-Yt-Nzcx-MTk0-OTY5-NTU2-Xk-Ey-Xk-Fqc-Gc.jpg",
     description:
-      "حساب كامل يحتوي على لعبة Assassins Creed Mirage لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "حساب كامل يحتوي على لعبة Call of duty black ops 6 لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
     descriptionEn:
-      "Full account including Assassins Creed Mirage on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
-  },  
+      "Full account including call of duty black ops 6  on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+  },
+
+  "The crew 2 xb": {
+    name: "The crew 2 Xbox",
+    nameEn: "The crew 2 Xbox",
+    platformTag: "XBOX",
+    category: "xbox-games",
+    note: "حساب كامل",
+    noteEn: "Full account",
+    price: 350,
+    isNew: null,
+    inStock: true
+,
+    currency: { ar: "ج.م", en: "EGP" },
+    image: "https://i.ibb.co/0bBH8GT/Untitled.png",
+    description:
+      "حساب كامل يحتوي على لعبة The crew 2 لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+    descriptionEn:
+      "Full account including The crew 2  on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+  },
+
+    "A Plague Tale Innocence xb": {
+    name: "A Plague Tale Innocence Xbox",
+    nameEn: "A Plague Tale Innocence Xbox",
+    platformTag: "XBOX",
+    category: "xbox-games",
+    note: "حساب كامل",
+    noteEn: "Full account",
+    price: 380,
+    isNew: null,
+    inStock: true
+,
+    currency: { ar: "ج.م", en: "EGP" },
+    image: "https://i.ibb.co/0bBH8GT/Untitled.png",
+    description:
+      "حساب كامل يحتوي على لعبة A Plague Tale Innocence لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+    descriptionEn:
+      "Full account including A Plague Tale Innocence  on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+  },
+  
 };
 
 /**
