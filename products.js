@@ -19,11 +19,11 @@ const CATEGORIES = [
     link: "category.html?cat=gift-cards"
   },
   {
-    id: "subscriptions",
-    label: "اشتراكات",
-    labelEn: "Subscriptions",
+    id: "Offers",
+    label: "خصومات",
+    labelEn: "Offers",
     image: "https://i.ibb.co/MkHjNSKD/20260702-132134.png",
-    link: "category.html?cat=subscriptions"
+    link: "Offers.html?cat=Offers"
   },
   {
     id: "xbox-games",
