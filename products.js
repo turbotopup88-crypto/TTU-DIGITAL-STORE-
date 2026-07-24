@@ -22,7 +22,8 @@ const CATEGORIES = [
     id: "Offers",
     label: "خصومات",
     labelEn: "Offers",
-    image: "https://i.ibb.co/MkHjNSKD/20260702-132134.png",
+     imageAr: "رابط صورة البانر بالعربي",
+  imageEn: "رابط صورة البانر بالإنجليزي",
     link: "Offers.html?cat=Offers"
   },
   {
