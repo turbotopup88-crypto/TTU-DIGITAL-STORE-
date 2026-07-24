@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>الكاتيجوري</title>
-
+<link rel="icon" href="https://i.ibb.co/CKWK5brd/48929.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="المتجر - منتجات رقمية">
 <meta property="og:description" content="بطاقات هدايا، اشتراكات، وألعاب رقمية - تسليم فوري عبر واتساب">
@@ -17,11 +17,9 @@
 <body>
 
   <header class="site-header">
-    <div class="header-icons start">
-      <button class="icon-btn" id="menu-btn" aria-label="القائمة">☰</button>
-    </div>
     <img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGQQDv_plCTNduaQnsV1TlgFWIGIm0i4mo1QjyhseiFQ&s" alt="شعار المتجر">
-    <div class="header-icons end">
+    <div class="header-icons">
+      <button class="icon-btn" id="search-btn" aria-label="بحث">🔍</button>
       <button class="icon-btn" id="lang-toggle" aria-label="تغيير اللغة">
         🌐
         <span class="lang-badge" id="lang-badge">EN</span>
@@ -36,7 +34,6 @@
   <div class="search-bar" id="search-bar">
     <div class="search-wrap">
       <input type="text" id="search-input" placeholder="ابحث في هذا القسم..." data-i18n-placeholder="searchPlaceholder" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list">
-      <button type="button" class="search-submit-btn" id="search-submit" aria-label="بحث">🔍</button>
       <div class="search-suggestions" id="search-suggestions" style="display:none"></div>
     </div>
   </div>
@@ -63,24 +60,6 @@
     </div>
     <p class="footer-copy" data-i18n="footerCopy">© 2026 جميع الحقوق محفوظة</p>
   </footer>
-
-  <!-- ---------- Nav Drawer (القائمة) ---------- -->
-  <div class="nav-overlay" id="nav-overlay"></div>
-  <aside class="nav-drawer" id="nav-drawer" aria-label="القائمة">
-    <div class="nav-header">
-      <h2 data-i18n="menuLabel">القائمة</h2>
-      <button class="nav-close" id="nav-close" aria-label="إغلاق القائمة">✕</button>
-    </div>
-    <div class="nav-body">
-      <a class="nav-link" href="index.html" data-i18n="homeLink">الرئيسية</a>
-      <a class="nav-link" href="category.html?cat=offers" data-i18n="offersLink">الخصومات</a>
-      <div class="nav-section-label" data-i18n="categoriesTitle">تصفح حسب الفئة</div>
-      <div id="nav-categories"></div>
-      <div class="nav-divider"></div>
-      <a class="nav-link" href="privacy.html" data-i18n="footerPrivacy">سياسة الخصوصية</a>
-      <a class="nav-link" href="returns.html" data-i18n="footerReturns">سياسة الاستبدال والاسترجاع</a>
-    </div>
-  </aside>
 
   <!-- ---------- Cart Drawer ---------- -->
   <div class="cart-overlay" id="cart-overlay"></div>
@@ -114,7 +93,7 @@
             <option value="" disabled selected data-i18n="paymentChoose">اختر طريقة الدفع</option>
             <option value="bank" data-i18n="paymentBank">تحويل مصرفي</option>
             <option value="wallet" data-i18n="paymentWallet">محفظة إلكترونية</option>
-            <option value="cash" data-i18n="paymentCash">نقداً عند الاستلام</option>
+            
           </select>
         </div>
       </div>
@@ -133,8 +112,6 @@
   <script src="cart.js"></script>
   <script src="catalog.js"></script>
   <script>
-    setupNavDrawer();
-
     // ---------- تحديد الكاتيجوري الحالية من رابط الصفحة ----------
     const catParams = new URLSearchParams(window.location.search);
     const catId = catParams.get('cat');
@@ -154,12 +131,13 @@
       document.title = localized(currentCategory.label, currentCategory.labelEn);
     }
 
-    // ---------- شريط الفئات (سحب أفقي، مع تمييز الفئة الحالية) ----------
+    // ---------- شريط الفئات (للتنقل السريع، مع تمييز الفئة الحالية) ----------
     const categoryStrip = document.getElementById('category-strip');
     CATEGORIES.forEach((cat) => {
       const item = document.createElement('a');
       item.className = 'category-item';
       item.href = cat.link || '#';
+      if (cat.id === catId) item.style.opacity = '1';
       item.innerHTML = `
         <span class="category-circle" style="${cat.id === catId ? 'border-color:var(--purple); box-shadow:var(--purple-glow);' : ''}">
           <img src="${cat.image}" alt="${localized(cat.label, cat.labelEn)}" loading="lazy">
@@ -169,13 +147,9 @@
       categoryStrip.appendChild(item);
     });
 
-    // ---------- منتجات هذه الفئة ----------
-    // "offers" حالة خاصة: بيعرض أي منتج عنده خصم (oldPrice) مهما كانت فئته الأصلية
-    // باقي الفئات: بتعرض المنتجات اللي category بتاعها بتطابق الفئة
+    // ---------- منتجات هذه الفئة (ترتيب عشوائي + تحميل تدريجي) ----------
     const categoryEntries = shuffleArray(
-      catId === 'offers'
-        ? Object.entries(PRODUCTS).filter(([, p]) => p.oldPrice && p.oldPrice > p.price)
-        : Object.entries(PRODUCTS).filter(([, p]) => p.category === catId)
+      Object.entries(PRODUCTS).filter(([, p]) => p.category === catId)
     );
 
     const productGrid = createInfiniteGrid({
@@ -194,16 +168,33 @@
       productGrid.reset(filtered);
     }
 
-    // ---------- البحث (داخل هذه الفئة فقط، شريط ثابت دايماً) ----------
+    // ---------- البحث (داخل هذه الفئة فقط) ----------
+    const searchBtn = document.getElementById('search-btn');
+    const searchBar = document.getElementById('search-bar');
     const searchInput = document.getElementById('search-input');
-    const searchSubmit = document.getElementById('search-submit');
     const suggestBox = document.getElementById('search-suggestions');
     const MAX_SUGGESTIONS = 5;
     let activeSuggestion = -1;
 
-    searchSubmit.addEventListener('click', () => {
+    function openSearchBar() {
+      searchBar.classList.add('open');
       searchInput.focus();
-      gridEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function closeSearchBar() {
+      searchBar.classList.remove('open');
+      searchInput.value = "";
+      renderProducts();
+      closeSuggestions();
+    }
+
+    searchBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (searchBar.classList.contains('open')) {
+        closeSearchBar();
+      } else {
+        openSearchBar();
+      }
     });
 
     function highlight(text, term) {
@@ -281,7 +272,7 @@
 
     searchInput.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        closeSuggestions();
+        closeSearchBar();
         return;
       }
 
@@ -308,6 +299,9 @@
 
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.search-wrap')) closeSuggestions();
+      if (!e.target.closest('.search-bar') && !e.target.closest('#search-btn') && searchBar.classList.contains('open')) {
+        closeSearchBar();
+      }
     });
   </script>
 </body>
