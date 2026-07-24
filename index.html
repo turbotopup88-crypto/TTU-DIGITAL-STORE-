@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> TTU STORE </title>
-<link rel="icon" href="https://i.ibb.co/CKWK5brd/48929.png">
+<title>المتجر - منتجات رقمية</title>
+
 <!-- ⚠️ عدّل الروابط دي لما يبقى عندك دومين حقيقي -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="المتجر - منتجات رقمية">
@@ -15,25 +15,16 @@
 
 <script src="lang.js"></script>
 <link rel="stylesheet" href="style.css">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3SHSN5TDX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-C3SHSN5TDX');
-    </script>
 </head>
 <body>
 
   <header class="site-header">
+    <div class="header-icons start">
+      <button class="icon-btn" id="menu-btn" aria-label="القائمة">☰</button>
+    </div>
     <!-- ضع رابط اللوجو هنا بدل الرابط المؤقت -->
     <img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGQQDv_plCTNduaQnsV1TlgFWIGIm0i4mo1QjyhseiFQ&s" alt="شعار المتجر">
-    <div class="header-icons">
-      <button class="icon-btn" id="search-btn" aria-label="بحث">🔍</button>
-      <button class="icon-btn" id="lang-toggle" aria-label="تغيير اللغة">
-        🌐
-        <span class="lang-badge" id="lang-badge">EN</span>
-      </button>
+    <div class="header-icons end">
       <button class="icon-btn" id="cart-btn" aria-label="السلة">
         🛒
         <span class="cart-badge" id="cart-count" style="display:none">0</span>
@@ -44,6 +35,7 @@
   <div class="search-bar" id="search-bar">
     <div class="search-wrap">
       <input type="text" id="search-input" placeholder="ابحث عن منتج..." data-i18n-placeholder="searchPlaceholder" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list">
+      <button type="button" class="search-submit-btn" id="search-submit" aria-label="بحث">🔍</button>
       <div class="search-suggestions" id="search-suggestions" style="display:none"></div>
     </div>
   </div>
@@ -60,7 +52,13 @@
     <!-- يُبنى تلقائياً من CATEGORIES في products.js -->
   </div>
 
-  <h2 class="section-title" data-i18n="productsTitle">ألعاب Xbox الرقمية</h2>
+  <h2 class="section-title" data-i18n="giftCardsPromoTitle">بطاقات هدايا رقمية</h2>
+  <div class="giftcards-strip" id="giftcards-strip">
+    <!-- يُبنى تلقائياً من منتجات فئة gift-cards -->
+  </div>
+  <a class="view-all-btn" href="category.html?cat=gift-cards" data-i18n="viewAllGiftCards">عرض كل البطاقات</a>
+
+  <h2 class="section-title" data-i18n="productsTitle">كل المنتجات</h2>
 
   <div class="product-grid" id="product-grid">
     <!-- كارد المنتج: عند الضغط عليه ينتقل إلى product.html?id=batman-arkham-knight -->
@@ -75,6 +73,32 @@
     </div>
     <p class="footer-copy" data-i18n="footerCopy">© 2026 جميع الحقوق محفوظة</p>
   </footer>
+
+  <!-- ---------- Nav Drawer (القائمة) ---------- -->
+  <div class="nav-overlay" id="nav-overlay"></div>
+  <aside class="nav-drawer" id="nav-drawer" aria-label="القائمة">
+    <div class="nav-header">
+      <h2 data-i18n="menuLabel">القائمة</h2>
+      <button class="nav-close" id="nav-close" aria-label="إغلاق القائمة">✕</button>
+    </div>
+    <div class="nav-body">
+      <a class="nav-link" href="index.html" data-i18n="homeLink">الرئيسية</a>
+      <a class="nav-link" href="Offers.html" data-i18n="offersLink">الخصومات</a>
+      <div class="nav-section-label" data-i18n="categoriesTitle">تصفح حسب الفئة</div>
+      <div id="nav-categories"></div>
+      <div class="nav-divider"></div>
+      <div class="nav-lang-row">
+        <span data-i18n="menuLabel">اللغة</span>
+        <button class="icon-btn" id="lang-toggle" aria-label="تغيير اللغة">
+          🌐
+          <span class="lang-badge" id="lang-badge">EN</span>
+        </button>
+      </div>
+      <div class="nav-divider"></div>
+      <a class="nav-link" href="privacy.html" data-i18n="footerPrivacy">سياسة الخصوصية</a>
+      <a class="nav-link" href="returns.html" data-i18n="footerReturns">سياسة الاستبدال والاسترجاع</a>
+    </div>
+  </aside>
 
   <!-- ---------- Cart Drawer ---------- -->
   <div class="cart-overlay" id="cart-overlay"></div>
@@ -108,7 +132,7 @@
             <option value="" disabled selected data-i18n="paymentChoose">اختر طريقة الدفع</option>
             <option value="bank" data-i18n="paymentBank">تحويل مصرفي</option>
             <option value="wallet" data-i18n="paymentWallet">محفظة إلكترونية</option>
-            
+            <option value="cash" data-i18n="paymentCash">نقداً عند الاستلام</option>
           </select>
         </div>
       </div>
@@ -177,7 +201,10 @@
     slider.addEventListener('mouseenter', () => clearInterval(autoplayTimer));
     slider.addEventListener('mouseleave', restartAutoplay);
 
-    // ---------- بناء الكاتيجوري ----------
+    // ---------- قائمة الهامبرغر ----------
+    setupNavDrawer();
+
+    // ---------- بناء الكاتيجوري (سحب أفقي، يستحمل أي عدد) ----------
     const categoryStrip = document.getElementById('category-strip');
     CATEGORIES.forEach((cat) => {
       const item = document.createElement('a');
@@ -189,6 +216,28 @@
       `;
       categoryStrip.appendChild(item);
     });
+
+    // ---------- بطاقات الهدايا (شريط أفقي من فئة gift-cards) ----------
+    const giftcardsStrip = document.getElementById('giftcards-strip');
+    const giftCardEntries = Object.entries(PRODUCTS).filter(([, p]) => p.category === 'gift-cards');
+    if (giftCardEntries.length === 0) {
+      giftcardsStrip.innerHTML = `<p class="giftcards-empty">${t('giftCardsComingSoon')}</p>`;
+    } else {
+      giftcardsStrip.innerHTML = giftCardEntries.map(([id, p]) => productCardHTML(id, p)).join('');
+      giftcardsStrip.addEventListener('click', (e) => {
+        const btn = e.target.closest('.add-btn');
+        if (!btn) return;
+        e.preventDefault();
+        e.stopPropagation();
+        addToCart(btn.dataset.id, 1);
+        btn.classList.add('added');
+        btn.innerHTML = `<span class="plus">✓</span> ${t('added')}`;
+        setTimeout(() => {
+          btn.classList.remove('added');
+          btn.innerHTML = `<span class="plus">+</span> ${t('addToCart')}`;
+        }, 1200);
+      });
+    }
 
     // ---------- بناء كروت المنتجات (ترتيب عشوائي + تحميل تدريجي 22 في المرة) ----------
     const grid = document.getElementById('product-grid');
@@ -212,33 +261,16 @@
 
     renderProducts();
 
-    // ---------- البحث ----------
-    const searchBtn = document.getElementById('search-btn');
-    const searchBar = document.getElementById('search-bar');
+    // ---------- البحث (شريط ثابت دايماً، مفيش فتح/قفل) ----------
     const searchInput = document.getElementById('search-input');
+    const searchSubmit = document.getElementById('search-submit');
     const suggestBox = document.getElementById('search-suggestions');
     const MAX_SUGGESTIONS = 5;
     let activeSuggestion = -1;
 
-    function openSearchBar() {
-      searchBar.classList.add('open');
+    searchSubmit.addEventListener('click', () => {
       searchInput.focus();
-    }
-
-    function closeSearchBar() {
-      searchBar.classList.remove('open');
-      searchInput.value = "";
-      renderProducts();
-      closeSuggestions();
-    }
-
-    searchBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (searchBar.classList.contains('open')) {
-        closeSearchBar();
-      } else {
-        openSearchBar();
-      }
+      document.getElementById('product-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
     function highlight(text, term) {
@@ -316,7 +348,7 @@
 
     searchInput.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        closeSearchBar();
+        closeSuggestions();
         return;
       }
 
@@ -343,9 +375,6 @@
 
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.search-wrap')) closeSuggestions();
-      if (!e.target.closest('.search-bar') && !e.target.closest('#search-btn') && searchBar.classList.contains('open')) {
-        closeSearchBar();
-      }
     });
   </script>
 </body>
