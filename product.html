@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>تفاصيل المنتج</title>
-
+<link rel="icon" href="https://i.ibb.co/CKWK5brd/48929.png">
 <!-- ⚠️ تاجات عامة للموقع. المعاينة لصفحة منتج معينة على واتساب/فيسبوك مش هتظهر تفاصيل المنتج
      نفسه إلا لو الموقع بقى شغال على سيرفر بيبني الصفحة ديناميكياً (Server-Side Rendering) -->
 <meta property="og:type" content="website">
@@ -19,11 +19,8 @@
 <body>
 
   <header class="site-header">
-    <div class="header-icons start">
-      <button class="icon-btn" id="menu-btn" aria-label="القائمة">☰</button>
-    </div>
     <img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGQQDv_plCTNduaQnsV1TlgFWIGIm0i4mo1QjyhseiFQ&s" alt="شعار المتجر">
-    <div class="header-icons end">
+    <div class="header-icons">
       <button class="icon-btn" id="lang-toggle" aria-label="تغيير اللغة">
         🌐
         <span class="lang-badge" id="lang-badge">EN</span>
@@ -46,24 +43,6 @@
     </div>
     <p class="footer-copy" data-i18n="footerCopy">© 2026 جميع الحقوق محفوظة</p>
   </footer>
-
-  <!-- ---------- Nav Drawer (القائمة) ---------- -->
-  <div class="nav-overlay" id="nav-overlay"></div>
-  <aside class="nav-drawer" id="nav-drawer" aria-label="القائمة">
-    <div class="nav-header">
-      <h2 data-i18n="menuLabel">القائمة</h2>
-      <button class="nav-close" id="nav-close" aria-label="إغلاق القائمة">✕</button>
-    </div>
-    <div class="nav-body">
-      <a class="nav-link" href="index.html" data-i18n="homeLink">الرئيسية</a>
-      <a class="nav-link" href="category.html?cat=offers" data-i18n="offersLink">الخصومات</a>
-      <div class="nav-section-label" data-i18n="categoriesTitle">تصفح حسب الفئة</div>
-      <div id="nav-categories"></div>
-      <div class="nav-divider"></div>
-      <a class="nav-link" href="privacy.html" data-i18n="footerPrivacy">سياسة الخصوصية</a>
-      <a class="nav-link" href="returns.html" data-i18n="footerReturns">سياسة الاستبدال والاسترجاع</a>
-    </div>
-  </aside>
 
   <div class="cart-overlay" id="cart-overlay"></div>
   <aside class="cart-drawer" id="cart-drawer" aria-label="سلة المشتريات">
@@ -96,7 +75,7 @@
             <option value="" disabled selected data-i18n="paymentChoose">اختر طريقة الدفع</option>
             <option value="bank" data-i18n="paymentBank">تحويل مصرفي</option>
             <option value="wallet" data-i18n="paymentWallet">محفظة إلكترونية</option>
-            <option value="cash" data-i18n="paymentCash">نقداً عند الاستلام</option>
+            
           </select>
         </div>
       </div>
@@ -113,8 +92,6 @@
 
   <script src="products.js"></script>
   <script src="cart.js"></script>
-  <script src="catalog.js"></script>
-  <script>setupNavDrawer();</script>
   <script src="script.js"></script>
 </body>
 </html>
