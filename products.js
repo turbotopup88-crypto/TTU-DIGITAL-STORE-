@@ -10,10 +10,7 @@ const WHATSAPP_NUMBER = "201555293810";
 // المنتجات نفسها بتظهر تلقائياً تحت البانر (أي منتج عنده oldPrice في PRODUCTS تحت) —
 // مفيش داعي تضيفهم هنا تاني
 // ---------------------------------------------------------
-const OFFERS_BANNER = {
-  imageEn:"https://i.ibb.co/jk3FvRW5/ey-Jp-ZCI6-Im1f-Nm-E2-Mm-U0-Mz-Zh-Mj-Bj-ODE5-MWE2-ZDQw-M2-Mw-Ym-Fl-Mjkx-ZGM6c2-Vka-W1lbn-Q6-Ly9m-Zj-My-Zm-Fl.jpg" ,
-  link: "Offers.html"
-};
+
 
 // ---------------------------------------------------------
 // الكاتيجوري — دوائر أسفل البانر مباشرة
@@ -48,9 +45,9 @@ const CATEGORIES = [
   {
     id: "offers",
     label: "خصومات",
-    labelEn: "Offers",
+    labelEn: "offers",
     image: "https://i.ibb.co/jk3FvRW5/ey-Jp-ZCI6-Im1f-Nm-E2-Mm-U0-Mz-Zh-Mj-Bj-ODE5-MWE2-ZDQw-M2-Mw-Ym-Fl-Mjkx-ZGM6c2-Vka-W1lbn-Q6-Ly9m-Zj-My-Zm-Fl.jpg",
-    link: "Offers.html"
+    link: "offers.html"
   }
 ];
 
