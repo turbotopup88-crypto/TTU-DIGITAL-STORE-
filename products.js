@@ -10,7 +10,7 @@ const WHATSAPP_NUMBER = "201555293810";
 // labelEn: اسم الكاتيجوري بالإنجليزي (يظهر لو المستخدم بدّل اللغة)
 // ---------------------------------------------------------
 const OFFERS_BANNER = {
-  imageAr: "رابط صورة البانر بالعربي",
+  imageAr: "https://i.ibb.co/pB3yk0mM/ey-Jp-ZCI6-Im1f-Nm-E2-Mm-Q3-Mzhh-Yz-Iw-ODE5-MTg1-OTIz-Y2-Rk-Nj-My-OThl-OTI6c2-Vka-W1lbn-Q6-Ly80-Y2-Vl-Yjcx-Mz.jpg",
   imageEn: "رابط صورة البانر بالإنجليزي",
   link: "" // رابط التوجيه لو حابب، أو سيبه فاضي "" لو البانر مش هيتضغط
 };
