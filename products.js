@@ -10,11 +10,7 @@ const WHATSAPP_NUMBER = "201555293810";
 // المنتجات نفسها بتظهر تلقائياً تحت البانر (أي منتج عنده oldPrice في PRODUCTS تحت) —
 // مفيش داعي تضيفهم هنا تاني
 // ---------------------------------------------------------
-const OFFERS_BANNER = {
-  imageAr: "https://i.ibb.co/pB3yk0mM/ey-Jp-ZCI6-Im1f-Nm-E2-Mm-Q3-Mzhh-Yz-Iw-ODE5-MTg1-OTIz-Y2-Rk-Nj-My-OThl-OTI6c2-Vka-W1lbn-Q6-Ly80-Y2-Vl-Yjcx-Mz.jpg",
-  imageEn: "https://i.ibb.co/Dg4vBLXz/ey-Jp-ZCI6-Im1f-Nm-E2-Mm-Q4-NTIy-OWY4-ODE5-MWE1-Mm-I1-OTY5-M2-Q1-Yzg3-Nm-I6c2-Vka-W1lbn-Q6-Ly9m-Zj-Vk-ODQ5-Y2-M3-Zm.jpg",
-  link: "offers.html"
-};
+
 
 // ---------------------------------------------------------
 // الكاتيجوري — دوائر أسفل البانر مباشرة
@@ -31,13 +27,7 @@ const CATEGORIES = [
     image: "https://i.ibb.co/DPj8GzcL/20260702-131510.png",
     link: "category.html?cat=gift-cards"
   },
-  {
-    id: "subscriptions",
-    label: "اشتراكات",
-    labelEn: "Subscriptions",
-    image: "https://i.ibb.co/MkHjNSKD/20260702-132134.png",
-    link: "category.html?cat=subscriptions"
-  },
+
   {
     id: "xbox-games",
     label: "ألعاب Xbox",
@@ -56,7 +46,7 @@ const CATEGORIES = [
     id: "offers",
     label: "خصومات",
     labelEn: "Offers",
-    image: "https://i.ibb.co/pB3yk0mM/ey-Jp-ZCI6-Im1f-Nm-E2-Mm-Q3-Mzhh-Yz-Iw-ODE5-MTg1-OTIz-Y2-Rk-Nj-My-OThl-OTI6c2-Vka-W1lbn-Q6-Ly80-Y2-Vl-Yjcx-Mz.jpg",
+    image: "https://i.ibb.co/jk3FvRW5/ey-Jp-ZCI6-Im1f-Nm-E2-Mm-U0-Mz-Zh-Mj-Bj-ODE5-MWE2-ZDQw-M2-Mw-Ym-Fl-Mjkx-ZGM6c2-Vka-W1lbn-Q6-Ly9m-Zj-My-Zm-Fl.jpg",
     link: "offers.html"
   }
 ];
