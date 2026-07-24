@@ -482,6 +482,7 @@ const PRODUCTS = {
     nameEn: "A Plague Tale Innocence Xbox",
     platformTag: "XBOX",
     category: "xbox-games",
+      category: "subscriptions",
     note: "حساب كامل",
     noteEn: "Full account",
     price: 280,
