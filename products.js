@@ -477,9 +477,9 @@ const PRODUCTS = {
       "Full account including The crew 2  on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-    "The crew 2 xb": {
-    name: "The crew 2 Xbox",
-    nameEn: "The crew 2 Xbox",
+    "A Plague Tale Innocence xb": {
+    name: "A Plague Tale Innocence Xbox",
+    nameEn: "A Plague Tale Innocence Xbox",
     platformTag: "XBOX",
     category: "xbox-games",
     note: "حساب كامل",
@@ -491,9 +491,9 @@ const PRODUCTS = {
     currency: { ar: "ج.م", en: "EGP" },
     image: "https://i.ibb.co/0bBH8GT/Untitled.png",
     description:
-      "حساب كامل يحتوي على لعبة The crew 2 لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "حساب كامل يحتوي على لعبة A Plague Tale Innocence لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
     descriptionEn:
-      "Full account including The crew 2  on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "Full account including A Plague Tale Innocence  on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
   
 };
