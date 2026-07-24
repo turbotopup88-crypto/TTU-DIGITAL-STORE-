@@ -9,11 +9,6 @@ const WHATSAPP_NUMBER = "201555293810";
 //       لو عايز رابط تاني (صفحة خارجية مثلاً) غيّر القيمة هنا
 // labelEn: اسم الكاتيجوري بالإنجليزي (يظهر لو المستخدم بدّل اللغة)
 // ---------------------------------------------------------
-const OFFERS_BANNER = {
-  imageAr: "https://i.ibb.co/pB3yk0mM/ey-Jp-ZCI6-Im1f-Nm-E2-Mm-Q3-Mzhh-Yz-Iw-ODE5-MTg1-OTIz-Y2-Rk-Nj-My-OThl-OTI6c2-Vka-W1lbn-Q6-Ly80-Y2-Vl-Yjcx-Mz.jpg",
-  imageEn: "https://i.ibb.co/Dg4vBLXz/ey-Jp-ZCI6-Im1f-Nm-E2-Mm-Q4-NTIy-OWY4-ODE5-MWE1-Mm-I1-OTY5-M2-Q1-Yzg3-Nm-I6c2-Vka-W1lbn-Q6-Ly9m-Zj-Vk-ODQ5-Y2-M3-Zm.jpg" ,
-  link: "" // رابط التوجيه لو حابب، أو سيبه فاضي "" لو البانر مش هيتضغط
-};
 
 const CATEGORIES = [
   {
@@ -43,7 +38,13 @@ const CATEGORIES = [
     labelEn: "PlayStation Games",
     image: "https://i.ibb.co/5XBCN79z/images.png",
     link: "category.html?cat=playstation-games"
-  }
+  },
+  {
+    imageAr: "https://i.ibb.co/pB3yk0mM/ey-Jp-ZCI6-Im1f-Nm-E2-Mm-Q3-Mzhh-Yz-Iw-ODE5-MTg1-OTIz-Y2-Rk-Nj-My-OThl-OTI6c2-Vka-W1lbn-Q6-Ly80-Y2-Vl-Yjcx-Mz.jpg",
+  imageEn: "https://i.ibb.co/Dg4vBLXz/ey-Jp-ZCI6-Im1f-Nm-E2-Mm-Q4-NTIy-OWY4-ODE5-MWE1-Mm-I1-OTY5-M2-Q1-Yzg3-Nm-I6c2-Vka-W1lbn-Q6-Ly9m-Zj-Vk-ODQ5-Y2-M3-Zm.jpg" ,
+  link: "Offers.html" // رابط التوجيه لو حابب، أو سيبه فاضي "" لو البانر مش هيتضغط
+},
+  
 ];
 
 // ---------------------------------------------------------
