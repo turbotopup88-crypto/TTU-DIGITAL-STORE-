@@ -555,23 +555,23 @@ const PRODUCTS = {
       "Full account including Dying light 2 on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-  "Need For Speed heat  xb": {
-    name: "Dying light 2 Xbox",
-    nameEn: "Dying light 2 Xbox",
+  "Need For Speed heat deluxe edition xb": {
+    name: "Need For Speed heat deluxe edition Xbox",
+    nameEn: "Need For Speed heat deluxe edition Xbox",
     platformTag: "XBOX",
     category: "xbox-games",
     note: "حساب كامل",
     noteEn: "Full account",
-    price: 600,
+    price: 150,
     isNew: null,
     inStock: true
 ,
     currency: { ar: "ج.م", en: "EGP" },
-    image:"https://i.ibb.co/n8CsFvp1/3b8a68cf-f202-46ff-9b5e-7b795a4073e8.webp" ,
+    image:"https://i.ibb.co/6J4g5xGf/OIP.webp" ,
     description:
-      "حساب كامل يحتوي على لعبة Dying light 2 لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "حساب كامل يحتوي على لعبة Need For Speed heat deluxe edition لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
     descriptionEn:
-      "Full account including Dying light 2 on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "Full account including Need For Speed heat deluxe edition on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
   
 };
