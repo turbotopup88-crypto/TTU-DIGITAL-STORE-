@@ -19,8 +19,14 @@ function saveCart(cart) {
 
 function addToCart(id, qty = 1) {
   const cart = getCart();
+  // ✅ تحقق من أن المنتج موجود في PRODUCTS قبل الإضافة
+  if (!PRODUCTS[id]) {
+    console.warn(`⚠️ المنتج ${id} غير موجود في PRODUCTS`);
+    return false;
+  }
   cart[id] = (cart[id] || 0) + qty;
   saveCart(cart);
+  return true;
 }
 
 function setQty(id, qty) {
@@ -39,11 +45,16 @@ function removeFromCart(id) {
   delete cart[id];
   saveCart(cart);
   renderCartPanel();
-  updateCartBadge(); // تحديث البادج مباشرة بعد الحذف
+  updateCartBadge();
 }
 
+// ✅ دالة جديدة: حساب الكمية فقط للمنتجات الموجودة
 function getCartCount() {
-  return Object.values(getCart()).reduce((a, b) => a + b, 0);
+  const cart = getCart();
+  return Object.entries(cart).reduce((sum, [id, qty]) => {
+    // عد فقط المنتجات الموجودة في PRODUCTS
+    return PRODUCTS[id] ? sum + qty : sum;
+  }, 0);
 }
 
 function getCartTotal() {
@@ -67,7 +78,7 @@ function paymentMethodLabel(value) {
 function updateCartBadge() {
   const badge = document.getElementById("cart-count");
   if (!badge) return;
-  const count = getCartCount();
+  const count = getCartCount(); // ✅ استخدم الدالة المحدثة
   badge.textContent = count;
   badge.style.display = count > 0 ? "flex" : "none";
 }
@@ -78,7 +89,20 @@ function renderCartPanel() {
   if (!body) return;
 
   const cart = getCart();
-  const ids = Object.keys(cart).filter((id) => PRODUCTS[id]);
+  // ✅ فلتر أقوى: التأكد من وجود المنتج في PRODUCTS
+  const ids = Object.keys(cart).filter((id) => {
+    if (!PRODUCTS[id]) {
+      console.warn(`⚠️ حذف منتج غير موجود من السلة: ${id}`);
+      delete cart[id]; // احذفه من السلة إذا لم يكن موجود
+      return false;
+    }
+    return true;
+  });
+
+  // اذا تم حذف أي منتجات، احفظ السلة المنظفة
+  if (Object.keys(cart).length !== Object.keys(getCart()).length) {
+    saveCart(cart);
+  }
 
   if (ids.length === 0) {
     body.innerHTML = `<p class="cart-empty">${t('cartEmpty')}</p>`;
@@ -129,6 +153,11 @@ function renderCartPanel() {
 }
 
 function openCart() {
+  // ✅ تحقق من تحميل PRODUCTS قبل فتح السلة
+  if (!PRODUCTS || Object.keys(PRODUCTS).length === 0) {
+    console.error("❌ PRODUCTS لم تحمل بعد!");
+    return;
+  }
   renderCartPanel();
   document.getElementById("cart-drawer").classList.add("open");
   document.getElementById("cart-overlay").classList.add("open");
@@ -141,6 +170,7 @@ function closeCart() {
 
 function buildCartWhatsAppUrl(whatsappNumber, customer) {
   const cart = getCart();
+  // ✅ فلتر فقط المنتجات الموجودة في PRODUCTS
   const ids = Object.keys(cart).filter((id) => PRODUCTS[id]);
   const lines = ["طلب جديد من السلة 🛒", "-----------------------"];
 
@@ -165,7 +195,14 @@ function buildCartWhatsAppUrl(whatsappNumber, customer) {
   return `https://wa.me/${whatsappNumber}?text=${message}`;
 }
 
-// ---------- ربط أزرار السلة الثابتة في الهيدر (لو موجودة في الصفحة) ----------
+// ✅ دالة جديدة: مسح السلة بعد الطلب
+function clearCart() {
+  localStorage.removeItem(CART_KEY);
+  updateCartBadge();
+  console.log("✅ تم مسح السلة");
+}
+
+// ---------- ربط أزرار السلة الثابتة في الهيدر ----------
 document.addEventListener("DOMContentLoaded", () => {
   updateCartBadge();
 
@@ -189,7 +226,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (cartCheckout) {
     cartCheckout.addEventListener("click", () => {
-      if (getCartCount() === 0) return;
+      if (getCartCount() === 0) {
+        console.warn("⚠️ السلة فارغة!");
+        return;
+      }
 
       const nameEl = document.getElementById("cart-name");
       const phoneEl = document.getElementById("cart-phone");
@@ -216,6 +256,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (errorEl) errorEl.classList.remove("show");
 
       const url = buildCartWhatsAppUrl(WHATSAPP_NUMBER, { name, phone, email, payment });
+      
+      // ✅ مسح السلة بعد إرسال الطلب مباشرة
+      clearCart();
+      closeCart();
+      
+      console.log("✅ تم إرسال الطلب وتنظيف السلة");
       window.open(url, "_blank");
     });
   }
