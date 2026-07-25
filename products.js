@@ -497,24 +497,24 @@ const PRODUCTS = {
       "Full account including A Plague Tale Innocence  on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-   "A Plague Tale Innocence xb": {
-    name: "A Plague Tale Innocence Xbox",
-    nameEn: "A Plague Tale Innocence Xbox",
+   "A Plague Tale Requiem xb": {
+    name: "A Plague Tale Requiem Xbox",
+    nameEn: "A Plague Tale Requiem Xbox",
     platformTag: "XBOX",
     category: "xbox-games",
     note: "حساب كامل",
     noteEn: "Full account",
-    price: 280,
-      oldprice: 380,
+    price: 400,
+      oldprice: 700,
     isNew: null,
     inStock: true
 ,
     currency: { ar: "ج.م", en: "EGP" },
     image:"https://i.ibb.co/V0JwLfN5/apps-49740-68306748966338141-e6f96fac-aa67-4f59-9043-10654607aa79.jpg" ,
     description:
-      "حساب كامل يحتوي على لعبة A Plague Tale Innocence لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "حساب كامل يحتوي على لعبةA Plague Tale Requiem لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
     descriptionEn:
-      "Full account including A Plague Tale Innocence  on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "Full account including A Plague Tale Requiem on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
   
 };
