@@ -39,6 +39,7 @@ function removeFromCart(id) {
   delete cart[id];
   saveCart(cart);
   renderCartPanel();
+  updateCartBadge(); // تحديث البادج مباشرة بعد الحذف
 }
 
 function getCartCount() {
