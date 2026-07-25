@@ -512,29 +512,28 @@ const PRODUCTS = {
     currency: { ar: "ج.م", en: "EGP" },
     image:"https://i.ibb.co/tPZvrDKF/wp10511236.jpg" ,
     description:
-      "حساب كامل يحتوي على لعبةA Plague Tale Requiem لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "حساب كامل يحتوي على لعبة A Plague Tale Requiem لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
     descriptionEn:
       "Full account including A Plague Tale Requiem on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-  "A Plague Tale Requiem xb": {
-    name: "A Plague Tale Requiem Xbox",
-    nameEn: "A Plague Tale Requiem Xbox",
+  "Mortal Kombat 11 xb": {
+    name: "Mortal Kombat 11 Xbox",
+    nameEn: "Mortal Kombat 11 Xbox",
     platformTag: "XBOX",
     category: "xbox-games",
     note: "حساب كامل",
     noteEn: "Full account",
     price: 400,
-      oldprice: 700,
     isNew: null,
     inStock: true
 ,
     currency: { ar: "ج.م", en: "EGP" },
     image:"https://i.ibb.co/tPZvrDKF/wp10511236.jpg" ,
     description:
-      "حساب كامل يحتوي على لعبةA Plague Tale Requiem لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "حساب كامل يحتوي على لعبة Mortal Kombat 11 لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
     descriptionEn:
-      "Full account including A Plague Tale Requiem on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "Full account including Mortal Kombat 11 on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
   
 };
