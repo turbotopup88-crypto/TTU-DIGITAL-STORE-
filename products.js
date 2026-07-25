@@ -490,7 +490,7 @@ const PRODUCTS = {
     inStock: true
 ,
     currency: { ar: "ج.م", en: "EGP" },
-    image:"https://i.ibb.co/V0JwLfN5/apps-49740-68306748966338141-e6f96fac-aa67-4f59-9043-10654607aa79.jpg" ,
+    image:"https://assets.mycast.io/posters/a-plague-tale-innocence-fan-casting-poster-380962-medium.jpg?1694389502" ,
     description:
       "حساب كامل يحتوي على لعبة A Plague Tale Innocence لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
     descriptionEn:
