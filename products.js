@@ -510,7 +510,27 @@ const PRODUCTS = {
     inStock: true
 ,
     currency: { ar: "ج.م", en: "EGP" },
-    image:"https://i.ibb.co/V0JwLfN5/apps-49740-68306748966338141-e6f96fac-aa67-4f59-9043-10654607aa79.jpg" ,
+    image:"https://i.ibb.co/tPZvrDKF/wp10511236.jpg" ,
+    description:
+      "حساب كامل يحتوي على لعبةA Plague Tale Requiem لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+    descriptionEn:
+      "Full account including A Plague Tale Requiem on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+  },
+
+  "A Plague Tale Requiem xb": {
+    name: "A Plague Tale Requiem Xbox",
+    nameEn: "A Plague Tale Requiem Xbox",
+    platformTag: "XBOX",
+    category: "xbox-games",
+    note: "حساب كامل",
+    noteEn: "Full account",
+    price: 400,
+      oldprice: 700,
+    isNew: null,
+    inStock: true
+,
+    currency: { ar: "ج.م", en: "EGP" },
+    image:"https://i.ibb.co/tPZvrDKF/wp10511236.jpg" ,
     description:
       "حساب كامل يحتوي على لعبةA Plague Tale Requiem لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
     descriptionEn:
