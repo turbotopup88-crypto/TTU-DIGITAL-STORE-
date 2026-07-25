@@ -485,7 +485,7 @@ const PRODUCTS = {
     note: "حساب كامل",
     noteEn: "Full account",
     price: 280,
-      oldprice: 380,
+    oldPrice: 380,
     isNew: null,
     inStock: true
 ,
@@ -505,7 +505,7 @@ const PRODUCTS = {
     note: "حساب كامل",
     noteEn: "Full account",
     price: 400,
-      oldprice: 700,
+    oldPrice: 700,
     isNew: null,
     inStock: true
 ,
