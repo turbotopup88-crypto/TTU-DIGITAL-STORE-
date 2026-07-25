@@ -535,6 +535,25 @@ const PRODUCTS = {
     descriptionEn:
       "Full account including Mortal Kombat 11 on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
+
+   "Dying light 2 xb": {
+    name: "Dying light 2 Xbox",
+    nameEn: "Dying light 2 Xbox",
+    platformTag: "XBOX",
+    category: "xbox-games",
+    note: "حساب كامل",
+    noteEn: "Full account",
+    price: 600,
+    isNew: null,
+    inStock: true
+,
+    currency: { ar: "ج.م", en: "EGP" },
+    image:"https://i.ibb.co/CsYH2TdW/mortal-kombat-background-vuty155sy5r9venh.jpg" ,
+    description:
+      "حساب كامل يحتوي على لعبة Dying light 2 لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+    descriptionEn:
+      "Full account including Dying light 2 on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+  },
   
 };
 
