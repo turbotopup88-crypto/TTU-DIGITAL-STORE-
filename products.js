@@ -548,7 +548,7 @@ const PRODUCTS = {
     inStock: true
 ,
     currency: { ar: "ج.م", en: "EGP" },
-    image:"https://i.ibb.co/CsYH2TdW/mortal-kombat-background-vuty155sy5r9venh.jpg" ,
+    image:"https://i.ibb.co/4ZYxsWWb/28597-2560x1440-desktop-hd-dying-light-2-stay-human-wallpaper.jpg" ,
     description:
       "حساب كامل يحتوي على لعبة Dying light 2 لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
     descriptionEn:
