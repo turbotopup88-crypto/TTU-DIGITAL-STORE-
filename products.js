@@ -573,6 +573,25 @@ const PRODUCTS = {
     descriptionEn:
       "Full account including Need For Speed heat deluxe edition on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
+
+   "Need For Speed Unbound xb": {
+    name: "Need For Speed Unbound Xbox",
+    nameEn: "Need For Speed Unbound Xbox",
+    platformTag: "XBOX",
+    category: "xbox-games",
+    note: "حساب كامل",
+    noteEn: "Full account",
+    price: 700,
+    isNew: null,
+    inStock: true
+,
+    currency: { ar: "ج.م", en: "EGP" },
+    image:"https://i.ibb.co/6J4g5xGf/OIP.webp" ,
+    description:
+      "حساب كامل يحتوي على لعبة Need For Speed Unbound لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+    descriptionEn:
+      "Full account including Need For Speed Unbound on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+  },
   
 };
 
