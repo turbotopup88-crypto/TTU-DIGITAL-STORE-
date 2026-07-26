@@ -15,7 +15,6 @@
 
 <script src="lang.js"></script>
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="filters-styles.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3SHSN5TDX"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -61,9 +60,7 @@
     <!-- يُبنى تلقائياً من CATEGORIES في products.js -->
   </div>
 
-  <h2 class="section-title" data-i18n="productsTitle">المنتجات</h2>
-
-  <!-- 🔽 سيتم إدراج واجهة الفلاتر هنا تلقائياً -->
+  <h2 class="section-title" data-i18n="productsTitle">ألعاب Xbox الرقمية</h2>
 
   <div class="product-grid" id="product-grid">
     <!-- كارد المنتج: عند الضغط عليه ينتقل إلى product.html?id=batman-arkham-knight -->
@@ -128,7 +125,6 @@
 
   <script src="products.js"></script>
   <script src="cart.js"></script>
-  <script src="filters.js"></script>
   <script src="catalog.js"></script>
   <script>
     // ---------- بناء سلايدر البانرات ----------
@@ -194,6 +190,28 @@
       categoryStrip.appendChild(item);
     });
 
+    // ---------- بناء كروت المنتجات (ترتيب عشوائي + تحميل تدريجي 22 في المرة) ----------
+    const grid = document.getElementById('product-grid');
+    const allEntries = shuffleArray(Object.entries(PRODUCTS));
+
+    const productGrid = createInfiniteGrid({
+      gridEl: grid,
+      sentinelEl: document.getElementById('grid-sentinel'),
+      items: allEntries,
+      pageSize: 22,
+      emptyMessage: t('noResults')
+    });
+
+    function renderProducts(filter = "") {
+      const term = filter.trim().toLowerCase();
+      const filtered = !term
+        ? allEntries
+        : allEntries.filter(([, p]) => p.name.toLowerCase().includes(term) || p.platformTag.toLowerCase().includes(term));
+      productGrid.reset(filtered);
+    }
+
+    renderProducts();
+
     // ---------- البحث ----------
     const searchBtn = document.getElementById('search-btn');
     const searchBar = document.getElementById('search-bar');
@@ -210,7 +228,7 @@
     function closeSearchBar() {
       searchBar.classList.remove('open');
       searchInput.value = "";
-      applyAndRenderFilters();
+      renderProducts();
       closeSuggestions();
     }
 
@@ -273,7 +291,7 @@
         more.className = 'suggestion-more';
         more.textContent = t('showAllResults')(matches.length);
         more.addEventListener('click', () => {
-          applyAndRenderFilters(term);
+          renderProducts(term);
           closeSuggestions();
           document.getElementById('product-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
@@ -292,7 +310,7 @@
     }
 
     searchInput.addEventListener('input', () => {
-      applyAndRenderFilters(searchInput.value);
+      renderProducts(searchInput.value);
       renderSuggestions(searchInput.value);
     });
 
