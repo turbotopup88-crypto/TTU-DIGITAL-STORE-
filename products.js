@@ -48,7 +48,7 @@ const CATEGORIES = [
 const BANNERS = [
   {
     image: "https://i.ibb.co/nNt0rrRq/20260611-213617.png",
-    link: "product.html?id=batman-arkham-knight-xb"
+    link: ""
   },
   {
     image: "https://i.ibb.co/5XRS3gCF/20260703-165847.png",
