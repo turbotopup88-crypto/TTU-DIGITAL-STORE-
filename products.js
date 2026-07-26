@@ -48,7 +48,7 @@ const CATEGORIES = [
 const BANNERS = [
   {
     image: "https://i.ibb.co/nNt0rrRq/20260611-213617.png",
-    link: "product.html?id=batman-arkham-knight"
+    link: "product.html?id=batman-arkham-knight-xb"
   },
   {
     image: "https://i.ibb.co/5XRS3gCF/20260703-165847.png",
@@ -303,7 +303,7 @@ const PRODUCTS = {
   },
 
 
-      "Gift-Card-10-USD-xb ": {
+      "Gift-Card-10-USD-xb": {
     name: "Gift Card 10 USD Xbox",
     nameEn: "Gift Card 10 USD Xbox",
     platformTag: "XBOX",
@@ -322,7 +322,7 @@ const PRODUCTS = {
       "Gift Card 10 USD For Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-        "Gift-Card-50-USD-xb ": {
+        "Gift-Card-50-USD-xb": {
     name: "Gift Card 50 USD Xbox",
     nameEn: "Gift Card 50 USD Xbox",
     platformTag: "XBOX",
@@ -342,7 +342,7 @@ const PRODUCTS = {
   },
 
 
-        "Gift-Card-100-USD-xb ": {
+        "Gift-Card-100-USD-xb": {
     name: "Gift Card 100 USD Xbox",
     nameEn: "Gift Card 100 USD Xbox",
     platformTag: "XBOX",
@@ -361,7 +361,7 @@ const PRODUCTS = {
       "Gift Card 100 USD For Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-        "Gift-Card-10-USD-ps ": {
+        "Gift-Card-10-USD-ps": {
     name: "Gift Card 10 USD Playstation",
     nameEn: "Gift Card 10 USD Playstation",
     platformTag: "PlayStation",
@@ -380,7 +380,7 @@ const PRODUCTS = {
       "Gift Card 10 USD For playstation. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-        "Gift-Card-50-USD-ps ": {
+        "Gift-Card-50-USD-ps": {
     name: "Gift Card 50 USD Playstation",
     nameEn: "Gift Card 50 USD PlayStation",
     platformTag: "playstation",
@@ -399,7 +399,7 @@ const PRODUCTS = {
       "Gift Card 50 USD For playstation. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-        "Gift-Card-100-USD-ps ": {
+        "Gift-Card-100-USD-ps": {
     name: "Gift Card 100 USD PlayStation",
     nameEn: "Gift Card 100 USD PlayStation",
     platformTag: "PlayStation",
