@@ -1,0 +1,251 @@
+/* ----- Filters Panel Styles ----- */
+
+.filters-panel {
+  margin: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.filters-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+/* ----- Filter Toggle Button (الأيقونة الرئيسية) ----- */
+.filter-toggle-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  color: var(--text);
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.filter-toggle-btn:hover {
+  border-color: var(--purple);
+  background: var(--purple-soft);
+  box-shadow: var(--purple-glow);
+}
+
+.filter-toggle-btn.open {
+  background: var(--purple-soft);
+  border-color: var(--purple);
+  box-shadow: var(--purple-glow);
+}
+
+.filter-icon {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.filter-toggle-btn.open .filter-icon {
+  transform: scaleY(-1);
+}
+
+/* ----- Clear Filters Button ----- */
+.filter-clear-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  background: rgba(255, 138, 138, 0.1);
+  border: 1px solid rgba(255, 138, 138, 0.3);
+  border-radius: 8px;
+  color: #ff8a8a;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-left: auto;
+}
+
+.filter-clear-btn:hover {
+  background: rgba(255, 138, 138, 0.2);
+  border-color: rgba(255, 138, 138, 0.6);
+  box-shadow: 0 0 12px rgba(255, 138, 138, 0.3);
+}
+
+/* ----- Filters Menu (القائمة المنسدلة) ----- */
+.filters-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 16px;
+  min-width: 280px;
+  max-width: calc(100vw - 32px);
+  background: var(--bg-1);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 16px;
+  display: none;
+  flex-direction: column;
+  gap: 18px;
+  z-index: 100;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), var(--purple-glow);
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.filters-menu.open {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* ----- Filter Group ----- */
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.filter-group h3 {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--purple);
+}
+
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ----- Filter Buttons (الأزرار داخل القائمة) ----- */
+.filter-price-btn,
+.filter-discount-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  color: var(--text-dim);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: right;
+  transition: all 0.15s ease;
+}
+
+.filter-price-btn:hover,
+.filter-discount-btn:hover {
+  background: var(--purple-soft);
+  border-color: var(--purple-dim);
+  color: var(--text);
+}
+
+.filter-price-btn.active,
+.filter-discount-btn.active {
+  background: var(--purple-soft);
+  border-color: var(--purple);
+  color: var(--purple);
+  box-shadow: 0 0 12px rgba(176, 38, 255, 0.3);
+  font-weight: 700;
+}
+
+.discount-count {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-left: 4px;
+}
+
+.filter-price-btn.active .discount-count,
+.filter-discount-btn.active .discount-count {
+  color: var(--purple);
+}
+
+/* ----- Responsive Design ----- */
+@media (max-width: 480px) {
+  .filters-menu {
+    right: 0;
+    left: 0;
+    min-width: auto;
+    max-width: none;
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    border-radius: 16px 16px 0 0;
+    border-bottom: none;
+  }
+
+  .filters-menu.open {
+    animation: slideUpFilters 0.3s ease;
+  }
+
+  @keyframes slideUpFilters {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .filter-clear-btn {
+    margin-left: 0;
+  }
+
+  .filters-header {
+    flex-wrap: nowrap;
+    width: auto;
+  }
+}
+
+/* ----- Filter Icon Animation ----- */
+@keyframes filterPulse {
+  0%, 100% {
+    box-shadow: var(--purple-glow);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(176, 38, 255, 0.7);
+  }
+}
+
+.filter-toggle-btn:has(.filter-icon) {
+  position: relative;
+}
+
+/* ----- Accessibility ----- */
+.filter-price-btn:focus-visible,
+.filter-discount-btn:focus-visible,
+.filter-toggle-btn:focus-visible,
+.filter-clear-btn:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 2px;
+}
+
+/* ----- Dark mode adjustment (اختياري) ----- */
+@media (prefers-color-scheme: dark) {
+  .filters-menu {
+    background: var(--bg-1);
+  }
+
+  .filter-price-btn,
+  .filter-discount-btn {
+    background: var(--card);
+  }
+}
