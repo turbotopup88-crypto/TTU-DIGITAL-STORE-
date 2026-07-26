@@ -73,7 +73,7 @@ const BANNERS = [
 // inStock: false لو المنتج خلص — هيظهر "غير متوفر" على الكارد وصفحة المنتج وهيتقفل زرار الطلب
 // ---------------------------------------------------------
 const PRODUCTS = {
-  "batman-arkham-knight xb": {
+  "batman-arkham-knight-xb": {
     name: "Batman Arkham Knight Xbox",
     nameEn: "Batman Arkham Knight Xbox",
     platformTag: "XBOX",
@@ -92,7 +92,7 @@ const PRODUCTS = {
       "Full account including Batman: Arkham Knight on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-  "FC 26 xb": {
+  "FC-26-xb": {
     name: "FC 26 Xbox",
     nameEn: "FC 26 Xbox",
     platformTag: "XBOX",
@@ -111,7 +111,7 @@ const PRODUCTS = {
       "Full account including FC 26 on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-  "red dead redempiton 2 ps": {
+  "red-dead-redempiton-2-ps": {
     name: "Red Dead Redempiton 2 Playstation",
     nameEn: "Rad Dead Redempiton 2 Playstation",
     platformTag: "PS5",
@@ -130,7 +130,7 @@ const PRODUCTS = {
       "Full account including Red dead redempiton 2 on PS5. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-  "Watch dogs leigon ps": {
+  "Watch-dogs-leigon-ps": {
     name: "Watch dogs leigon Playstation",
     nameEn: "Watch dogs leigon Playstation",
     platformTag: "PS5",
@@ -149,7 +149,7 @@ const PRODUCTS = {
       "Full account including Watch dogs leigon on PS5. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },  
 
-    "Assassins creed mirage xb": {
+    "Assassins-creed-mirage-xb": {
     name: "Assassins Creed Mirage Xbox",
     nameEn: "Assassins Creed Mirage Xbox",
     platformTag: "XBOX",
@@ -168,7 +168,7 @@ const PRODUCTS = {
       "Full account including Assassins Creed Mirage on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },  
 
-      "Assassins creed shadow xb": {
+      "Assassins-creed-shadow-xb": {
     name: "Assassins Creed Shadow Xbox",
     nameEn: "Assassins Creed Shadow Xbox",
     platformTag: "XBOX",
@@ -187,7 +187,7 @@ const PRODUCTS = {
       "Full account including Assassins Creed Shadow on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },  
 
-    "red dead redempiton 2 xb": {
+    "red-dead-redempiton-2-xb": {
     name: "Red Dead Redempiton 2 Xbox",
     nameEn: "Rad Dead Redempiton 2 Xbox",
     platformTag: "XBOX",
@@ -206,7 +206,7 @@ const PRODUCTS = {
       "Full account including Red dead redempiton 2 on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-    "far cry 6 ps": {
+    "far-cry-6-ps": {
     name: "Far Cry 6 Playstation",
     nameEn: "Far Cry 6 Playstation",
     platformTag: "PS5",
@@ -225,7 +225,7 @@ const PRODUCTS = {
       "Full account including Far Cry 6 on PS5. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-    "Resident Evil Village ps": {
+    "Resident-Evil-Village-ps": {
     name: "Resident Evil Village Playstation",
     nameEn: "Resident Evil Village Playstation",
     platformTag: "PS5",
@@ -244,7 +244,7 @@ const PRODUCTS = {
       "Full account including Resident Evil Village on PS5. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-    "Spider Man ps": {
+    "Spider-Man-ps": {
     name: "Spider maximum Playstation",
     nameEn: "Spider Man Playstation",
     platformTag: "PS5",
@@ -263,7 +263,7 @@ const PRODUCTS = {
       "Full account including Spider Man on PS5. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-    "Spider Man Miles Morales ps": {
+    "Spider-Man-Miles-Morales-ps": {
     name: "Spider Man Miles Morales PlayStation",
     nameEn: "Spider Man Miles Morales Playstation",
     platformTag: "PS5",
@@ -283,7 +283,7 @@ const PRODUCTS = {
   },
 
 
-      "Forza Horizon 5 xb": {
+      "Forza-Horizon-5-xb": {
     name: "Forza Horizon 5 Xbox",
     nameEn: "Forza Horizon 5 Xbox",
     platformTag: "XBOX",
@@ -303,7 +303,7 @@ const PRODUCTS = {
   },
 
 
-      "Gift Card 10 USD xb ": {
+      "Gift-Card-10-USD-xb ": {
     name: "Gift Card 10 USD Xbox",
     nameEn: "Gift Card 10 USD Xbox",
     platformTag: "XBOX",
@@ -322,7 +322,7 @@ const PRODUCTS = {
       "Gift Card 10 USD For Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-        "Gift Card 50 USD xb ": {
+        "Gift-Card-50-USD-xb ": {
     name: "Gift Card 50 USD Xbox",
     nameEn: "Gift Card 50 USD Xbox",
     platformTag: "XBOX",
@@ -342,7 +342,7 @@ const PRODUCTS = {
   },
 
 
-        "Gift Card 100 USD xb ": {
+        "Gift-Card-100-USD-xb ": {
     name: "Gift Card 100 USD Xbox",
     nameEn: "Gift Card 100 USD Xbox",
     platformTag: "XBOX",
@@ -361,7 +361,7 @@ const PRODUCTS = {
       "Gift Card 100 USD For Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-        "Gift Card 10 USD ps ": {
+        "Gift-Card-10-USD-ps ": {
     name: "Gift Card 10 USD Playstation",
     nameEn: "Gift Card 10 USD Playstation",
     platformTag: "PlayStation",
@@ -380,7 +380,7 @@ const PRODUCTS = {
       "Gift Card 10 USD For playstation. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-        "Gift Card 50 USD ps ": {
+        "Gift-Card-50-USD-ps ": {
     name: "Gift Card 50 USD Playstation",
     nameEn: "Gift Card 50 USD PlayStation",
     platformTag: "playstation",
@@ -399,7 +399,7 @@ const PRODUCTS = {
       "Gift Card 50 USD For playstation. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-        "Gift Card 100 USD ps ": {
+        "Gift-Card-100-USD-ps ": {
     name: "Gift Card 100 USD PlayStation",
     nameEn: "Gift Card 100 USD PlayStation",
     platformTag: "PlayStation",
@@ -418,7 +418,7 @@ const PRODUCTS = {
       "Gift Card 10 USD For playstation. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-      "Stray Xbox": {
+      "Stray-Xbox": {
     name: "Stray Xbox",
     nameEn: "Stray Xbox",
     platformTag: "XBOX",
@@ -439,7 +439,7 @@ const PRODUCTS = {
 
     
 
-  "Call of duty black ops 6 xb": {
+  "Call-of-duty-black-ops-6-xb": {
     name: "Call of duty black ops 6 Xbox",
     nameEn: "Call of duty black ops 6 Xbox",
     platformTag: "XBOX",
@@ -458,7 +458,7 @@ const PRODUCTS = {
       "Full account including call of duty black ops 6  on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-  "The crew 2 xb": {
+  "The-crew-2-xb": {
     name: "The crew 2 Xbox",
     nameEn: "The crew 2 Xbox",
     platformTag: "XBOX",
@@ -477,7 +477,7 @@ const PRODUCTS = {
       "Full account including The crew 2  on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-    "A Plague Tale Innocence xb": {
+    "A-Plague-Tale-Innocence-xb": {
     name: "A Plague Tale Innocence Xbox",
     nameEn: "A Plague Tale Innocence Xbox",
     platformTag: "XBOX",
@@ -497,7 +497,7 @@ const PRODUCTS = {
       "Full account including A Plague Tale Innocence  on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-   "A Plague Tale Requiem xb": {
+   "A-Plague-Tale-Requiem-xb": {
     name: "A Plague Tale Requiem Xbox",
     nameEn: "A Plague Tale Requiem Xbox",
     platformTag: "XBOX",
@@ -517,7 +517,7 @@ const PRODUCTS = {
       "Full account including A Plague Tale Requiem on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-  "Mortal Kombat 11 xb": {
+  "Mortal-Kombat-11-xb": {
     name: "Mortal Kombat 11 Xbox",
     nameEn: "Mortal Kombat 11 Xbox",
     platformTag: "XBOX",
@@ -536,7 +536,7 @@ const PRODUCTS = {
       "Full account including Mortal Kombat 11 on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-   "Dying light 2 xb": {
+   "Dying-light-2-xb": {
     name: "Dying light 2 Xbox",
     nameEn: "Dying light 2 Xbox",
     platformTag: "XBOX",
@@ -555,7 +555,7 @@ const PRODUCTS = {
       "Full account including Dying light 2 on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-  "Need For Speed heat deluxe edition xb": {
+  "Need-For-Speed-heat-deluxe-edition-xb": {
     name: "Need For Speed heat deluxe edition Xbox",
     nameEn: "Need For Speed heat deluxe edition Xbox",
     platformTag: "XBOX",
@@ -574,7 +574,7 @@ const PRODUCTS = {
       "Full account including Need For Speed heat deluxe edition on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
 
-   "Need For Speed Unbound xb": {
+   "Need-For-Speed-Unbound-xb": {
     name: "Need For Speed Unbound Xbox",
     nameEn: "Need For Speed Unbound Xbox",
     platformTag: "XBOX",
