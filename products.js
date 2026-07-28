@@ -588,9 +588,9 @@ const PRODUCTS = {
     currency: { ar: "ج.م", en: "EGP" },
     image:"https://i.ibb.co/C58b1fpk/need-for-speed-unbound-fan-casting-poster-406056-medium.jpg" ,
     description:
-      "حساب كامل يحتوي على لعبة Need For Speed Unbound لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "Need for Speed Unbound هي لعبة سباقات عالم مفتوح تتميز بأسلوب فني مبتكر يجمع بين الرسوم الواقعية والتأثيرات الكرتونية. نافس في سباقات حماسية، طوّر سيارتك، واهرب من الشرطة للوصول إلى قمة سباقات الشوارع.",
     descriptionEn:
-      "Full account including Need For Speed Unbound on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "Need for Speed Unbound is an open-world racing game featuring an innovative art style that combines realistic graphics with cartoonish effects. Race in thrilling competitions, upgrade your car, and escape the police to reach the top of street racing."
   },
   
 };
