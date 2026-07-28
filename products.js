@@ -239,9 +239,9 @@ const PRODUCTS = {
     currency: { ar: "ج.م", en: "EGP" },
     image: "https://i.ibb.co/7JSK063C/download-2.jpg",
     description:
-      "حساب كامل يحتوي على لعبة Resident Evil Village لمنصة PS5، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "Resident Evil Village هي لعبة رعب وبقاء من منظور الشخص الأول، تتابع رحلة إيثان وينترز في قرية غامضة مليئة بالمخلوقات المرعبة والأسرار، مع مزيج من القتال والاستكشاف والألغاز.",
     descriptionEn:
-      "Full account including Resident Evil Village on PS5. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "Resident Evil Village is a first-person horror and survival game that follows Ethan Winters' journey in a mysterious village full of terrifying creatures and secrets, with a mix of combat, exploration, and puzzles."
   },
 
     "Spider-Man-ps": {
