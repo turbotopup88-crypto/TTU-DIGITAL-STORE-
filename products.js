@@ -432,9 +432,9 @@ const PRODUCTS = {
     currency: { ar: "ج.م", en: "EGP" },
     image: "https://i.ibb.co/wZtxWCsW/images-10.jpg",
     description:
-      "حساب كامل يحتوي على لعبة Stray لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "Stray هي لعبة مغامرات فريدة تضعك في دور قط ضائع داخل مدينة مستقبلية يسكنها الروبوتات. استكشف العالم، حل الألغاز، واكتشف أسرار المدينة في تجربة هادئة ومؤثرة.",
     descriptionEn:
-      "Full account including Stray on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "Stray is a unique adventure game that puts you in the role of a lost cat in a futuristic city inhabited by robots. Explore the world, solve puzzles, and uncover the city's secrets in a calm and touching experience."
   },  
 
     
