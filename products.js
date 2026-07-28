@@ -163,9 +163,9 @@ const PRODUCTS = {
     currency: { ar: "ج.م", en: "EGP" },
     image: "https://i.ibb.co/PZP2ngRh/images-6.jpg",
     description:
-      "حساب كامل يحتوي على لعبة Assassins Creed Mirage لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "Assassin's Creed Mirage هي لعبة أكشن ومغامرات تعود بجذور السلسلة إلى أسلوب التخفي والاغتيالات. تلعب بدور باسم في شوارع بغداد في القرن التاسع، حيث تكشف أسرارًا وتواجه منظمة الفرسان في رحلة مليئة بالإثارة.",
     descriptionEn:
-      "Full account including Assassins Creed Mirage on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "Assassin's Creed Mirage is an action-adventure game that brings the series back to its roots of stealth and assassinations. You play as Basim in the streets of ninth-century Baghdad, uncovering secrets and facing the Order of the Knights on an exciting journey."
   },  
 
       "Assassins-creed-shadow-xb": {
