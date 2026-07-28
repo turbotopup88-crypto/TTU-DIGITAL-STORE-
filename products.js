@@ -182,9 +182,9 @@ const PRODUCTS = {
     currency: { ar: "ج.م", en: "EGP" },
     image: "https://i.ibb.co/R4t7JHZJ/images-5.jpg",
     description:
-      "حساب كامل يحتوي على لعبة Assassins Creed Shadow لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "Assassin's Creed Shadows هي لعبة عالم مفتوح تدور أحداثها في اليابان الإقطاعية، حيث تلعب بشخصيتين مختلفتين: الشينوبي ناوي والمحارب ياسوكي. استكشف عالمًا غنيًا بالتفاصيل واستخدم أساليب التخفي أو القتال لخوض مغامرة ملحمية.",
     descriptionEn:
-      "Full account including Assassins Creed Shadow on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "Assassin's Creed Shadows is an open-world game set in feudal Japan, where you play as two different characters: the shinobi Nawi and the warrior Yasuke. Explore a richly detailed world and use stealth or combat to embark on an epic adventure."
   },  
 
     "red-dead-redempiton-2-xb": {
