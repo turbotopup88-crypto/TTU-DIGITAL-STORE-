@@ -220,9 +220,9 @@ const PRODUCTS = {
     currency: { ar: "ج.م", en: "EGP" },
     image: "https://i.ibb.co/dsshPYGt/images-7.jpg",
     description:
-      "حساب كامل يحتوي على لعبة Far Cry 6 لمنصة PS5، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "Far Cry 6 هي لعبة أكشن وعالم مفتوح تدور أحداثها في جزيرة يارا الخيالية، حيث تلعب بدور داني روخاس وتنضم إلى الثورة للإطاحة بالحاكم الديكتاتوري أنطون كاستيو. استكشف عالمًا واسعًا، واستخدم ترسانة متنوعة من الأسلحة والمركبات لخوض معارك مليئة بالإثارة والحرية.",
     descriptionEn:
-      "Full account including Far Cry 6 on PS5. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "Far Cry 6 is an action and open-world game set on the fictional island of Yara, where you play as Dani Rojas and join the revolution to take down the dictatorial ruler Antón Castillo. Explore a vast world, and use a variety of weapons and vehicles to dive into thrilling and free-flowing battles."
   },
 
     "Resident-Evil-Village-ps": {
