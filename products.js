@@ -453,9 +453,9 @@ const PRODUCTS = {
     currency: { ar: "ج.م", en: "EGP" },
     image: "https://i.ibb.co/PZv1hM6G/MV5-BYj-E3-OGFk-Mm-It-ZGMz-OC00-Ym-Vj-LWE5-Zm-Yt-Nzcx-MTk0-OTY5-NTU2-Xk-Ey-Xk-Fqc-Gc.jpg",
     description:
-      "حساب كامل يحتوي على لعبة Call of duty black ops 6 لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "Call of Duty: Black Ops 6 هي لعبة تصويب من منظور الشخص الأول تقدم حملة سينمائية مشوقة، وطور لعب جماعي سريع، بالإضافة إلى طور الزومبي الشهير، مع أسلحة حديثة وأسلوب لعب مليء بالإثارة.",
     descriptionEn:
-      "Full account including call of duty black ops 6  on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "Call of Duty: Black Ops 6 is a first-person shooter game that offers an exciting cinematic campaign, fast-paced multiplayer mode, and the popular zombies mode, with modern weapons and thrilling gameplay."
   },
 
   "The-crew-2-xb": {
