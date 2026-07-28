@@ -201,7 +201,7 @@ const PRODUCTS = {
     currency: { ar: "ج.م", en: "EGP" },
     image: "https://i.ibb.co/DgsCfdSS/download.jpg",
     description:
-      "حساب كامل يحتوي على لعبة Red dead redempiton 2 لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "Red Dead Redemption 2 هي لعبة أكشن ومغامرات بعالم مفتوح تدور أحداثها في الغرب الأمريكي عام 1899. تلعب بدور آرثر مورغان، أحد أفراد عصابة فان دير ليند، بينما يحاول النجاة وسط انهيار عصر رعاة البقر، واتخاذ قرارات مصيرية بين الولاء والعائلة والخلاص. تتميز اللعبة بقصة عميقة، وعالم حي مليء بالتفاصيل، وشخصيات لا تُنسى.",
     descriptionEn:
       "Full account including Red dead redempiton 2 on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
   },
