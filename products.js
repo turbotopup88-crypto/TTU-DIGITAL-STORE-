@@ -258,9 +258,9 @@ const PRODUCTS = {
     currency: { ar: "ج.م", en: "EGP" },
     image: "https://i.ibb.co/XxbJzdJ6/images-8.jpg",
     description:
-      "حساب كامل يحتوي على لعبة Spider Man لمنصة PS5، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "Marvel's Spider-Man هي لعبة أكشن وعالم مفتوح تتيح لك اللعب بشخصية بيتر باركر وحماية مدينة نيويورك من أخطر الأشرار، مع نظام تنقل وقتال سريع وقصة سينمائية مميزة.",
     descriptionEn:
-      "Full account including Spider Man on PS5. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "Marvel's Spider-Man is an action and open-world game that lets you play as Peter Parker and protect New York City from the most dangerous villains, with fast-moving combat and traversal, plus a standout cinematic story."
   },
 
     "Spider-Man-Miles-Morales-ps": {
