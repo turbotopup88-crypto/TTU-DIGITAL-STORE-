@@ -106,9 +106,9 @@ const PRODUCTS = {
     currency: { ar: "ج.م", en: "EGP" },
     image: "https://i.ibb.co/xThLH0G/IMG-20260703-030147.jpg",
     description:
-      "حساب كامل يحتوي على لعبة  FC 26 منصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "EA SPORTS FC 26 هي أحدث ألعاب كرة القدم من EA، وتقدم تجربة واقعية بفضل تحسينات أسلوب اللعب والرسوميات، مع أوضاع متنوعة مثل Ultimate Team وCareer Mode واللعب الجماعي عبر الإنترنت.",
     descriptionEn:
-      "Full account including FC 26 on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "EA SPORTS FC 26 is the latest football game from EA, offering a realistic experience thanks to gameplay and graphics improvements, with various modes like Ultimate Team, Career Mode, and online multiplayer."
   },
 
   "red-dead-redempiton-2-ps": {
