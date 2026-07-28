@@ -512,9 +512,9 @@ const PRODUCTS = {
     currency: { ar: "ج.م", en: "EGP" },
     image:"https://i.ibb.co/fLTk9tN/mixcollage-11-dec-2024-03-58-pm-1132.jpg" ,
     description:
-      "حساب كامل يحتوي على لعبة A Plague Tale Requiem لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "A Plague Tale Requiem هي لعبة أكشن ومغامرات وقصة مؤثرة، تواصل رحلة أميسيا وشقيقها هوجو في عالم يعج بالأوبئة والمخاطر، حيث يجمعان بين التخفي والقتال لحماية بعضهما البعض.",
     descriptionEn:
-      "Full account including A Plague Tale Requiem on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "A Plague Tale Requiem is an action-adventure game with a touching story, continuing the journey of Amicia and her brother Hugo in a world full of plagues and dangers, where they combine stealth and combat to protect each other."
   },
 
   "Mortal-Kombat-11-xb": {
