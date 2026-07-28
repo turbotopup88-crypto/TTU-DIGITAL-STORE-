@@ -492,9 +492,9 @@ const PRODUCTS = {
     currency: { ar: "ج.م", en: "EGP" },
     image:"https://assets.mycast.io/posters/a-plague-tale-innocence-fan-casting-poster-380962-medium.jpg?1694389502" ,
     description:
-      "حساب كامل يحتوي على لعبة A Plague Tale Innocence لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "A Plague Tale Innocence هي لعبة مغامرات وقصة تدور في فرنسا خلال العصور الوسطى، حيث تهرب أميسيا مع شقيقها هوجو من محاكم التفتيش وأسراب الجرذان القاتلة في رحلة مليئة بالتخفي والعاطفة.",
     descriptionEn:
-      "Full account including A Plague Tale Innocence  on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "A Plague Tale Innocence is an adventure and story-driven game set in France during the Middle Ages, where Amicia and her brother Hugo flee from the Inquisition and swarms of deadly rats on a journey full of stealth and emotion."
   },
 
    "A-Plague-Tale-Requiem-xb": {
