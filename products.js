@@ -277,9 +277,9 @@ const PRODUCTS = {
     currency: { ar: "ج.م", en: "EGP" },
     image: "https://i.ibb.co/jZQMRZ1d/download-3.jpg",
     description:
-      "حساب كامل يحتوي على لعبة Spider Man Miles Morales لمنصة PS5، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "Marvel's Spider-Man: Miles Morales هي لعبة أكشن تتابع قصة مايلز موراليس وهو يتعلم تحمل مسؤولية الرجل العنكبوت، مستخدمًا قدراته الكهربائية الفريدة في مواجهة تهديدات جديدة بمدينة نيويورك.",
     descriptionEn:
-      "Full account including Spider Man Miles Morales on PS5. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "Marvel's Spider-Man: Miles Morales is an action game that follows the story of Miles Morales as he learns to take on the responsibility of Spider-Man, using his unique electric powers to face new threats in New York City."
   },
 
 
