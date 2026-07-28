@@ -569,9 +569,9 @@ const PRODUCTS = {
     currency: { ar: "ج.م", en: "EGP" },
     image:"https://i.ibb.co/6J4g5xGf/OIP.webp" ,
     description:
-      "حساب كامل يحتوي على لعبة Need For Speed heat deluxe edition لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "Need for Speed Heat هي لعبة سباقات عالم مفتوح تجمع بين سباقات النهار الرسمية وسباقات الشوارع الليلية الخطيرة. عدّل سياراتك، واهرب من الشرطة، وابنِ سمعتك لتصبح أسطورة السباقات.",
     descriptionEn:
-      "Full account including Need For Speed heat deluxe edition on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "Need for Speed Heat is an open-world racing game that combines official daytime races with dangerous nighttime street races. Tune your cars, evade the cops, and build your reputation to become a racing legend."
   },
 
    "Need-For-Speed-Unbound-xb": {
