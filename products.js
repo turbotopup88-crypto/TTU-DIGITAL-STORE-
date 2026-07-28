@@ -531,9 +531,9 @@ const PRODUCTS = {
     currency: { ar: "ج.م", en: "EGP" },
     image:"https://i.ibb.co/MDdXPG1s/OIP.webp" ,
     description:
-      "حساب كامل يحتوي على لعبة Mortal Kombat 11 لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "Mortal Kombat 11 هي لعبة قتال تقدم مواجهات عنيفة وسريعة بين أشهر شخصيات السلسلة. استمتع بطور القصة السينمائي، وأنماط اللعب المتنوعة، ونظام قتال عميق مع حركات الـ Fatality الشهيرة.",
     descriptionEn:
-      "Full account including Mortal Kombat 11 on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "Mortal Kombat 11 is a fighting game featuring fast and violent battles between the most famous characters of the series. Enjoy the cinematic story mode, various gameplay modes, and a deep combat system with the famous Fatality moves."
   },
 
    "Dying-light-2-xb": {
