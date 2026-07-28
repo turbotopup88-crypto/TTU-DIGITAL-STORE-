@@ -472,9 +472,9 @@ const PRODUCTS = {
     currency: { ar: "ج.م", en: "EGP" },
     image: "https://i.ibb.co/dw7Lv2s1/1-IVy-Dh-CRLet-Fhmg-Osg-F84-Eafuh-GV6-Sw-TPjmnp2-Y7-H9x4jju-REk-B8-P1dism-Mvp-DYk.jpg",
     description:
-      "حساب كامل يحتوي على لعبة The crew 2 لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "The Crew 2 هي لعبة سباقات بعالم مفتوح داخل الولايات المتحدة، تتيح لك قيادة السيارات والدراجات النارية والقوارب والطائرات في سباقات متنوعة، مع حرية استكشاف ضخمة وتحديات مستمرة.",
     descriptionEn:
-      "Full account including The crew 2  on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "The Crew 2 is an open-world racing game set in the United States, letting you drive cars, motorcycles, boats, and planes in various races, with massive freedom to explore and ongoing challenges."
   },
 
     "A-Plague-Tale-Innocence-xb": {
