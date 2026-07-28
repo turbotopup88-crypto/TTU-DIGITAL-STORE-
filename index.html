@@ -18,7 +18,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3SHSN5TDX"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag(){dataLayer.push(arguments);} 
       gtag('js', new Date());
       gtag('config', 'G-C3SHSN5TDX');
     </script>
@@ -38,12 +38,14 @@
         🛒
         <span class="cart-badge" id="cart-count" style="display:none">0</span>
       </button>
+      <!-- زر فتح دردشة الذكاء الاصطناعي -->
+      <button class="icon-btn" id="ai-chat-btn" aria-label="دردشة الذكاء الاصطناعي">🤖</button>
     </div>
   </header>
 
   <div class="search-bar" id="search-bar">
     <div class="search-wrap">
-      <input type="text" id="search-input" placeholder="ابحث عن منتج..." data-i18n-placeholder="searchPlaceholder" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list">
+      <input type="text" id="search-input" placeholder="ابحث عن منتج..." data-i18n-placeholder="searchPlaceholder" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete=[...]
       <div class="search-suggestions" id="search-suggestions" style="display:none"></div>
     </div>
   </div>
@@ -121,6 +123,23 @@
       </div>
       <button class="whatsapp-btn" id="cart-checkout" data-i18n="checkout">🟢 إتمام الطلب عبر واتساب</button>
     </div>
+  </aside>
+
+  <!-- ---------- AI Gemini Chat Drawer (New) ---------- -->
+  <div class="ai-overlay" id="ai-overlay" style="display:none"></div>
+  <aside class="ai-chat-drawer" id="ai-chat-drawer" aria-label="دردشة الذكاء الاصطناعي" style="display:none">
+    <div class="ai-header">
+      <h2>دردشة ذكية</h2>
+      <button class="ai-close" id="ai-close" aria-label="إغلاق الدردشة">✕</button>
+    </div>
+    <div class="ai-body" id="ai-body" role="log" aria-live="polite">
+      <div class="ai-empty">مرحباً! اسألني عن المنتجات أو اكتب أي استفسار.</div>
+    </div>
+    <form class="ai-form" id="ai-form">
+      <input type="text" id="ai-input" placeholder="اكتب سؤالك هنا..." autocomplete="off" required>
+      <button type="submit" id="ai-send">إرسال</button>
+    </form>
+    <div class="ai-note">ملاحظة: للمحافظة على أمان المفتاح يجب إعداد نقطة نهاية خادم (proxy) تستخدم مفتاح Gemini سـرياً. الكود هنا يرسل الطلب إلى /api/gemini</div>
   </aside>
 
   <script src="products.js"></script>
@@ -238,128 +257,4 @@
         closeSearchBar();
       } else {
         openSearchBar();
-      }
-    });
-
-    function highlight(text, term) {
-      if (!term) return text;
-      const i = text.toLowerCase().indexOf(term.toLowerCase());
-      if (i === -1) return text;
-      return `${text.slice(0, i)}<mark>${text.slice(i, i + term.length)}</mark>${text.slice(i + term.length)}`;
-    }
-
-    function matchingProducts(term) {
-      const q = term.trim().toLowerCase();
-      if (!q) return [];
-      return Object.entries(PRODUCTS).filter(([, p]) =>
-        p.name.toLowerCase().includes(q) || p.platformTag.toLowerCase().includes(q)
-      );
-    }
-
-    function renderSuggestions(term) {
-      const matches = matchingProducts(term);
-      activeSuggestion = -1;
-
-      if (!term.trim()) {
-        closeSuggestions();
-        return;
-      }
-
-      if (matches.length === 0) {
-        suggestBox.innerHTML = `<p class="suggestion-empty">${t('noResultsFor')(term)}</p>`;
-        suggestBox.style.display = 'block';
-        searchInput.setAttribute('aria-expanded', 'true');
-        return;
-      }
-
-      const shown = matches.slice(0, MAX_SUGGESTIONS);
-      suggestBox.innerHTML = shown
-        .map(([id, p]) => `
-          <a class="suggestion-item" href="product.html?id=${id}" data-id="${id}">
-            <img src="${p.image}" alt="">
-            <div class="suggestion-info">
-              <span class="s-name">${highlight(localized(p.name, p.nameEn), term)}</span>
-              <span class="s-price">${p.price} ${currencyText(p)}</span>
-            </div>
-          </a>
-        `)
-        .join('');
-
-      if (matches.length > MAX_SUGGESTIONS) {
-        const more = document.createElement('button');
-        more.type = 'button';
-        more.className = 'suggestion-more';
-        more.textContent = t('showAllResults')(matches.length);
-        more.addEventListener('click', () => {
-          renderProducts(term);
-          closeSuggestions();
-          document.getElementById('product-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-        suggestBox.appendChild(more);
-      }
-
-      suggestBox.style.display = 'block';
-      searchInput.setAttribute('aria-expanded', 'true');
-    }
-
-    function closeSuggestions() {
-      suggestBox.style.display = 'none';
-      suggestBox.innerHTML = '';
-      searchInput.setAttribute('aria-expanded', 'false');
-      activeSuggestion = -1;
-    }
-
-    searchInput.addEventListener('input', () => {
-      renderProducts(searchInput.value);
-      renderSuggestions(searchInput.value);
-    });
-
-    searchInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeSearchBar();
-        return;
-      }
-
-      const items = [...suggestBox.querySelectorAll('.suggestion-item')];
-      if (items.length === 0) return;
-
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        activeSuggestion = (activeSuggestion + 1) % items.length;
-      } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        activeSuggestion = (activeSuggestion - 1 + items.length) % items.length;
-      } else if (e.key === 'Enter' && activeSuggestion > -1) {
-        e.preventDefault();
-        window.location.href = items[activeSuggestion].href;
-        return;
-      } else {
-        return;
-      }
-
-      items.forEach((el, i) => el.classList.toggle('active', i === activeSuggestion));
-      items[activeSuggestion].scrollIntoView({ block: 'nearest' });
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.search-wrap')) closeSuggestions();
-      if (!e.target.closest('.search-bar') && !e.target.closest('#search-btn') && searchBar.classList.contains('open')) {
-        closeSearchBar();
-      }
-    });
-  </script>
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6a6742a54c74f91d46242739/1juhlolv4';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
-</body>
-</html>
+This tool response was truncated. Please retry the call with the same parameters after reading the full file contents from getfile and providing the correct sha parameter.
