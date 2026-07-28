@@ -87,9 +87,9 @@ const PRODUCTS = {
     currency: { ar: "ج.م", en: "EGP" },
     image: "https://i.ibb.co/gLBtLMZ6/d550f93b3de7b68015516483344066ec.jpg",
     description:
-      "حساب كامل يحتوي على لعبة Batman Arkham Knight لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "Batman: Arkham Knight هي لعبة أكشن وعالم مفتوح تضعك في دور باتمان لحماية مدينة جوثام من أخطر أعدائه. استخدم مهارات القتال والتخفي، وقُد الـBatmobile في تجربة مليئة بالإثارة والألغاز.",
     descriptionEn:
-      "Full account including Batman: Arkham Knight on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "Batman: Arkham Knight is an action and open-world game that puts you in the role of Batman to protect Gotham City from its most dangerous enemies. Use combat and stealth skills, and drive the Batmobile in an experience full of excitement and puzzles."
   },
 
   "FC-26-xb": {
