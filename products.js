@@ -144,9 +144,9 @@ const PRODUCTS = {
     currency: { ar: "ج.م", en: "EGP" },
     image: "https://i.ibb.co/V0vSS1pY/download-1.jpg",
     description:
-      "حساب كامل يحتوي على لعبة Watch dogs leigon لمنصة PS5، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "Watch Dogs: Legion هي لعبة عالم مفتوح تدور أحداثها في لندن المستقبلية، حيث يمكنك تجنيد أي شخص من سكان المدينة والانضمام إلى المقاومة لتحريرها من سيطرة النظام القمعي باستخدام الاختراق والتكنولوجيا.",
     descriptionEn:
-      "Full account including Watch dogs leigon on PS5. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "Watch Dogs: Legion is an open-world game set in a futuristic London, where you can recruit anyone from the city's residents and join the resistance to free it from the control of the oppressive regime using hacking and technology."
   },  
 
     "Assassins-creed-mirage-xb": {
