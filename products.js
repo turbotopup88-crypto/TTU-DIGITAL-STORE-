@@ -125,9 +125,9 @@ const PRODUCTS = {
     currency: { ar: "ج.م", en: "EGP" },
     image: "https://i.ibb.co/DgsCfdSS/download.jpg",
     description:
-      "حساب كامل يحتوي على لعبة Red dead redempiton 2 لمنصة PS5، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "Red Dead Redemption 2 هي لعبة أكشن ومغامرات بعالم مفتوح تدور أحداثها في الغرب الأمريكي عام 1899. تلعب بدور آرثر مورغان، أحد أفراد عصابة فان دير ليند، بينما يحاول النجاة وسط انهيار عصر رعاة البقر، واتخاذ قرارات مصيرية بين الولاء والعائلة والخلاص. تتميز اللعبة بقصة عميقة، وعالم حي مليء بالتفاصيل، وشخصيات لا تُنسى.",
     descriptionEn:
-      "Full account including Red dead redempiton 2 on PS5. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "Red Dead Redemption 2 is an action-adventure game set in an open world that takes place in the American West in 1899. You play as Arthur Morgan, a member of the Van der Linde gang, trying to survive as the era of cowboys comes to an end, making life-changing choices between loyalty, family, and redemption. The game features a deep story, a living world full of details, and unforgettable characters."
   },
 
   "Watch-dogs-leigon-ps": {
@@ -203,7 +203,7 @@ const PRODUCTS = {
     description:
       "Red Dead Redemption 2 هي لعبة أكشن ومغامرات بعالم مفتوح تدور أحداثها في الغرب الأمريكي عام 1899. تلعب بدور آرثر مورغان، أحد أفراد عصابة فان دير ليند، بينما يحاول النجاة وسط انهيار عصر رعاة البقر، واتخاذ قرارات مصيرية بين الولاء والعائلة والخلاص. تتميز اللعبة بقصة عميقة، وعالم حي مليء بالتفاصيل، وشخصيات لا تُنسى.",
     descriptionEn:
-      "Full account including Red dead redempiton 2 on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "Red Dead Redemption 2 is an action-adventure game set in an open world that takes place in the American West in 1899. You play as Arthur Morgan, a member of the Van der Linde gang, trying to survive as the era of cowboys comes to an end, making life-changing choices between loyalty, family, and redemption. The game features a deep story, a living world full of details, and unforgettable characters."
   },
 
     "far-cry-6-ps": {
