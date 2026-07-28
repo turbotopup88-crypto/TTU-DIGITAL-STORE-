@@ -297,9 +297,9 @@ const PRODUCTS = {
     currency: { ar: "ج.م", en: "EGP" },
     image: "https://i.ibb.co/8g3XLhPF/images-9.jpg",
     description:
-      "حساب كامل يحتوي على لعبة Forza Horizon 5 لمنصة Xbox، تسليم خلال ساعتين بحد اقصى بعد تأكيد الطلب عبر واتساب.",
+      "Forza Horizon 5 هي لعبة سباقات بعالم مفتوح تأخذك إلى المكسيك بمناظرها الخلابة وتنوع بيئاتها. استمتع بقيادة مئات السيارات والمشاركة في سباقات وتحديات مليئة بالحماس.",
     descriptionEn:
-      "Full account including Forza Horizon 5 on Xbox. Instant Delivery within a maximum of 2 hours after order confirmation via WhatsApp."
+      "Forza Horizon 5 is an open-world racing game that takes you to Mexico with its stunning landscapes and diverse environments. Enjoy driving hundreds of cars and taking part in exciting races and challenges."
   },
 
 
