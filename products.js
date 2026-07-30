@@ -484,8 +484,7 @@ const PRODUCTS = {
     category: "xbox-games",
     note: "حساب كامل",
     noteEn: "Full account",
-    price: 280,
-    oldPrice: 380,
+    price: 380,
     isNew: null,
     inStock: true
 ,
@@ -504,8 +503,7 @@ const PRODUCTS = {
     category: "xbox-games",
     note: "حساب كامل",
     noteEn: "Full account",
-    price: 490,
-    oldPrice: 700,
+    price: 700,
     isNew: null,
     inStock: true
 ,
