@@ -3,7 +3,7 @@
 // يعتمد على وجود PRODUCTS من products.js
 // ---------------------------------------------------------
 const CART_KEY = "store_cart_v1";
-const API_BASE_URL = "https://your-api.com/api"; // ✅ عدّل الـ URL حسب API الخاص بك
+const API_BASE_URL = "86d6858a3d2d0a75614ce1cf53fc94d88b7e20bbde34ce1b57"; // ✅ عدّل الـ URL حسب API الخاص بك
 
 function getCart() {
   try {
