@@ -3,6 +3,7 @@
 // يعتمد على وجود PRODUCTS من products.js
 // ---------------------------------------------------------
 const CART_KEY = "store_cart_v1";
+const API_BASE_URL = "https://your-api.com/api"; // ✅ عدّل الـ URL حسب API الخاص بك
 
 function getCart() {
   try {
@@ -168,31 +169,58 @@ function closeCart() {
   document.getElementById("cart-overlay").classList.remove("open");
 }
 
-function buildCartWhatsAppUrl(whatsappNumber, customer) {
+// ✅ دالة جديدة: بناء بيانات الطلب
+function buildOrderData(customer) {
   const cart = getCart();
-  // ✅ فلتر فقط المنتجات الموجودة في PRODUCTS
   const ids = Object.keys(cart).filter((id) => PRODUCTS[id]);
-  const lines = ["طلب جديد من السلة 🛒", "-----------------------"];
-
-  ids.forEach((id) => {
+  
+  const items = ids.map((id) => {
     const p = PRODUCTS[id];
     const qty = cart[id];
-    lines.push(`${p.name} × ${qty} = ${p.price * qty} ${currencyText(p)}`);
+    return {
+      productId: id,
+      productName: p.name,
+      quantity: qty,
+      price: p.price,
+      subtotal: p.price * qty
+    };
   });
 
-  lines.push("-----------------------");
-  lines.push(`الإجمالي: ${getCartTotal()} ${currencyLabel()}`);
+  return {
+    customer: {
+      name: customer.name,
+      phone: customer.phone,
+      email: customer.email || null
+    },
+    items: items,
+    total: getCartTotal(),
+    paymentMethod: customer.payment,
+    orderDate: new Date().toISOString()
+  };
+}
 
-  if (customer) {
-    lines.push("-----------------------");
-    lines.push(`الاسم: ${customer.name}`);
-    lines.push(`رقم الهاتف: ${customer.phone}`);
-    if (customer.email) lines.push(`البريد الإلكتروني: ${customer.email}`);
-    lines.push(`طريقة الدفع: ${paymentMethodLabel(customer.payment)}`);
+// ✅ دالة جديدة: إرسال الطلب إلى API
+async function submitOrderToAPI(orderData) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/orders`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(orderData)
+    });
+
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.status} ${response.statusText}`);
+    }
+
+    const result = await response.json();
+    console.log("✅ تم إرسال الطلب بنجاح:", result);
+    return result; // قد يحتوي على orderId أو invoiceId
+  } catch (error) {
+    console.error("❌ خطأ في إرسال الطلب:", error);
+    throw error;
   }
-
-  const message = encodeURIComponent(lines.join("\n"));
-  return `https://wa.me/${whatsappNumber}?text=${message}`;
 }
 
 // ✅ دالة جديدة: مسح السلة بعد الطلب
@@ -225,7 +253,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (cartCheckout) {
-    cartCheckout.addEventListener("click", () => {
+    cartCheckout.addEventListener("click", async () => {
       if (getCartCount() === 0) {
         console.warn("⚠️ السلة فارغة!");
         return;
@@ -242,6 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const email = emailEl ? emailEl.value.trim() : "";
       const payment = paymentEl ? paymentEl.value : "";
 
+      // ✅ التحقق من صحة البيانات
       if (!name || !phone || !payment) {
         if (errorEl) errorEl.classList.add("show");
         if (fieldsBox && !fieldsBox.classList.contains("open")) {
@@ -255,14 +284,40 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       if (errorEl) errorEl.classList.remove("show");
 
-      const url = buildCartWhatsAppUrl(WHATSAPP_NUMBER, { name, phone, email, payment });
-      
-      // ✅ مسح السلة بعد إرسال الطلب مباشرة
-      clearCart();
-      closeCart();
-      
-      console.log("✅ تم إرسال الطلب وتنظيف السلة");
-      window.open(url, "_blank");
+      // ✅ إضافة حالة تحميل على الزر
+      const originalText = cartCheckout.textContent;
+      cartCheckout.disabled = true;
+      cartCheckout.textContent = "جاري المعالجة...";
+
+      try {
+        // بناء بيانات الطلب
+        const orderData = buildOrderData({ name, phone, email, payment });
+        
+        // إرسال الطلب إلى API
+        const result = await submitOrderToAPI(orderData);
+        
+        // ✅ مسح السلة بعد النجاح
+        clearCart();
+        closeCart();
+        
+        // ✅ تحويل إلى صفحة الفواتير مع معرف الطلب
+        const invoiceId = result.orderId || result.id || result.invoiceId;
+        const invoiceUrl = `/invoices?orderId=${invoiceId}`;
+        
+        console.log("✅ تم إرسال الطلب وتحويل إلى صفحة الفواتير");
+        window.location.href = invoiceUrl;
+        
+      } catch (error) {
+        // إعادة حالة الزر في حالة الخطأ
+        cartCheckout.disabled = false;
+        cartCheckout.textContent = originalText;
+        
+        if (errorEl) {
+          errorEl.textContent = "حدث خطأ في إرسال الطلب. حاول مرة أخرى.";
+          errorEl.classList.add("show");
+        }
+        console.error("❌ فشل إرسال الطلب:", error);
+      }
     });
   }
 });
