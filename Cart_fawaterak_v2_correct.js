@@ -21,7 +21,7 @@ const FAWATERAK_CONFIG = {
   CLIENT_SECRET: "dkF76Z4hDDHCn1porjUETzKT3XW9S7RcRAkNg0nA",
   
   // API الخاص بك
-  YOUR_API_URL: "https://app.fawaterk.com/oauth/token", // 👈 استبدل هنا
+  YOUR_API_URL: "86d6858a3d2d0a75614ce1cf53fc94d88b7e20bbde34ce1b57", // 👈 استبدل هنا
   
   // Currency
   CURRENCY: "EGP" // أو AED, SAR, etc
