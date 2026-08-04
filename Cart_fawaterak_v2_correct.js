@@ -19,7 +19,7 @@ const FAWATERAK_CONFIG = {
   
   // OAuth Client Credentials
   CLIENT_ID: "a26aff7d-9b45-4956-94b3-c222e4ae3bb8",
-  CLIENT_SECRET: "YOUR_CLIENT_SECRET", // 👈 استبدل هنا
+  CLIENT_SECRET: "fawaterak — OAuth client credentials", // 👈 استبدل هنا
   
   // Hash Key (للـ Iframe إذا احتجت)
   HASH_KEY: "86d6858a3d2d0a75614ce1cf53fc94d88b7e20bbde34ce1b57",
