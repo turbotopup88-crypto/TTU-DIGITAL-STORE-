@@ -26,7 +26,7 @@ const FAWATERAK_CONFIG = {
   PROVIDER_KEY: "FAWATERAK.29711",
   
   // API الخاص بك
-  YOUR_API_URL: "https://your-website.com/api", // 👈 استبدل هنا
+  YOUR_API_URL: " https://app.fawaterk.com/oauth/token", // 👈 استبدل هنا
   
   // Currency - من الضروري تحديدها
   CURRENCY: "EGP" // أو أي عملة أخرى (SAR, AED, etc)
