@@ -4,19 +4,19 @@
 
 const CART_KEY = "store_cart_v1";
 
-// ✅ الإعدادات المعدلة بالاعتماد على الـ Worker الخاص بك
+// ✅ الإعدادات المحدثة
 const FAWATERAK_CONFIG = {
-  // رابط Cloudflare Worker الذي أنشأته لحمايتك
+  // رابط Cloudflare Worker الوسيط للحماية
   PROXY_BASE_URL: "https://fawaterak-proxy.turbotopup88.workers.dev",
   
-  // API الخاص بك (لحفظ الطلبات محلية)
-  YOUR_API_URL: "https://app.fawaterk.com/oauth/token", // 👈 تأكد من وجود https:// لو كان رابطاً
+  // يكتشف رابط الموقع الحالي تلقائياً (سواء localhost أو نطاقك الحقيقي)
+  SITE_URL: window.location.origin, 
   
   // العملة
   CURRENCY: "EGP"
 };
 
-// متغير عام للـ Access Token
+// متغيرات عامة للـ Access Token
 let fawaterkAccessToken = null;
 let tokenExpireTime = null;
 
@@ -182,7 +182,7 @@ function closeCart() {
 // ============================================================
 async function getFawaterkAccessToken() {
   if (fawaterkAccessToken && tokenExpireTime && Date.now() < tokenExpireTime) {
-    console.log("✅ استخدام Access Token موجود");
+    console.log("✅ استخدام Access Token موجود بالذاكرة");
     return fawaterkAccessToken;
   }
 
@@ -199,16 +199,16 @@ async function getFawaterkAccessToken() {
     console.log("📊 Response Status:", response.status);
 
     if (!response.ok) {
-      const error = await response.text();
-      console.error("❌ فشل الاستجابة:", error);
-      throw new Error(`فشل الحصول على Token: ${response.status}`);
+      const errorText = await response.text();
+      console.error("❌ فشل الاستجابة:", errorText);
+      throw new Error(`فشل الحصول على Token (${response.status}): ${errorText}`);
     }
 
     const data = await response.json();
     console.log("✅ بيانات الـ Token:", data);
     
     if (!data.access_token) {
-      throw new Error("لا يوجد access_token في الـ response");
+      throw new Error("لا يوجد access_token في استجابة الخادم");
     }
 
     fawaterkAccessToken = data.access_token;
@@ -230,7 +230,6 @@ async function createFawaterkTransaction(orderData) {
   try {
     // 1. الحصول على Access Token
     const accessToken = await getFawaterkAccessToken();
-    console.log("✅ حصلنا على Access Token");
 
     // 2. تحضير بيانات المنتجات
     const cart = getCart();
@@ -245,24 +244,25 @@ async function createFawaterkTransaction(orderData) {
         };
       });
 
-    // 3. تحضير بيانات الفاتورة
+    // 3. تحضير بيانات الفاتورة وروابط التحويل
     const nameParts = (orderData.customer.name || "").trim().split(' ');
     const transactionPayload = {
       cartTotal: orderData.total.toString(),
       currency: FAWATERAK_CONFIG.CURRENCY,
       customer: {
         first_name: nameParts[0] || orderData.customer.name,
-        last_name: nameParts.slice(1).join(' ') || 'User',
+        last_name: nameParts.slice(1).join(' ') || 'Customer',
         email: orderData.customer.email || 'customer@example.com',
         phone: orderData.customer.phone || "01000000000",
         address: "Cairo"
       },
       cartItems: cartItems,
+      // 📍 روابط تحويل آمنة تشير إلى موقعك الحالي بشكل صحسح
       redirectionUrls: {
-        successUrl: `${FAWATERAK_CONFIG.YOUR_API_URL}/success?orderId=${orderData.orderId}`,
-        failUrl: `${FAWATERAK_CONFIG.YOUR_API_URL}/failed?orderId=${orderData.orderId}`,
-        pendingUrl: `${FAWATERAK_CONFIG.YOUR_API_URL}/pending?orderId=${orderData.orderId}`,
-        webhookUrl: `${FAWATERAK_CONFIG.YOUR_API_URL}/webhook`
+        successUrl: `${FAWATERAK_CONFIG.SITE_URL}/?status=success&orderId=${orderData.orderId}`,
+        failUrl: `${FAWATERAK_CONFIG.SITE_URL}/?status=failed&orderId=${orderData.orderId}`,
+        pendingUrl: `${FAWATERAK_CONFIG.SITE_URL}/?status=pending&orderId=${orderData.orderId}`,
+        webhookUrl: `${FAWATERAK_CONFIG.SITE_URL}/`
       },
       pay_load: {
         order_id: orderData.orderId,
@@ -287,19 +287,18 @@ async function createFawaterkTransaction(orderData) {
     console.log("📊 Response Status:", response.status);
 
     if (!response.ok) {
-      const error = await response.text();
-      console.error("❌ فشل الاستجابة:", error);
-      throw new Error(`فشل إنشاء المعاملة: ${response.status}`);
+      const errorText = await response.text();
+      console.error("❌ فشل إنشاء المعاملة:", errorText);
+      throw new Error(`فشل إنشاء المعاملة (${response.status}): ${errorText}`);
     }
 
     const result = await response.json();
     console.log("✅ استجابة Fawaterak:", result);
 
-    // استخراج رابط الدفع بناءً على استجابة الـ API
     const checkoutUrl = (result.data && result.data.url) || result.redirectUrl || (result.invoiceKey ? `https://fawaterk.com/invoice/${result.invoiceKey}` : null);
 
     if (!checkoutUrl) {
-      throw new Error("لا يوجد رابط دفع في الـ response");
+      throw new Error("لم يتم استلام رابط الدفع من بوابة الدفع");
     }
 
     return {
@@ -308,37 +307,19 @@ async function createFawaterkTransaction(orderData) {
     };
 
   } catch (error) {
-    console.error("❌ خطأ في إنشاء المعاملة:", error);
+    console.error("❌ خطأ في عملية الدفع:", error);
     throw error;
   }
 }
 
 // ============================================================
-// 📋 دالة حفظ الطلب في API الخاص بك (إذا وجد)
+// 📋 دالة حفظ الطلب محلياً
 // ============================================================
 async function saveOrderToYourAPI(orderData) {
-  try {
-    // محاولة حفظ الطلب، وإذا فشلت لا نوقف العملية بل نضع رقم طلب عشوائي
-    const response = await fetch(`${FAWATERAK_CONFIG.YOUR_API_URL}/orders`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(orderData)
-    });
-
-    if (!response.ok) {
-      throw new Error(`فشل حفظ الطلب: ${response.status}`);
-    }
-
-    const result = await response.json();
-    console.log("✅ تم حفظ الطلب:", result);
-    return result;
-
-  } catch (error) {
-    console.warn("⚠️ تعذر الاتصال بـ API المحلي، تم إنشاء ID مؤقت:", error);
-    return { orderId: "ORD-" + Date.now() };
-  }
+  // استخدام معرف طلب محلي سريع بدون الحاجة لاتصال خارجي معطل
+  const generatedId = "ORD-" + Date.now();
+  console.log("📦 تم تجهيز رقم الطلب محلياً:", generatedId, orderData);
+  return { orderId: generatedId };
 }
 
 // ============================================================
@@ -444,32 +425,27 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         console.log("🚀 بدء عملية الشراء...");
         
-        // 1. بناء بيانات الطلب
-        const orderData = buildOrderData({ name, phone, email, payment });
-        console.log("📋 بيانات الطلب:", orderData);
+        // 1. بناء بيانات الطلب وحفظه محلياً
+        const initialOrderData = buildOrderData({ name, phone, email, payment });
+        const orderResult = await saveOrderToYourAPI(initialOrderData);
+        const orderId = orderResult.orderId;
         
-        // 2. حفظ الطلب في API الخاص بك
-        const orderResult = await saveOrderToYourAPI(orderData);
-        const orderId = orderResult.orderId || orderResult.id || ("ORD-" + Date.now());
-        
-        console.log("✅ تم إنشاء الطلب:", orderId);
+        console.log("✅ رقم الطلب المولد:", orderId);
 
-        // 3. إنشاء معاملة في Fawaterak عبر الـ Worker
+        // 2. إنشاء المعاملة عبر Cloudflare Worker
         const transaction = await createFawaterkTransaction({
-          ...orderData,
+          ...initialOrderData,
           orderId
         });
 
-        console.log("✅ تم إنشاء المعاملة:", transaction);
+        console.log("✅ تم تجهيز المعاملة بنجاح:", transaction);
 
-        // 4. مسح السلة
+        // 3. تنظيف السلة وإغلاق النافذة
         clearCart();
         closeCart();
 
-        // 5. تحويل إلى صفحة الدفع
-        console.log("✅ تحويل إلى صفحة الدفع...");
-        console.log("📍 رابط الدفع:", transaction.checkoutUrl);
-        
+        // 4. التحويل المباشر لصفحة الدفع
+        console.log("📍 التحويل لصفحة فواتيرك:", transaction.checkoutUrl);
         window.location.href = transaction.checkoutUrl;
 
       } catch (error) {
@@ -480,7 +456,7 @@ document.addEventListener("DOMContentLoaded", () => {
           errorEl.textContent = "❌ حدث خطأ: " + error.message;
           errorEl.classList.add("show");
         }
-        console.error("❌ فشل:", error);
+        console.error("❌ فشل الشراء:", error);
       }
     });
   }
