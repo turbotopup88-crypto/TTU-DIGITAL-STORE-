@@ -17,7 +17,7 @@ async function createFatourahInvoice(orderData) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${FATOURAH_API_KEY}`
+        "Authorization": `Bearer a26aff7d-9b45-4956-94b3-c222e4ae3bb8`
       },
       body: JSON.stringify({
         // معرف فريد من طلبك
