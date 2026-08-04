@@ -172,7 +172,7 @@ function closeCart() {
 }
 
 // ============================================================
-// 💳 دالة إنشاء معاملة الدفع المباشرة (بدون Token)
+// 💳 دالة إنشاء معاملة الدفع (المُحدثة بالكامل)
 // ============================================================
 async function createFawaterkTransaction(orderData) {
   try {
@@ -191,7 +191,7 @@ async function createFawaterkTransaction(orderData) {
     const nameParts = (orderData.customer.name || "").trim().split(' ');
     
     const transactionPayload = {
-      payment_method_id: 3,
+      payment_method_id: 3, // 3 للدفع بالبطاقات (تأكد من اختيار وسيلة الدفع من لوحة فواتيرك)
       cartTotal: orderData.total.toString(),
       currency: FAWATERAK_CONFIG.CURRENCY,
       customer: {
@@ -209,7 +209,7 @@ async function createFawaterkTransaction(orderData) {
       }
     };
 
-    console.log("📤 إرسال بيانات المعاملة المباشرة للـ Worker:", transactionPayload);
+    console.log("📤 إرسال البيانات إلى Worker:", transactionPayload);
 
     const response = await fetch(`${FAWATERAK_CONFIG.PROXY_BASE_URL}/api/v3/createTransaction`, {
       method: "POST",
@@ -220,14 +220,25 @@ async function createFawaterkTransaction(orderData) {
     });
 
     const result = await response.json();
-    console.log("✅ استجابة Fawaterak:", result);
+    console.log("🔍 الاستجابة الكاملة من فواتيرك:", result);
 
-    const checkoutUrl = (result.data && result.data.payment_data && result.data.payment_data.redirectTo) || 
-                        (result.data && result.data.url) || 
-                        result.start_pay_url;
+    // التحقق مما إذا كانت فواتيرك قد أرجعت خطأ في البيانات
+    if (result.status === "failure" || result.status === "error" || result.error) {
+      const errorMsg = result.message || (result.error && result.error.message) || JSON.stringify(result);
+      throw new Error(`رد فواتيرك: ${errorMsg}`);
+    }
+
+    // استخراج رابط الدفع بجميع المسارات المحتملة من فواتيرك
+    const checkoutUrl = 
+      result.data?.payment_data?.redirectTo ||
+      result.data?.url ||
+      result.start_pay_url ||
+      result.invoice_url ||
+      (result.data?.invoice_key ? `https://fawaterk.com/invoice/${result.data.invoice_key}` : null);
 
     if (!checkoutUrl) {
-      throw new Error((result.error && result.error.message) || result.message || "لم يتم استلام رابط الدفع من فواتيرك");
+      console.error("❌ تفاصيل الاستجابة المعطلة:", result);
+      throw new Error(result.message || "لم يتم استلام رابط الدفع، افحص الـ Console لمعرفة رد بوابة فواتيرك");
     }
 
     return { checkoutUrl };
