@@ -10,7 +10,7 @@
 
 async function createFatourahInvoice(orderData) {
   const FATOURAH_API_URL = "https://app.fawaterk.com/oauth/token"; // تحقق من التوثيق
-  const FATOURAH_API_KEY = "86d6858a3d2d0a75614ce1cf53fc94d88b7e20bbde34ce1b57";
+  const FATOURAH_API_KEY = "a26aff7d-9b45-4956-94b3-c222e4ae3bb8";
 
   try {
     const response = await fetch(FATOURAH_API_URL, {
