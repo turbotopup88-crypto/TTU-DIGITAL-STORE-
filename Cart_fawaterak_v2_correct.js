@@ -1,35 +1,30 @@
 // ---------------------------------------------------------
-// السلة — ربط صحيح 100% مع Fawaterak API v3
-// بناءً على التوثيق الرسمي
+// السلة — ربط صحيح 100% مع Fawaterak - بيانات الإنتاج
 // ---------------------------------------------------------
 
 const CART_KEY = "store_cart_v1";
 
-// ✅ بيانات Fawaterak الصحيحة
+// ✅ بيانات Fawaterak الصحيحة (من حسابك)
 const FAWATERAK_CONFIG = {
-  // استخدم staging أولاً للاختبار
-  BASE_URL: "https://staging.fawaterk.com", // أو https://app.fawaterk.com في الإنتاج
+  // استخدم app.fawaterk.com للإنتاج
+  BASE_URL: "https://app.fawaterk.com",
   
-  // OAuth Token Endpoint
-  TOKEN_ENDPOINT: "https://staging.fawaterk.com/oauth/token",
+  // OAuth Token Endpoint (من بيانات حسابك)
+  TOKEN_ENDPOINT: "https://app.fawaterk.com/oauth/token",
   
   // API Endpoints
   API_V3_CREATE_TRANSACTION: "/api/v3/createTransaction",
   API_V3_GET_PAYMENT_METHODS: "/api/v3/getTrPaymentmethods",
   
-  // OAuth Client Credentials
-  CLIENT_ID: "a26aff7d-9b45-4956-94b3-c222e4ae3bb8",
-  CLIENT_SECRET: "fawaterak — OAuth client credentials", // 👈 استبدل هنا
-  
-  // Hash Key (للـ Iframe إذا احتجت)
-  HASH_KEY: "86d6858a3d2d0a75614ce1cf53fc94d88b7e20bbde34ce1b57",
-  PROVIDER_KEY: "FAWATERAK.29711",
+  // OAuth Client Credentials (بيانات صحيحة من حسابك)
+  CLIENT_ID: "a26c882d-9e41-4238-8005-9d0e856aac5a",
+  CLIENT_SECRET: "dkF76Z4hDDHCn1porjUETzKT3XW9S7RcRAkNg0nA",
   
   // API الخاص بك
-  YOUR_API_URL: " https://app.fawaterk.com/oauth/token", // 👈 استبدل هنا
+  YOUR_API_URL: "https://your-website.com/api", // 👈 استبدل هنا
   
-  // Currency - من الضروري تحديدها
-  CURRENCY: "EGP" // أو أي عملة أخرى (SAR, AED, etc)
+  // Currency
+  CURRENCY: "EGP" // أو AED, SAR, etc
 };
 
 // متغير عام للـ Access Token
@@ -205,6 +200,8 @@ async function getFawaterkAccessToken() {
 
   try {
     console.log("🔄 جلب Access Token من Fawaterak...");
+    console.log("📍 Token URL:", FAWATERAK_CONFIG.TOKEN_ENDPOINT);
+    console.log("📍 Client ID:", FAWATERAK_CONFIG.CLIENT_ID);
 
     const response = await fetch(FAWATERAK_CONFIG.TOKEN_ENDPOINT, {
       method: "POST",
@@ -218,20 +215,22 @@ async function getFawaterkAccessToken() {
       })
     });
 
+    console.log("📊 Response Status:", response.status);
+
     if (!response.ok) {
       const error = await response.text();
       console.error("❌ فشل الاستجابة:", error);
-      throw new Error(`فشل الحصول على Token: ${response.status} - ${error}`);
+      throw new Error(`فشل الحصول على Token: ${response.status}`);
     }
 
     const data = await response.json();
+    console.log("✅ بيانات الـ Token:", data);
     
     if (!data.access_token) {
       throw new Error("لا يوجد access_token في الـ response");
     }
 
     fawaterkAccessToken = data.access_token;
-    // احفظ الـ token لمدة (expires_in - 1 دقيقة)
     tokenExpireTime = Date.now() + ((data.expires_in || 3600) * 1000 - 60000);
 
     console.log("✅ تم الحصول على Access Token بنجاح");
@@ -265,23 +264,24 @@ async function createFawaterkTransaction(orderData) {
         };
       });
 
-    // 3. تحضير بيانات الفاتورة (بناءً على التوثيق الصحيح)
+    // 3. تحضير بيانات الفاتورة
+    const nameParts = orderData.customer.name.split(' ');
     const transactionPayload = {
       cartTotal: orderData.total.toString(),
-      currency: FAWATERAK_CONFIG.CURRENCY, // ضروري جداً!
+      currency: FAWATERAK_CONFIG.CURRENCY,
       customer: {
-        first_name: orderData.customer.name.split(' ')[0] || orderData.customer.name,
-        last_name: orderData.customer.name.split(' ').slice(1).join(' ') || '',
-        email: orderData.customer.email || '',
+        first_name: nameParts[0] || orderData.customer.name,
+        last_name: nameParts.slice(1).join(' ') || '',
+        email: orderData.customer.email || 'customer@example.com',
         phone: orderData.customer.phone,
-        address: "Not provided"
+        address: "Cairo"
       },
       cartItems: cartItems,
       redirectionUrls: {
         successUrl: `${FAWATERAK_CONFIG.YOUR_API_URL}/success?orderId=${orderData.orderId}`,
         failUrl: `${FAWATERAK_CONFIG.YOUR_API_URL}/failed?orderId=${orderData.orderId}`,
         pendingUrl: `${FAWATERAK_CONFIG.YOUR_API_URL}/pending?orderId=${orderData.orderId}`,
-        webhookUrl: `${FAWATERAK_CONFIG.YOUR_API_URL}/webhook` // هام جداً
+        webhookUrl: `${FAWATERAK_CONFIG.YOUR_API_URL}/webhook`
       },
       pay_load: {
         order_id: orderData.orderId,
@@ -306,7 +306,7 @@ async function createFawaterkTransaction(orderData) {
       body: JSON.stringify(transactionPayload)
     });
 
-    console.log("📊 Status:", response.status);
+    console.log("📊 Response Status:", response.status);
 
     if (!response.ok) {
       const error = await response.text();
@@ -461,8 +461,11 @@ document.addEventListener("DOMContentLoaded", () => {
       cartCheckout.textContent = "جاري المعالجة...";
 
       try {
+        console.log("🚀 بدء عملية الشراء...");
+        
         // 1. بناء بيانات الطلب
         const orderData = buildOrderData({ name, phone, email, payment });
+        console.log("📋 بيانات الطلب:", orderData);
         
         // 2. حفظ الطلب في API الخاص بك
         const orderResult = await saveOrderToYourAPI(orderData);
@@ -486,7 +489,6 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("✅ تحويل إلى صفحة الدفع...");
         console.log("📍 رابط الدفع:", transaction.checkoutUrl);
         
-        // استخدم window.location.href للتحويل المباشر
         window.location.href = transaction.checkoutUrl;
 
       } catch (error) {
