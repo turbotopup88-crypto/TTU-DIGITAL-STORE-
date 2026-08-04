@@ -3,7 +3,7 @@
 // ربط مع منصة فاتورتك
 // ---------------------------------------------------------
 const CART_KEY = "store_cart_v1";
-const YOUR_API_URL = "https://your-website.com/api"; // ✅ API الخاص بك فقط للتسجيل
+const YOUR_API_URL = " https://app.fawaterk.com/oauth/token"; // ✅ API الخاص بك فقط للتسجيل
 
 function getCart() {
   try {
