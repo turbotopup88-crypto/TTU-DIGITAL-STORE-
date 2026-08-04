@@ -1,1 +1,384 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الفاتورة</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+      direction: rtl;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .invoice-header {
+      text-align: center;
+      margin-bottom: 40px;
+      border-bottom: 2px solid #333;
+      padding-bottom: 20px;
+    }
+
+    .invoice-header h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .invoice-header p {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .invoice-number {
+      font-size: 18px;
+      color: #0066cc;
+      margin: 10px 0;
+    }
+
+    .invoice-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .section-content {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 30px 0;
+    }
+
+    table thead {
+      background: #f0f0f0;
+    }
+
+    table th {
+      padding: 12px;
+      text-align: right;
+      font-weight: bold;
+      border-bottom: 2px solid #333;
+    }
+
+    table td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    table tr:last-child td {
+      border-bottom: 2px solid #333;
+    }
+
+    .total-section {
+      text-align: left;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 2px solid #333;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .total-row.grand-total {
+      font-weight: bold;
+      font-size: 18px;
+      color: #0066cc;
+      margin-top: 20px;
+    }
+
+    .status {
+      text-align: center;
+      margin: 30px 0;
+      padding: 15px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .status.pending {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+    }
+
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 50px;
+      font-size: 18px;
+      color: #666;
+    }
+
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #0066cc;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .actions {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      margin: 0 5px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: #0066cc;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #0052a3;
+    }
+
+    .btn-secondary {
+      background: #666;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #444;
+    }
+
+    .error-message {
+      display: none;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      <p>جاري تحميل الفاتورة...</p>
+    </div>
+
+    <div id="error-message" class="status error error-message">
+      للأسف لم نستطع تحميل الفاتورة. حاول مرة أخرى.
+    </div>
+
+    <div id="invoice-container" style="display: none;">
+      <div class="invoice-header">
+        <h1>الفاتورة</h1>
+        <p id="invoice-date"></p>
+        <div class="invoice-number" id="invoice-number"></div>
+      </div>
+
+      <div id="status-message" class="status"></div>
+
+      <div class="invoice-content">
+        <div>
+          <div class="section">
+            <div class="section-title">بيانات العميل</div>
+            <div class="section-content">
+              <p><strong>الاسم:</strong> <span id="customer-name"></span></p>
+              <p><strong>الهاتف:</strong> <span id="customer-phone"></span></p>
+              <p id="customer-email-row">
+                <strong>البريد الإلكتروني:</strong> <span id="customer-email"></span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="section">
+            <div class="section-title">تفاصيل الدفع</div>
+            <div class="section-content">
+              <p><strong>طريقة الدفع:</strong> <span id="payment-method"></span></p>
+              <p><strong>حالة الطلب:</strong> <span id="order-status"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>المنتج</th>
+            <th>الكمية</th>
+            <th>السعر</th>
+            <th>الإجمالي</th>
+          </tr>
+        </thead>
+        <tbody id="items-table">
+        </tbody>
+      </table>
+
+      <div class="total-section">
+        <div class="total-row">
+          <span>الإجمالي:</span>
+          <span id="total-amount"></span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" onclick="printInvoice()">طباعة</button>
+        <button class="btn btn-secondary" onclick="window.location.href='/'">العودة للرئيسية</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE_URL = "https://your-api.com/api"; // ✅ عدّل هنا
+
+    async function loadInvoice() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const orderId = urlParams.get('orderId');
+
+      if (!orderId) {
+        showError("لم يتم العثور على معرف الطلب");
+        return;
+      }
+
+      try {
+        // جلب بيانات الطلب من API
+        const response = await fetch(`${API_BASE_URL}/orders/${orderId}`);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const order = await response.json();
+        displayInvoice(order);
+      } catch (error) {
+        console.error("❌ خطأ في تحميل الفاتورة:", error);
+        showError("حدث خطأ في تحميل الفاتورة. حاول مرة أخرى.");
+      }
+    }
+
+    function displayInvoice(order) {
+      // إخفاء حالة التحميل
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('invoice-container').style.display = 'block';
+
+      // ملء البيانات
+      document.getElementById('invoice-number').textContent = `الفاتورة رقم: ${order.orderId || order.id}`;
+      document.getElementById('invoice-date').textContent = new Date(order.orderDate || order.createdAt).toLocaleDateString('ar-EG');
+
+      // بيانات العميل
+      document.getElementById('customer-name').textContent = order.customer.name;
+      document.getElementById('customer-phone').textContent = order.customer.phone;
+      
+      if (order.customer.email) {
+        document.getElementById('customer-email').textContent = order.customer.email;
+      } else {
+        document.getElementById('customer-email-row').style.display = 'none';
+      }
+
+      // بيانات الدفع
+      const paymentMap = {
+        'bank': 'تحويل بنكي',
+        'wallet': 'محفظة رقمية',
+        'cash': 'دفع عند الاستقبال'
+      };
+      document.getElementById('payment-method').textContent = paymentMap[order.paymentMethod] || order.paymentMethod;
+      document.getElementById('order-status').textContent = order.status || 'معلق';
+
+      // حالة الطلب
+      const statusEl = document.getElementById('status-message');
+      if (order.status === 'completed' || order.status === 'paid') {
+        statusEl.classList.add('success');
+        statusEl.textContent = '✅ تم تأكيد الطلب بنجاح';
+      } else if (order.status === 'pending') {
+        statusEl.classList.add('pending');
+        statusEl.textContent = '⏳ الطلب قيد المراجعة';
+      } else {
+        statusEl.classList.add('pending');
+        statusEl.textContent = `حالة الطلب: ${order.status || 'معلق'}`;
+      }
+
+      // جدول المنتجات
+      const itemsTable = document.getElementById('items-table');
+      itemsTable.innerHTML = order.items.map(item => `
+        <tr>
+          <td>${item.productName}</td>
+          <td>${item.quantity}</td>
+          <td>${item.price}</td>
+          <td>${item.subtotal}</td>
+        </tr>
+      `).join('');
+
+      // الإجمالي
+      document.getElementById('total-amount').textContent = `${order.total} ريال`;
+    }
+
+    function showError(message) {
+      document.getElementById('loading').style.display = 'none';
+      const errorEl = document.getElementById('error-message');
+      errorEl.textContent = message;
+      errorEl.style.display = 'block';
+    }
+
+    function printInvoice() {
+      window.print();
+    }
+
+    // تحميل الفاتورة عند فتح الصفحة
+    window.addEventListener('DOMContentLoaded', loadInvoice);
+  </script>
+</body>
+</html>
