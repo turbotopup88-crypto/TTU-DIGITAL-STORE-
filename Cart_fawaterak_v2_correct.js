@@ -1,6 +1,6 @@
 const FAWATERAK_CONFIG = {
   // ضع رابط الـ Worker الخاص بك هنا
-  PROXY_BASE_URL: "https://fawaterak-proxy.YOUR-SUBDOMAIN.workers.dev", 
+  PROXY_BASE_URL: "https://fawaterak-proxy.turbotopup88.workers.dev", 
   CURRENCY: "EGP" 
 };
 
