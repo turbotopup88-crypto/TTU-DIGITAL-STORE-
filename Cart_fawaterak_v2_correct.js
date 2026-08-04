@@ -10,7 +10,7 @@ const FAWATERAK_CONFIG = {
   PROXY_BASE_URL: "https://fawaterak-proxy.turbotopup88.workers.dev",
   
   // API الخاص بك (لحفظ الطلبات محلية)
-  YOUR_API_URL: "https://86d6858a3d2d0a75614ce1cf53fc94d88b7e20bbde34ce1b57", // 👈 تأكد من وجود https:// لو كان رابطاً
+  YOUR_API_URL: "https://app.fawaterk.com/oauth/token", // 👈 تأكد من وجود https:// لو كان رابطاً
   
   // العملة
   CURRENCY: "EGP"
