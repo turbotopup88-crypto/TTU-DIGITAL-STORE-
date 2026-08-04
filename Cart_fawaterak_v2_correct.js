@@ -1,24 +1,18 @@
 // ---------------------------------------------------------
-// السلة — ربط آمن عبر Cloudflare Worker مع Fawaterak
+// السلة — ربط مباشر وآمن عبر Cloudflare Worker مع Fawaterak
 // ---------------------------------------------------------
 
 const CART_KEY = "store_cart_v1";
 
-// ✅ الإعدادات المحدثة
 const FAWATERAK_CONFIG = {
-  // رابط Cloudflare Worker الوسيط للحماية
+  // رابط Cloudflare Worker الوسيط
   PROXY_BASE_URL: "https://fawaterak-proxy.turbotopup88.workers.dev",
   
-  // يكتشف رابط الموقع الحالي تلقائياً (سواء localhost أو نطاقك الحقيقي)
+  // يكتشف رابط الموقع الحالي تلقائياً للتحويل بعد الدفع
   SITE_URL: window.location.origin, 
   
-  // العملة
   CURRENCY: "EGP"
 };
-
-// متغيرات عامة للـ Access Token
-let fawaterkAccessToken = null;
-let tokenExpireTime = null;
 
 // ============================================================
 // دوال السلة الأساسية
@@ -178,60 +172,10 @@ function closeCart() {
 }
 
 // ============================================================
-// 🔐 دالة الحصول على OAuth Access Token عبر الـ Worker
-// ============================================================
-async function getFawaterkAccessToken() {
-  if (fawaterkAccessToken && tokenExpireTime && Date.now() < tokenExpireTime) {
-    console.log("✅ استخدام Access Token موجود بالذاكرة");
-    return fawaterkAccessToken;
-  }
-
-  try {
-    console.log("🔄 جلب Access Token من الـ Worker الوسيط...");
-
-    const response = await fetch(`${FAWATERAK_CONFIG.PROXY_BASE_URL}/oauth/token`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-
-    console.log("📊 Response Status:", response.status);
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("❌ فشل الاستجابة:", errorText);
-      throw new Error(`فشل الحصول على Token (${response.status}): ${errorText}`);
-    }
-
-    const data = await response.json();
-    console.log("✅ بيانات الـ Token:", data);
-    
-    if (!data.access_token) {
-      throw new Error("لا يوجد access_token في استجابة الخادم");
-    }
-
-    fawaterkAccessToken = data.access_token;
-    tokenExpireTime = Date.now() + ((data.expires_in || 3600) * 1000 - 60000);
-
-    console.log("✅ تم الحصول على Access Token بنجاح");
-    return fawaterkAccessToken;
-
-  } catch (error) {
-    console.error("❌ خطأ في الحصول على Token:", error);
-    throw error;
-  }
-}
-
-// ============================================================
-// 💳 دالة إنشاء معاملة عبر الـ Worker
+// 💳 دالة إنشاء معاملة الدفع المباشرة (بدون Token)
 // ============================================================
 async function createFawaterkTransaction(orderData) {
   try {
-    // 1. الحصول على Access Token
-    const accessToken = await getFawaterkAccessToken();
-
-    // 2. تحضير بيانات المنتجات
     const cart = getCart();
     const cartItems = Object.entries(cart)
       .filter(([id]) => PRODUCTS[id])
@@ -244,9 +188,10 @@ async function createFawaterkTransaction(orderData) {
         };
       });
 
-    // 3. تحضير بيانات الفاتورة وروابط التحويل
     const nameParts = (orderData.customer.name || "").trim().split(' ');
+    
     const transactionPayload = {
+      payment_method_id: 3,
       cartTotal: orderData.total.toString(),
       currency: FAWATERAK_CONFIG.CURRENCY,
       customer: {
@@ -257,54 +202,35 @@ async function createFawaterkTransaction(orderData) {
         address: "Cairo"
       },
       cartItems: cartItems,
-      // 📍 روابط تحويل آمنة تشير إلى موقعك الحالي بشكل صحسح
       redirectionUrls: {
         successUrl: `${FAWATERAK_CONFIG.SITE_URL}/?status=success&orderId=${orderData.orderId}`,
         failUrl: `${FAWATERAK_CONFIG.SITE_URL}/?status=failed&orderId=${orderData.orderId}`,
-        pendingUrl: `${FAWATERAK_CONFIG.SITE_URL}/?status=pending&orderId=${orderData.orderId}`,
-        webhookUrl: `${FAWATERAK_CONFIG.SITE_URL}/`
-      },
-      pay_load: {
-        order_id: orderData.orderId,
-        customer_reference: orderData.customer.phone
-      },
-      sendEmail: false,
-      sendSMS: false
+        pendingUrl: `${FAWATERAK_CONFIG.SITE_URL}/?status=pending&orderId=${orderData.orderId}`
+      }
     };
 
-    console.log("📤 إرسال بيانات المعاملة للـ Worker:", transactionPayload);
+    console.log("📤 إرسال بيانات المعاملة المباشرة للـ Worker:", transactionPayload);
 
-    // 4. إرسال الطلب عبر الـ Worker
     const response = await fetch(`${FAWATERAK_CONFIG.PROXY_BASE_URL}/api/v3/createTransaction`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${accessToken}`
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(transactionPayload)
     });
 
-    console.log("📊 Response Status:", response.status);
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("❌ فشل إنشاء المعاملة:", errorText);
-      throw new Error(`فشل إنشاء المعاملة (${response.status}): ${errorText}`);
-    }
-
     const result = await response.json();
     console.log("✅ استجابة Fawaterak:", result);
 
-    const checkoutUrl = (result.data && result.data.url) || result.redirectUrl || (result.invoiceKey ? `https://fawaterk.com/invoice/${result.invoiceKey}` : null);
+    const checkoutUrl = (result.data && result.data.payment_data && result.data.payment_data.redirectTo) || 
+                        (result.data && result.data.url) || 
+                        result.start_pay_url;
 
     if (!checkoutUrl) {
-      throw new Error("لم يتم استلام رابط الدفع من بوابة الدفع");
+      throw new Error((result.error && result.error.message) || result.message || "لم يتم استلام رابط الدفع من فواتيرك");
     }
 
-    return {
-      intentKey: result.data ? result.data.intent_key : null,
-      checkoutUrl: checkoutUrl
-    };
+    return { checkoutUrl };
 
   } catch (error) {
     console.error("❌ خطأ في عملية الدفع:", error);
@@ -316,9 +242,8 @@ async function createFawaterkTransaction(orderData) {
 // 📋 دالة حفظ الطلب محلياً
 // ============================================================
 async function saveOrderToYourAPI(orderData) {
-  // استخدام معرف طلب محلي سريع بدون الحاجة لاتصال خارجي معطل
   const generatedId = "ORD-" + Date.now();
-  console.log("📦 تم تجهيز رقم الطلب محلياً:", generatedId, orderData);
+  console.log("📦 تم تجهيز رقم الطلب محلياً:", generatedId);
   return { orderId: generatedId };
 }
 
@@ -425,26 +350,18 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         console.log("🚀 بدء عملية الشراء...");
         
-        // 1. بناء بيانات الطلب وحفظه محلياً
         const initialOrderData = buildOrderData({ name, phone, email, payment });
         const orderResult = await saveOrderToYourAPI(initialOrderData);
         const orderId = orderResult.orderId;
-        
-        console.log("✅ رقم الطلب المولد:", orderId);
 
-        // 2. إنشاء المعاملة عبر Cloudflare Worker
         const transaction = await createFawaterkTransaction({
           ...initialOrderData,
           orderId
         });
 
-        console.log("✅ تم تجهيز المعاملة بنجاح:", transaction);
-
-        // 3. تنظيف السلة وإغلاق النافذة
         clearCart();
         closeCart();
 
-        // 4. التحويل المباشر لصفحة الدفع
         console.log("📍 التحويل لصفحة فواتيرك:", transaction.checkoutUrl);
         window.location.href = transaction.checkoutUrl;
 
