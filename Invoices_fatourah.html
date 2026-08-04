@@ -384,7 +384,7 @@
 
   <script>
     // ✅ عدّل هذا الرابط ليطابق API الخاص بك
-    const YOUR_API_URL = "https://your-website.com/api";
+    const YOUR_API_URL = "https://app.fawaterk.com/oauth/token";
 
     async function loadInvoice() {
       try {
@@ -398,7 +398,7 @@
         }
 
         // جلب البيانات من API الخاص بك
-        const response = await fetch(`${YOUR_API_URL}/orders/${orderId}`);
+        const response = await fetch(`a26aff7d-9b45-4956-94b3-c222e4ae3bb8/orders/${orderId}`);
         
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}`);
