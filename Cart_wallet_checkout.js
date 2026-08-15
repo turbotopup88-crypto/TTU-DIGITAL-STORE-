@@ -1,21 +1,17 @@
 // ---------------------------------------------------------
-// السلة — ربط مباشر وآمن عبر Cloudflare Worker مع Fawaterak
+// السلة — دفع عن طريق تحويل يدوي لمحفظة إلكترونية
+// بيستبدل ملف Cart_fawaterak_v2_correct.js بالكامل
 // ---------------------------------------------------------
 
 const CART_KEY = "store_cart_v1";
 
-const FAWATERAK_CONFIG = {
-  // رابط Cloudflare Worker الوسيط
-  PROXY_BASE_URL: "https://fawaterak-proxy.turbotopup88.workers.dev",
-  
-  // يكتشف رابط الموقع الحالي تلقائياً للتحويل بعد الدفع
-  SITE_URL: window.location.origin, 
-  
-  CURRENCY: "EGP"
-};
+// ⚠️ غيّر ده لرابط الـ Worker بتاعك بعد ما تديبلويه
+const ORDER_API_URL = "https://late-recipe-5391.turbotopup88.wrs.dev";
+
+const WALLET_NUMBER = "01555293810";
 
 // ============================================================
-// دوال السلة الأساسية
+// دوال السلة الأساسية (زي ما هي)
 // ============================================================
 
 function getCart() {
@@ -97,7 +93,6 @@ function renderCartPanel() {
   const cart = getCart();
   const ids = Object.keys(cart).filter((id) => {
     if (!PRODUCTS[id]) {
-      console.warn(`⚠️ حذف منتج غير موجود: ${id}`);
       delete cart[id];
       return false;
     }
@@ -157,10 +152,7 @@ function renderCartPanel() {
 }
 
 function openCart() {
-  if (!PRODUCTS || Object.keys(PRODUCTS).length === 0) {
-    console.error("❌ PRODUCTS لم تحمل بعد!");
-    return;
-  }
+  if (!PRODUCTS || Object.keys(PRODUCTS).length === 0) return;
   renderCartPanel();
   document.getElementById("cart-drawer").classList.add("open");
   document.getElementById("cart-overlay").classList.add("open");
@@ -171,100 +163,18 @@ function closeCart() {
   document.getElementById("cart-overlay").classList.remove("open");
 }
 
-// ============================================================
-// 💳 دالة إنشاء معاملة الدفع (المُحدثة بالكامل)
-// ============================================================
-async function createFawaterkTransaction(orderData) {
-  try {
-    const cart = getCart();
-    const cartItems = Object.entries(cart)
-      .filter(([id]) => PRODUCTS[id])
-      .map(([id, qty]) => {
-        const p = PRODUCTS[id];
-        return {
-          name: p.name || `Product ${id}`,
-          price: p.price.toString(),
-          quantity: qty.toString()
-        };
-      });
-
-    const nameParts = (orderData.customer.name || "").trim().split(' ');
-    
-    const transactionPayload = {
-      payment_method_id: 3, // 3 للدفع بالبطاقات (تأكد من اختيار وسيلة الدفع من لوحة فواتيرك)
-      cartTotal: orderData.total.toString(),
-      currency: FAWATERAK_CONFIG.CURRENCY,
-      customer: {
-        first_name: nameParts[0] || orderData.customer.name,
-        last_name: nameParts.slice(1).join(' ') || 'Customer',
-        email: orderData.customer.email || 'customer@example.com',
-        phone: orderData.customer.phone || "01000000000",
-        address: "Cairo"
-      },
-      cartItems: cartItems,
-      redirectionUrls: {
-        successUrl: `${FAWATERAK_CONFIG.SITE_URL}/?status=success&orderId=${orderData.orderId}`,
-        failUrl: `${FAWATERAK_CONFIG.SITE_URL}/?status=failed&orderId=${orderData.orderId}`,
-        pendingUrl: `${FAWATERAK_CONFIG.SITE_URL}/?status=pending&orderId=${orderData.orderId}`
-      }
-    };
-
-    console.log("📤 إرسال البيانات إلى Worker:", transactionPayload);
-
-    const response = await fetch(`${FAWATERAK_CONFIG.PROXY_BASE_URL}/api/v3/createTransaction`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(transactionPayload)
-    });
-
-    const result = await response.json();
-    console.log("🔍 الاستجابة الكاملة من فواتيرك:", result);
-
-    // التحقق مما إذا كانت فواتيرك قد أرجعت خطأ في البيانات
-    if (result.status === "failure" || result.status === "error" || result.error) {
-      const errorMsg = result.message || (result.error && result.error.message) || JSON.stringify(result);
-      throw new Error(`رد فواتيرك: ${errorMsg}`);
-    }
-
-    // استخراج رابط الدفع بجميع المسارات المحتملة من فواتيرك
-    const checkoutUrl = 
-      result.data?.payment_data?.redirectTo ||
-      result.data?.url ||
-      result.start_pay_url ||
-      result.invoice_url ||
-      (result.data?.invoice_key ? `https://fawaterk.com/invoice/${result.data.invoice_key}` : null);
-
-    if (!checkoutUrl) {
-      console.error("❌ تفاصيل الاستجابة المعطلة:", result);
-      throw new Error(result.message || "لم يتم استلام رابط الدفع، افحص الـ Console لمعرفة رد بوابة فواتيرك");
-    }
-
-    return { checkoutUrl };
-
-  } catch (error) {
-    console.error("❌ خطأ في عملية الدفع:", error);
-    throw error;
-  }
+function clearCart() {
+  localStorage.removeItem(CART_KEY);
+  updateCartBadge();
 }
 
 // ============================================================
-// 📋 دالة حفظ الطلب محلياً
-// ============================================================
-async function saveOrderToYourAPI(orderData) {
-  const generatedId = "ORD-" + Date.now();
-  console.log("📦 تم تجهيز رقم الطلب محلياً:", generatedId);
-  return { orderId: generatedId };
-}
-
-// ============================================================
-// 🛒 دالة بناء بيانات الطلب
+// بناء بيانات الطلب
 // ============================================================
 function buildOrderData(customer) {
   const cart = getCart();
   const ids = Object.keys(cart).filter((id) => PRODUCTS[id]);
-  
+
   const items = ids.map((id) => {
     const p = PRODUCTS[id];
     const qty = cart[id];
@@ -273,7 +183,7 @@ function buildOrderData(customer) {
       productName: p.name,
       quantity: qty,
       price: p.price,
-      subtotal: p.price * qty
+      subtotal: p.price * qty,
     };
   });
 
@@ -281,26 +191,56 @@ function buildOrderData(customer) {
     customer: {
       name: customer.name,
       phone: customer.phone,
-      email: customer.email || null
+      email: customer.email,
     },
-    items: items,
+    items,
     total: getCartTotal(),
-    paymentMethod: customer.payment,
-    orderDate: new Date().toISOString()
   };
 }
 
 // ============================================================
-// ✅ دالة مسح السلة
+// إرسال الطلب للـ Worker
 // ============================================================
-function clearCart() {
-  localStorage.removeItem(CART_KEY);
-  updateCartBadge();
-  console.log("✅ تم مسح السلة");
+async function submitOrder(orderData) {
+  const res = await fetch(ORDER_API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(orderData),
+  });
+  const result = await res.json();
+  if (!res.ok || result.error) {
+    throw new Error(result.error || "حدث خطأ أثناء إرسال الطلب");
+  }
+  return result;
 }
 
 // ============================================================
-// 🎯 معالج زر الشراء الرئيسي
+// شاشة تعليمات الدفع بعد نجاح إرسال الطلب
+// ============================================================
+function showWalletInstructions(orderId, total) {
+  const body = document.getElementById("cart-body");
+  const footer = document.getElementById("cart-footer");
+  footer.style.display = "none";
+
+  body.innerHTML = `
+    <div style="text-align:center;padding:20px 10px;">
+      <div style="font-size:40px;margin-bottom:10px;">💳</div>
+      <h3 style="margin-bottom:10px;">تم استلام طلبك رقم ${orderId}</h3>
+      <p style="color:var(--text-dim);margin-bottom:16px;">
+        حوّل مبلغ <b style="color:var(--green);">${total} ${currencyLabel()}</b> على رقم المحفظة الإلكترونية:
+      </p>
+      <div style="background:var(--card);border:1px solid var(--card-border);border-radius:12px;padding:14px;font-size:20px;font-weight:800;letter-spacing:1px;margin-bottom:16px;">
+        ${WALLET_NUMBER}
+      </div>
+      <p style="color:var(--text-dim);font-size:13px;">
+        بعد التحويل هيتم تأكيد طلبك وهيوصلك إيميل تأكيد، والمنتج الرقمي هيوصلك على بريدك الإلكتروني خلال ساعتين بحد أقصى.
+      </p>
+    </div>
+  `;
+}
+
+// ============================================================
+// معالج زر الشراء الرئيسي
 // ============================================================
 document.addEventListener("DOMContentLoaded", () => {
   updateCartBadge();
@@ -325,25 +265,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (cartCheckout) {
     cartCheckout.addEventListener("click", async () => {
-      if (getCartCount() === 0) {
-        console.warn("⚠️ السلة فارغة!");
-        return;
-      }
+      if (getCartCount() === 0) return;
 
       const nameEl = document.getElementById("cart-name");
       const phoneEl = document.getElementById("cart-phone");
       const emailEl = document.getElementById("cart-email");
-      const paymentEl = document.getElementById("cart-payment");
       const errorEl = document.getElementById("cart-form-error");
 
       const name = nameEl ? nameEl.value.trim() : "";
       const phone = phoneEl ? phoneEl.value.trim() : "";
       const email = emailEl ? emailEl.value.trim() : "";
-      const payment = paymentEl ? paymentEl.value : "";
 
-      if (!name || !phone || !payment) {
+      // الإيميل بقى إلزامي لأن تسليم المنتج هيبقى عليه
+      if (!name || !phone || !email) {
         if (errorEl) {
-          errorEl.textContent = "الرجاء ملء جميع الحقول المطلوبة";
+          errorEl.textContent = "من فضلك عبئ الاسم والهاتف والإيميل (هيتم تسليم المنتج عليه)";
           errorEl.classList.add("show");
         }
         if (fieldsBox && !fieldsBox.classList.contains("open")) {
@@ -356,35 +292,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const originalText = cartCheckout.textContent;
       cartCheckout.disabled = true;
-      cartCheckout.textContent = "جاري المعالجة...";
+      cartCheckout.textContent = "جاري الإرسال...";
 
       try {
-        console.log("🚀 بدء عملية الشراء...");
-        
-        const initialOrderData = buildOrderData({ name, phone, email, payment });
-        const orderResult = await saveOrderToYourAPI(initialOrderData);
-        const orderId = orderResult.orderId;
-
-        const transaction = await createFawaterkTransaction({
-          ...initialOrderData,
-          orderId
-        });
+        const orderData = buildOrderData({ name, phone, email });
+        const result = await submitOrder(orderData);
 
         clearCart();
-        closeCart();
-
-        console.log("📍 التحويل لصفحة فواتيرك:", transaction.checkoutUrl);
-        window.location.href = transaction.checkoutUrl;
-
+        showWalletInstructions(result.orderId, orderData.total);
       } catch (error) {
         cartCheckout.disabled = false;
         cartCheckout.textContent = originalText;
-        
         if (errorEl) {
           errorEl.textContent = "❌ حدث خطأ: " + error.message;
           errorEl.classList.add("show");
         }
-        console.error("❌ فشل الشراء:", error);
       }
     });
   }
