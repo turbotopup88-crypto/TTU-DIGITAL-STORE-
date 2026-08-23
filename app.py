@@ -10,9 +10,18 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'change-this-secret-key'  # غيّرها قبل النشر
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///store.db'
-app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'uploads')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'change-this-secret-key-prod')
+
+# إعداد رابط قاعدة البيانات لـ PostgreSQL مع معالجة الرابط الخاص بـ Neon
+raw_db_url = os.environ.get('DATABASE_URL', 'postgresql://neondb_owner:npg_4oMxiTNu7kjA@ep-calm-credit-ax7ucoxo-pooler.c-4.us-east-2.aws.neon.tech/neondb?sslmode=require')
+if raw_db_url and raw_db_url.startswith("postgres://"):
+    raw_db_url = raw_db_url.replace("postgres://", "postgresql://", 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = raw_db_url
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# في Vercel يجب إرسال الملفات إلى المجلد المؤقت /tmp للحفظ
+app.config['UPLOAD_FOLDER'] = '/tmp/uploads' if os.environ.get('VERCEL') else os.path.join(app.root_path, 'uploads')
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5 ميجا لكل ملف
 
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
@@ -30,7 +39,6 @@ def allowed_file(filename):
 
 
 # ==================== بيانات التمهيد (تُستخدم مرة واحدة فقط أول تشغيل) ====================
-# بعد كده الفئات والبانرات تُدار بالكامل من لوحة التحكم (admin/categories و admin/banners)
 
 SEED_CATEGORIES = [
     {"id": "gift-cards", "label": "بطاقات هدايا", "labelEn": "Gift Cards",
@@ -72,7 +80,7 @@ class User(db.Model, UserMixin):
 
 
 class Category(db.Model):
-    id = db.Column(db.String(50), primary_key=True)  # slug مثل xbox-games
+    id = db.Column(db.String(50), primary_key=True)
     label = db.Column(db.String(100), nullable=False)
     label_en = db.Column(db.String(100))
     image = db.Column(db.String(400))
@@ -99,7 +107,7 @@ class Banner(db.Model):
 
 
 class Product(db.Model):
-    id = db.Column(db.String(80), primary_key=True)  # slug مثل batman-arkham-knight-xb
+    id = db.Column(db.String(80), primary_key=True)
     name = db.Column(db.String(150), nullable=False)
     name_en = db.Column(db.String(150))
     category = db.Column(db.String(50), nullable=False)
@@ -139,7 +147,7 @@ class Product(db.Model):
 class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    status = db.Column(db.String(20), default='pending')  # pending / completed / failed
+    status = db.Column(db.String(20), default='pending')
     payment_proof = db.Column(db.String(300))
     admin_note = db.Column(db.Text)
     customer_name = db.Column(db.String(100))
@@ -180,16 +188,25 @@ def admin_required(f):
 # ==================== دوال مساعدة للقوالب ====================
 
 def products_json():
-    products = Product.query.all()
-    return json.dumps({p.id: p.to_js_dict() for p in products}, ensure_ascii=False)
+    try:
+        products = Product.query.all()
+        return json.dumps({p.id: p.to_js_dict() for p in products}, ensure_ascii=False)
+    except Exception:
+        return "{}"
 
 
 def get_categories():
-    return Category.query.order_by(Category.sort_order.asc(), Category.label.asc()).all()
+    try:
+        return Category.query.order_by(Category.sort_order.asc(), Category.label.asc()).all()
+    except Exception:
+        return []
 
 
 def get_banners():
-    return Banner.query.order_by(Banner.sort_order.asc(), Banner.id.asc()).all()
+    try:
+        return Banner.query.order_by(Banner.sort_order.asc(), Banner.id.asc()).all()
+    except Exception:
+        return []
 
 
 def base_context():
@@ -200,6 +217,24 @@ def base_context():
         "banners_json": json.dumps(banners, ensure_ascii=False),
         "products_json": products_json(),
     }
+
+
+# ==================== بناء الجداول تلقائياً وتجهيز البيانات ====================
+with app.app_context():
+    try:
+        db.create_all()
+        if Category.query.count() == 0:
+            for i, c in enumerate(SEED_CATEGORIES):
+                db.session.add(Category(
+                    id=c['id'], label=c['label'], label_en=c.get('labelEn', c['label']),
+                    image=c.get('image', ''), sort_order=i,
+                ))
+        if Banner.query.count() == 0:
+            for i, b in enumerate(SEED_BANNERS):
+                db.session.add(Banner(image=b['image'], link=b.get('link', ''), sort_order=i))
+        db.session.commit()
+    except Exception as e:
+        print(f"Database Init Error: {e}")
 
 
 # ==================== صفحات المتجر ====================
@@ -314,7 +349,7 @@ def api_checkout():
         total=0,
     )
     db.session.add(order)
-    db.session.flush()  # عشان ناخد order.id قبل الحفظ النهائي
+    db.session.flush()
 
     total = 0
     for it in items:
@@ -635,73 +670,5 @@ def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
-# ==================== أوامر تيرمنال ====================
-
-@app.cli.command('create-admin')
-def create_admin():
-    """إنشاء حساب أدمن جديد: flask create-admin"""
-    import getpass
-    name = input('الاسم: ')
-    email = input('البريد الإلكتروني: ').strip().lower()
-    password = getpass.getpass('كلمة المرور: ')
-
-    if User.query.filter_by(email=email).first():
-        print('هذا البريد مستخدم بالفعل')
-        return
-
-    user = User(name=name, email=email, is_admin=True)
-    user.set_password(password)
-    db.session.add(user)
-    db.session.commit()
-    print(f'تم إنشاء حساب الأدمن بنجاح: {email}')
-
-
-def seed_products():
-    """تعبئة المنتجات الأولية مرة واحدة فقط لو الجدول فاضي"""
-    if Product.query.count() > 0:
-        return
-
-    from seed_data import PRODUCTS_SEED
-    for slug, p in PRODUCTS_SEED.items():
-        db.session.add(Product(
-            id=slug,
-            name=p['name'],
-            name_en=p.get('nameEn', p['name']),
-            category=p['category'],
-            platform_tag=p.get('platformTag', ''),
-            note=p.get('note', ''),
-            note_en=p.get('noteEn', ''),
-            price=p['price'],
-            old_price=p.get('oldPrice'),
-            currency_ar=p.get('currency', {}).get('ar', 'ج.م'),
-            currency_en=p.get('currency', {}).get('en', 'EGP'),
-            image=p.get('image', ''),
-            description=p.get('description', ''),
-            description_en=p.get('descriptionEn', ''),
-            is_new=bool(p.get('isNew')),
-            in_stock=p.get('inStock', True),
-        ))
-    db.session.commit()
-    print(f"تمت تعبئة {len(PRODUCTS_SEED)} منتج بنجاح")
-
-
-def seed_categories_and_banners():
-    """تعبئة الفئات والبانرات الأولية مرة واحدة فقط لو الجداول فاضية"""
-    if Category.query.count() == 0:
-        for i, c in enumerate(SEED_CATEGORIES):
-            db.session.add(Category(
-                id=c['id'], label=c['label'], label_en=c.get('labelEn', c['label']),
-                image=c.get('image', ''), sort_order=i,
-            ))
-    if Banner.query.count() == 0:
-        for i, b in enumerate(SEED_BANNERS):
-            db.session.add(Banner(image=b['image'], link=b.get('link', ''), sort_order=i))
-    db.session.commit()
-
-
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-        seed_products()
-        seed_categories_and_banners()
     app.run(debug=True)
