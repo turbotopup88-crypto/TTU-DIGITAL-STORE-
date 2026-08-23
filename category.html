@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الكاتيجوري</title>
+<link rel="icon" href="https://i.ibb.co/CKWK5brd/48929.png">
+<script src="{{ url_for('static', filename='lang.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+{% include 'partials/header.html' %}
+{% include 'partials/search_bar.html' %}
+
+  <div style="padding:18px 16px 0;">
+    <a class="back-link" href="{{ url_for('index') }}" id="back-link">→ العودة للمتجر</a>
+  </div>
+
+  <h2 class="section-title" id="category-title">الفئة</h2>
+  <div class="category-strip" id="category-strip"></div>
+  <div class="product-grid" id="product-grid" style="margin-top:8px;"></div>
+  <div id="grid-sentinel" class="grid-sentinel"></div>
+
+{% include 'partials/footer.html' %}
+{% include 'partials/cart_drawer.html' %}
+
+  <script>
+    const CATEGORIES = {{ categories_json|safe }};
+    const BANNERS = {{ banners_json|safe }};
+    const PRODUCTS = {{ products_json|safe }};
+    const CURRENT_CAT_ID = {{ cat_id|tojson }};
+    const IS_LOGGED_IN = {{ 'true' if current_user.is_authenticated else 'false' }};
+  </script>
+  <script src="{{ url_for('static', filename='cart.js') }}"></script>
+  <script src="{{ url_for('static', filename='catalog.js') }}"></script>
+  <script>
+    const catId = CURRENT_CAT_ID;
+    const currentCategory = CATEGORIES.find((c) => c.id === catId);
+
+    document.getElementById('back-link').textContent = t('backLink');
+
+    const titleEl = document.getElementById('category-title');
+    const gridEl = document.getElementById('product-grid');
+    const sentinelEl = document.getElementById('grid-sentinel');
+
+    if (!currentCategory) {
+      titleEl.textContent = localized('الفئة غير موجودة', 'Category not found');
+      sentinelEl.style.display = 'none';
+    } else {
+      titleEl.textContent = localized(currentCategory.label, currentCategory.labelEn);
+      document.title = localized(currentCategory.label, currentCategory.labelEn);
+    }
+
+    const categoryStrip = document.getElementById('category-strip');
+    CATEGORIES.forEach((cat) => {
+      const item = document.createElement('a');
+      item.className = 'category-item';
+      item.href = cat.link || '#';
+      item.innerHTML = `
+        <span class="category-circle" style="${cat.id === catId ? 'border-color:var(--purple); box-shadow:var(--purple-glow);' : ''}">
+          <img src="${cat.image}" alt="${localized(cat.label, cat.labelEn)}" loading="lazy">
+        </span>
+        <span>${localized(cat.label, cat.labelEn)}</span>
+      `;
+      categoryStrip.appendChild(item);
+    });
+
+    const categoryEntries = shuffleArray(Object.entries(PRODUCTS).filter(([, p]) => p.category === catId));
+
+    const productGrid = createInfiniteGrid({
+      gridEl: gridEl,
+      sentinelEl: sentinelEl,
+      items: categoryEntries,
+      pageSize: 22,
+      emptyMessage: localized('لا توجد منتجات في هذه الفئة بعد', 'No products in this category yet')
+    });
+
+    function renderProducts(filter = "") {
+      const term = filter.trim().toLowerCase();
+      const filtered = !term
+        ? categoryEntries
+        : categoryEntries.filter(([, p]) => p.name.toLowerCase().includes(term) || p.platformTag.toLowerCase().includes(term));
+      productGrid.reset(filtered);
+    }
+
+    const searchBtn = document.getElementById('search-btn');
+    const searchBar = document.getElementById('search-bar');
+    const searchInput = document.getElementById('search-input');
+    const suggestBox = document.getElementById('search-suggestions');
+    const MAX_SUGGESTIONS = 5;
+    let activeSuggestion = -1;
+
+    function openSearchBar() { searchBar.classList.add('open'); searchInput.focus(); }
+    function closeSearchBar() { searchBar.classList.remove('open'); searchInput.value = ""; renderProducts(); closeSuggestions(); }
+
+    searchBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (searchBar.classList.contains('open')) closeSearchBar(); else openSearchBar();
+    });
+
+    function highlight(text, term) {
+      if (!term) return text;
+      const i = text.toLowerCase().indexOf(term.toLowerCase());
+      if (i === -1) return text;
+      return `${text.slice(0, i)}<mark>${text.slice(i, i + term.length)}</mark>${text.slice(i + term.length)}`;
+    }
+    function matchingProducts(term) {
+      const q = term.trim().toLowerCase();
+      if (!q) return [];
+      return categoryEntries.filter(([, p]) => p.name.toLowerCase().includes(q) || p.platformTag.toLowerCase().includes(q));
+    }
+    function renderSuggestions(term) {
+      const matches = matchingProducts(term);
+      activeSuggestion = -1;
+      if (!term.trim()) { closeSuggestions(); return; }
+      if (matches.length === 0) {
+        suggestBox.innerHTML = `<p class="suggestion-empty">${t('noResultsFor')(term)}</p>`;
+        suggestBox.style.display = 'block';
+        searchInput.setAttribute('aria-expanded', 'true');
+        return;
+      }
+      const shown = matches.slice(0, MAX_SUGGESTIONS);
+      suggestBox.innerHTML = shown.map(([id, p]) => `
+          <a class="suggestion-item" href="/product.html?id=${id}" data-id="${id}">
+            <img src="${p.image}" alt="">
+            <div class="suggestion-info">
+              <span class="s-name">${highlight(localized(p.name, p.nameEn), term)}</span>
+              <span class="s-price">${p.price} ${currencyText(p)}</span>
+            </div>
+          </a>`).join('');
+      if (matches.length > MAX_SUGGESTIONS) {
+        const more = document.createElement('button');
+        more.type = 'button';
+        more.className = 'suggestion-more';
+        more.textContent = t('showAllResults')(matches.length);
+        more.addEventListener('click', () => {
+          renderProducts(term);
+          closeSuggestions();
+          gridEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        suggestBox.appendChild(more);
+      }
+      suggestBox.style.display = 'block';
+      searchInput.setAttribute('aria-expanded', 'true');
+    }
+    function closeSuggestions() {
+      suggestBox.style.display = 'none';
+      suggestBox.innerHTML = '';
+      searchInput.setAttribute('aria-expanded', 'false');
+      activeSuggestion = -1;
+    }
+    searchInput.addEventListener('input', () => { renderProducts(searchInput.value); renderSuggestions(searchInput.value); });
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { closeSearchBar(); return; }
+      const items = [...suggestBox.querySelectorAll('.suggestion-item')];
+      if (items.length === 0) return;
+      if (e.key === 'ArrowDown') { e.preventDefault(); activeSuggestion = (activeSuggestion + 1) % items.length; }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); activeSuggestion = (activeSuggestion - 1 + items.length) % items.length; }
+      else if (e.key === 'Enter' && activeSuggestion > -1) { e.preventDefault(); window.location.href = items[activeSuggestion].href; return; }
+      else return;
+      items.forEach((el, i) => el.classList.toggle('active', i === activeSuggestion));
+      items[activeSuggestion].scrollIntoView({ block: 'nearest' });
+    });
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search-wrap')) closeSuggestions();
+      if (!e.target.closest('.search-bar') && !e.target.closest('#search-btn') && searchBar.classList.contains('open')) closeSearchBar();
+    });
+  </script>
+</body>
+</html>

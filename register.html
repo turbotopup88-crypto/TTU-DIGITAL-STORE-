@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إنشاء حساب</title>
+<link rel="icon" href="https://i.ibb.co/CKWK5brd/48929.png">
+<script src="{{ url_for('static', filename='lang.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+{% include 'partials/header.html' %}
+
+  <div class="page-wrap narrow">
+    <h1>إنشاء حساب جديد</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form class="order-form" method="POST" action="{{ url_for('register', next=request.args.get('next', '')) }}">
+      <div class="field">
+        <label>الاسم الكامل</label>
+        <input type="text" name="name" required>
+      </div>
+      <div class="field">
+        <label>البريد الإلكتروني</label>
+        <input type="email" name="email" required>
+      </div>
+      <div class="field">
+        <label>رقم الهاتف / الواتساب</label>
+        <input type="text" name="phone" placeholder="09xxxxxxxx">
+      </div>
+      <div class="field">
+        <label>كلمة المرور</label>
+        <input type="password" name="password" required>
+      </div>
+      <button class="whatsapp-btn" type="submit">إنشاء الحساب</button>
+      <p class="form-note">عندك حساب؟ <a href="{{ url_for('login', next=request.args.get('next', '')) }}" style="color:var(--purple);">سجّل دخول</a></p>
+    </form>
+  </div>
+
+{% include 'partials/footer.html' %}
+</body>
+</html>

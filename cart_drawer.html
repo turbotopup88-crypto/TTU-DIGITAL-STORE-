@@ -1,0 +1,44 @@
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-label="سلة المشتريات">
+    <div class="cart-header">
+      <h2 data-i18n="cartTitle">سلتك</h2>
+      <button class="cart-close" id="cart-close" aria-label="إغلاق السلة">✕</button>
+    </div>
+    <div class="cart-body" id="cart-body"></div>
+    <div class="cart-footer" id="cart-footer">
+      <button type="button" class="cart-fields-toggle" id="cart-fields-toggle">
+        <span data-i18n="customerInfoLabel">بيانات التواصل وطريقة الدفع</span>
+        <span class="toggle-arrow">▾</span>
+      </button>
+      <div class="cart-checkout-fields" id="cart-checkout-fields">
+        <div class="field">
+          <label for="cart-name" data-i18n="nameLabel">الاسم الكامل</label>
+          <input type="text" id="cart-name" placeholder="اكتب اسمك" data-i18n-placeholder="namePlaceholder" value="{{ current_user.name if current_user.is_authenticated else '' }}">
+        </div>
+        <div class="field">
+          <label for="cart-phone" data-i18n="phoneLabel">رقم الهاتف</label>
+          <input type="tel" id="cart-phone" placeholder="09xxxxxxxx" value="{{ current_user.phone if current_user.is_authenticated and current_user.phone else '' }}">
+        </div>
+        <div class="field">
+          <label for="cart-email" data-i18n="emailLabel">البريد الإلكتروني</label>
+          <input type="email" id="cart-email" placeholder="example@email.com" data-i18n-placeholder="emailPlaceholder" value="{{ current_user.email if current_user.is_authenticated else '' }}">
+        </div>
+        <div class="field">
+          <label for="cart-payment" data-i18n="paymentLabel">طريقة الدفع</label>
+          <select id="cart-payment">
+            <option value="" disabled selected data-i18n="paymentChoose">اختر طريقة الدفع</option>
+            <option value="bank" data-i18n="paymentBank">تحويل مصرفي</option>
+            <option value="wallet" data-i18n="paymentWallet">محفظة إلكترونية</option>
+          </select>
+        </div>
+      </div>
+
+      <p class="form-error" id="cart-form-error" data-i18n="orderErrorMsg">من فضلك عبئ الاسم، الهاتف وطريقة الدفع.</p>
+
+      <div class="cart-total-row">
+        <span data-i18n="total">الإجمالي</span>
+        <span id="cart-total">0</span>
+      </div>
+      <button class="whatsapp-btn" id="cart-checkout">🟢 إتمام الطلب</button>
+    </div>
+  </aside>
