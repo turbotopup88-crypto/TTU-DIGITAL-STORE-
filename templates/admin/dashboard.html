@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة التحكم</title>
+<link rel="icon" href="https://i.ibb.co/CKWK5brd/48929.png">
+<script src="{{ url_for('static', filename='lang.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+{% include 'partials/header.html' %}
+
+  <div class="page-wrap">
+    <h1>لوحة التحكم</h1>
+
+    <div class="stats">
+      <div class="stat-box"><div class="num">{{ stats.products_count }}</div><div>عدد المنتجات</div></div>
+      <div class="stat-box"><div class="num">{{ stats.pending_count }}</div><div>طلبات معلقة</div></div>
+      <div class="stat-box"><div class="num">{{ stats.completed_count }}</div><div>طلبات مكتملة</div></div>
+      <div class="stat-box"><div class="num">{{ stats.failed_count }}</div><div>طلبات فاشلة</div></div>
+    </div>
+
+    <div class="admin-actions">
+      <a class="btn" href="{{ url_for('admin_products') }}">إدارة المنتجات</a>
+      <a class="btn" href="{{ url_for('admin_categories') }}">إدارة الفئات</a>
+      <a class="btn" href="{{ url_for('admin_banners') }}">إدارة البانرات</a>
+      <a class="btn" href="{{ url_for('admin_orders') }}">إدارة الطلبات</a>
+    </div>
+  </div>
+
+{% include 'partials/footer.html' %}
+</body>
+</html>

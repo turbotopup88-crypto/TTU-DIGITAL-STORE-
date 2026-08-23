@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إدارة البانرات</title>
+<link rel="icon" href="https://i.ibb.co/CKWK5brd/48929.png">
+<script src="{{ url_for('static', filename='lang.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+{% include 'partials/header.html' %}
+
+  <div class="page-wrap">
+    <h1>إدارة البانرات</h1>
+    <p style="color:var(--text-dim); font-size:13px; margin-bottom:16px;">
+      البانرات دي بتظهر في السلايدر المتحرك أعلى الصفحة الرئيسية. الترتيب: رقم أصغر = يظهر أول.
+      لو حطيت رابط، هيفتح الرابط ده لما حد يدوس على البانر.
+    </p>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="order-form" style="margin-bottom:24px;">
+      <h2 style="font-size:16px;">إضافة بانر جديد</h2>
+      <form method="POST" action="{{ url_for('admin_new_banner') }}">
+        <div class="field">
+          <label>رابط صورة البانر</label>
+          <input type="text" name="image" placeholder="https://..." required>
+        </div>
+        <div class="field">
+          <label>الرابط عند الضغط على البانر (اختياري)</label>
+          <input type="text" name="link" placeholder="https://... اتركه فارغ لو مفيش رابط">
+        </div>
+        <button class="whatsapp-btn" type="submit" style="margin-top:10px;">إضافة البانر</button>
+      </form>
+    </div>
+
+    {% for banner in banners %}
+      <div class="order-form" style="margin-bottom:14px;">
+        <img src="{{ banner.image }}" style="width:100%; max-width:400px; border-radius:10px; margin-bottom:10px;">
+        <form method="POST" action="{{ url_for('admin_edit_banner', banner_id=banner.id) }}">
+          <div class="field">
+            <label>رابط الصورة</label>
+            <input type="text" name="image" value="{{ banner.image }}" required>
+          </div>
+          <div class="field">
+            <label>الرابط عند الضغط (اختياري)</label>
+            <input type="text" name="link" value="{{ banner.link or '' }}">
+          </div>
+          <div class="field">
+            <label>الترتيب</label>
+            <input type="number" name="sort_order" value="{{ banner.sort_order }}" style="max-width:100px;">
+          </div>
+          <button class="btn btn-small" type="submit" style="margin-top:8px;">حفظ التعديل</button>
+        </form>
+        <form action="{{ url_for('admin_delete_banner', banner_id=banner.id) }}" method="POST" style="margin-top:8px;" onsubmit="return confirm('حذف هذا البانر؟');">
+          <button class="btn btn-danger btn-small" type="submit">حذف البانر</button>
+        </form>
+      </div>
+    {% endfor %}
+  </div>
+
+{% include 'partials/footer.html' %}
+</body>
+</html>
